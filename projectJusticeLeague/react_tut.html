@@ -1,0 +1,47 @@
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.7.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.development.js"></script>
+    <script  src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+    <script type="text/babel" data-type="module">
+        const rootElement = document.getElementById('root')
+
+        /*const element = React.createElement(
+            'div',
+        {
+            children: React.createElement('span', null, 'Hello', ' World', ' Bitches'),
+            className: 'container',
+        })*/
+        function SayHello({firstName, lastName='Undefined'}){
+            return (
+                <div>
+                    Hello {firstName} {lastName}!    
+                </div>
+            )
+        }
+
+        const propTypes = {
+            string(props, propName, componentName){
+                if(typeof props[propName] !== 'string'){
+                    return new Error(
+                        `Hey, the component ${componentName} needs the prop ${propName} to be a string, but you passed a ${typeof props[propName]} in ${componentName}`
+                    )
+
+                }
+
+            },
+        }
+        SayHello.propTypes = {
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired,
+
+        }
+
+        const helloElement = <SayHello firstName={false}/>
+        ReactDOM.render(helloElement, rootElement)
+        //element.textContent = 'Hellooo small World!'
+        //element.className = 'container'
+        //rootElement.appendChild(element)
+    </script>
+</body>
