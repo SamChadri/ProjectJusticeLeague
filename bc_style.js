@@ -1,7 +1,9 @@
 $(document).ready(function(){
     // Transition effect for navbar 
     $('#bf-1').click(function(){ playerButtonOnClick(this,true); });
-    $('#bf-2').click(function(){playerButtonOnClick(this,false)})
+    $('#bf-2').click(function(){playerButtonOnClick(this,false)});
+    $('#bf-3').click(function(){playerButtonOnClick(this,false)});
+
     var vk_visible = true;
 
     var featurette_height = $('.feature-pic').height();
@@ -19,17 +21,15 @@ $(document).ready(function(){
         console.log('Playing video');
         console.log(event.target);
         event.target.playVideo();
-        $("#vid-test2").hover(
+        $(`#${id}`).hover(
             function(){
-                if (player_state == 'PAUSED'){
+                if (event.target.getPlayerState() == YT.PlayerState.PAUSED){
                     event.target.playVideo();
-                    player_state = 'PLAYING';
                 }
             },
             function(){
-                if(player_state == 'PLAYING'){
+                if(event.target.getPlayerState() == YT.PlayerState.PLAYING){
                     event.target.pauseVideo();
-                    player_state = 'PAUSED';
                 }
             });
     }
@@ -57,6 +57,8 @@ $(document).ready(function(){
         //TODO: Add in functionality for React later on.
         
         var id = $(curr_obj).attr('id');
+        var num_id = id.substring(id.length - 1);
+        id = `vid-test${num_id}`
         var fheight = $('.feature-pic').height();
         var fwidth = $('.feature-pic').width();
         console.log(`Height: ${fheight}, `);
@@ -80,11 +82,18 @@ $(document).ready(function(){
                 });
             
         }else{
-            var player = new YT.Player('vid-test2', {
+            var videoId = '';
+            console.log(id);
+            if (id == 'vid-test2'){
+                videoId = '1ZHTurVaGus';
+            }else{
+                videoId = '5ngeO703yA4';
+            }  
+            var player = new YT.Player(id, {
                 height: fheight,
                 width: fwidth,
                 host:`${window.location.protocol}//www.youtube.com`,
-                videoId: '1ZHTurVaGus',//TrailerCode Goes here,
+                videoId: videoId,//TrailerCode Goes here,
                 events: {
                     'onReady': onPlayerReady,
                     'onStateChange': onPlayerStateChange
@@ -121,7 +130,7 @@ $(document).ready(function(){
                 let elem = entry.target;
                 var timeout = counter * 100;
                 window.setTimeout(function(){
-                    if(elem.tagName == 'HR'){
+                    if(elem.tagName == 'svg'){
                         elem.classList.add('zoom-in-ani');
                         timeout = 0;
                     }else{
@@ -135,7 +144,7 @@ $(document).ready(function(){
             
             }else{
                 let elem = entry.target;
-                if(elem.tagName == 'HR'){
+                if(elem.tagName == 'svg'){
                     elem.classList.remove('zoom-in-ani');
                 }else{
                     elem.classList.remove('fade-in-ani');
@@ -168,17 +177,52 @@ $(document).ready(function(){
             }
         });
     },);
+    var feature_observer = new IntersectionObserver(function(entries){
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                let elem = entry.target;
+                var timeout =  00;
+                console.log(elem);
+                var kids = elem.children;
+                for(let i=0; i < kids.length; i++){
+                    //Maybe add sauce later. Finish other shit first
+                    window.setTimeout(function(){
+                        console.log(`Adding animation for ${elem.id}`)
+                        kids[i].classList.add('fade-in-ani');
+                        kids[i].style.visibility = 'visible';
+                    },timeout);
+                }
+            }else{
+                let elem = entry.target;
+                var kids = elem.children;
+                for(let i=0; i < kids.length; i++){
+                    console.log(`Removing animation for ${elem.id}`)
+                    kids[i].classList.remove('fade-in-ani');
+                    kids[i].style.visibility = 'hidden';
+                }
+            }
+
+        });
+    },);
 
     var intro_kids = $('#d-intro').children();
-    for(let i =0; i < intro_kids.length; i++){
+    for(let i = 0; i < intro_kids.length; i++){
         observer.observe(intro_kids[i]);
     }
     var avenue_kids = $('#d-avenues').children();
-    for(let i =0; i < avenue_kids.length; i++){
+    for(let i = 0; i < avenue_kids.length; i++){
         av_observer.observe(avenue_kids[i]);
     }
+    //get rid of this later
+    var feature_counter = 1
     //observer.observe(document.querySelector("#d-intro"));
 
+    for(let i = 0; i < $('.featurette').length; i++){
+        var selector = `#f-description-${feature_counter}`;
+        console.log(`setting observer for ${selector}`);
+        feature_observer.observe(document.querySelector(selector))
+        feature_counter += 1;
+    }
 
     
     $(window).scroll(function() {
