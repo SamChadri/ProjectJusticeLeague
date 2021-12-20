@@ -1,0 +1,5 @@
+
+npm init -y
+npm install webpack webpack-cli --save-dev
+npm i --save-dev babel-loader @babel/core @babel/preset-react @babel/preset-env
+npm install --save-dev style-loader css-loader

@@ -1,0 +1,420 @@
+@keyframes fade-in {
+    from {opacity: 0.0;}
+    to {opacity: var(--op);}
+}
+
+@keyframes fade-out {
+    from {opacity: inherit;}
+    to {opacity: 0.0;}
+}
+
+@keyframes slide-down {
+    from {transform: translateY(-50px);}
+    to {transform: translateY(0px);}
+}
+
+@keyframes slide-up {
+    from {transform: translateY(50px);}
+    to {transform: translateY(0px);}
+}
+
+@keyframes slide-left {
+    from {transform: translateX(50px);}
+    to {transform: translateX(0px);}
+}
+
+@keyframes slide-right {
+    from {transform: translateX(-50px);}
+    to {transform: translateY(0px);}
+}
+
+@keyframes zoom-in {
+    from {transform: scale(0);}
+    to {transform: scale(1.0);}
+}
+
+@keyframes zoom-out {
+    from {transform: scale(1.0);}
+    to {transform: scale(0);}
+}
+
+.pt-6,
+.py-6{
+    padding-top: 4rem;
+}
+
+.pb-6,
+.py-6{
+    padding-bottom: 4rem;
+}
+.pr-6,
+.px-6{
+    padding-right: 4rem;
+}
+
+.pl-6,
+.px-6{
+    padding-left: 4rem;
+}
+
+
+.pt-7,
+.py-7{
+    padding-top: 8rem;
+}
+
+.pb-7,
+.py-7{
+    padding-bottom: 8rem;
+}
+.pr-7,
+.px-7{
+    padding-right: 8rem;
+}
+
+.pl-7,
+.px-7{
+    padding-left: 8rem;
+}
+
+.pt-8,
+.py-8{
+    padding-top: 12rem;
+}
+
+.pb-8,
+.py-8{
+    padding-bottom: 12rem;
+}
+.pr-8,
+.px-8{
+    padding-right: 12rem;
+}
+
+.pl-8,
+.px-8{
+    padding-left: 12rem;
+}
+
+
+
+
+
+hr.fade-in-ani{
+    --op: .3;
+    animation: fade-in 2s ease;
+    animation-fill-mode: forwards;
+}
+
+.fade-in-ani{
+    --op: 1;
+    animation: fade-in 3s;
+    animation-fill-mode: forwards;
+}
+
+.fade-out-ani {
+    animation: fade-out 1s;
+    animation-fill-mode: forwards
+}
+
+.fade-in-down-ani {
+    animation: fade-in 1s, slide-down 1s
+}
+
+.fade-in-up-ani {
+    animation: fade-in 1s, slide-up 1s
+}
+
+.fade-in-left-ani {
+    animation: fade-in 1s, slide-left 1s 
+}
+
+.fade-in-right-ani {
+    animation: fade-in 1s, slide-right 1s
+}
+
+.zoom-in-ani {
+    animation: zoom-in 1.5s
+}
+
+.zoom-out-ani {
+    animation: zoom-out 1.5s
+}
+
+.slide-down-ani {
+    animation: slide-down 1s
+}
+
+.slide-up-ani {
+    animation: slide-up 1s
+}
+
+.slide-left-ani{
+    animation: slide-left 1s
+}
+
+.slide-right-ani{
+    animation: slide-right 1s
+}
+
+.nav-masthead .nav-link {
+    padding: .25rem 0;
+    margin-left: 1rem;
+    color: rgba(255, 255, 255, .5);
+    background-color: transparent;
+    border-bottom: .25rem solid transparent;
+}
+
+.navbar{
+    top: 0;
+    left: 0;
+    transition: background-color 1s ease 0s;
+}
+#navBrand{
+    color: #ffb3de;
+    text-decoration: none;
+}
+#navBrand:hover{
+    color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .active {
+    color: #ffb3de;
+    border-bottom-color: #ffb3de;
+    
+  }
+  
+.content-header {
+    padding-top: 50px
+}
+
+.carousel-item {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .carousel-item img {
+    width: 100%;
+    height: 100vh;
+
+  }
+  
+  .carousel{
+    position:relative;
+    width: 100%;
+    top:0;
+    left:0;
+    margin-bottom: 3rem;
+  }
+
+  .content-divisions .col-lg-4{
+    margin-bottom: 1.5rem;
+    text-align: center;
+    
+  }
+
+  .content-divisions .col-lg-4p{
+    margin-right: .75rem;
+    margin-left: .75rem;
+  }
+
+ /* .carousel-item {
+
+    height: 100vh;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }*/
+  .nav-trans {
+    background-color: #000;
+    -webkit-transition: background-color 1s ease;
+    -moz-transition: background-color 1s ease;  
+    -o-transition: background-color 1s ease;         
+    transition: background-color 1s ease;
+  }
+
+  .nav-trans {
+
+  }
+
+  
+  @media (min-width:768px) {
+      .affix-top {
+        /* navbar style at top */
+        background-color:transparent;
+        border-color:transparent;
+        padding: 15px;
+        -webkit-transition:all 0.5s ease;
+        -moz-transition:all 0.5s ease; 
+        -o-transition:all 0.5s ease;         
+        transition:all 0.5s ease;  
+      }
+  }
+  .first {
+    height:100vh;
+    min-height:400px;
+    background-size:cover;
+    background-image:url('https://images.unsplash.com/photo-1470434151738-dc5f4474c239?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb');
+  }
+  main{
+      position: static !important;
+      z-index: 11;
+  }
+
+  .featurette-divider {
+    margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+  }
+  
+  /* Thin out the marketing headings */
+  .featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    /* rtl:remove */
+    letter-spacing: -.05rem;
+  }
+
+  .info-divider{
+      width: 50%;
+      margin: auto;
+  }
+  .feature-pic{
+      position: absolute;
+      width: 100%;
+      padding-left: inherit;
+      padding-right: inherit;
+      left:0px;
+      right: 0px;
+      -webkit-filter:blur(0);
+      filter:blur(0);
+      transition: .4s ease-in-out;
+  }
+
+
+  /* Why does this only work with div */
+  .img-div:hover .feature-pic{
+    -webkit-filter:  blur(3px);
+    filter: blur(3px);
+    opacity: 0.7;
+    transition: filter ease 1.5s;
+    transition: opacity ease 0.5s;
+    overflow: hidden;
+  }
+
+  .feature-button{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    color: white;    
+  }
+
+  .img-div:hover .feature-button{
+      visibility: visible;
+
+  }
+  #vid-test1{
+    position: absolute;
+    height: 500px;
+    width: 100%;
+    top:0;
+    left:0;
+    padding-left: inherit;
+    padding-right: inherit;
+    
+    visibility: hidden;
+    opacity: 0;
+    transition:visibility 0.3s linear,opacity 0.3s linear;
+
+
+    
+  }
+
+  /* TODO Change this to class later **/
+  #vid-test2{
+    position: absolute;
+    height: 500px;
+    width: 100%;
+    top:0;
+    left:0;
+    padding-left: inherit;
+    padding-right: inherit;
+    
+    visibility: hidden;
+    opacity: 0;
+    transition:visibility 0.3s linear,opacity 0.3s linear;
+
+
+    
+  }
+
+  #vid-test3{
+    position: absolute;
+    height: 500px;
+    width: 100%;
+    top:0;
+    left:0;
+    padding-left: inherit;
+    padding-right: inherit;
+    
+    visibility: hidden;
+    opacity: 0;
+    transition:visibility 0.3s linear,opacity 0.3s linear;
+
+
+    
+  }
+
+  .xo_style{
+      color: #ffb3de;
+  }
+  .btn.btn-primary{
+    border-radius: 0;
+  }
+  .btn.btn-outline-light{
+      color: #ffb3de;
+  }
+  .btn.btn-outline-light:hover{
+    background-color: #ffb3de;
+    color: black;
+  }
+
+
+
+  .img-div:hover #vid-test1{
+    visibility: visible;
+    opacity: 1;
+
+  }
+  /* TODO Change this to class later **/
+  .img-div:hover #vid-test2{
+    visibility: visible;
+    opacity: 1;
+
+  }
+  .img-div:hover #vid-test3{
+    visibility: visible;
+    opacity: 1;
+
+  }
+
+
+  .img-div{
+    overflow: hidden;
+    position:relative;
+    height: 500px;
+  }
+  
+  .test{
+    border-radius: 50%;
+    color: #ffb3de;
+}
+
+  
