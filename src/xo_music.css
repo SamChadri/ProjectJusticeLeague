@@ -265,3 +265,25 @@ hr.fade-in-ani{
       column-count: 2;
     }
   }
+
+div.card{
+    background: black;
+    border-color: #ffffff;
+    box-shadow: 0 20px 15px -25px rgb(184, 182, 182);
+}
+ .card.card-carousel{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-radius: 0px;
+    box-shadow: 0 20px 35px -25px rgb(184, 182, 182);
+}
+
+.card.card-carousel > img{
+    position: absolute;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+
+}
