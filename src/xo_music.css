@@ -287,3 +287,68 @@ div.card{
     width: 100%;
 
 }
+.img-div{
+    overflow: hidden;
+    position:relative;
+    height: 500px;
+  }
+
+
+#info-div{
+    position: absolute;
+    height: 500px;
+    width: 100%;
+    top:0;
+    left:0;
+    padding-left: inherit;
+    padding-right: inherit;
+    
+    visibility: hidden;
+    opacity: 0;
+    transition:visibility 0.3s linear,opacity 0.3s linear;
+
+
+    
+  }
+  .feature-pic{
+    position: absolute;
+    width: 100%;
+    padding-left: inherit;
+    padding-right: inherit;
+    left:0px;
+    right: 0px;
+    -webkit-filter:blur(0);
+    filter:blur(0);
+    transition: .4s ease-in-out;
+}
+
+
+/* Why does this only work with div */
+.img-div:hover .feature-pic{
+  -webkit-filter:  blur(3px);
+  filter: blur(3px);
+  opacity: 0.7;
+  transition: filter ease 1.5s;
+  transition: opacity ease 0.5s;
+  overflow: hidden;
+}
+
+
+  .feature-button{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    color: white;    
+  }
+
+  .img-div:hover .feature-button{
+      visibility: visible;
+
+  }
+  .img-div:hover #info-div{
+    visibility: visible;
+    opacity: 1;
+
+  }
