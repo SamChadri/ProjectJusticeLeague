@@ -32,16 +32,54 @@ $(document).ready(function(){
         'https://cdn.wallpapersafari.com/63/25/QWLRut.jpg',
         'https://wp.stanforddaily.com/wp-content/uploads/2021/05/JCole.png',
         'https://www.billboard.com/wp-content/uploads/2021/11/adele-2021-billboar-1548.jpg',
-        'https://static01.nyt.com/images/2018/05/08/opinion/08Hampton1/08Hampton1-videoSixteenByNineJumbo1600.jpg'
+        'https://static01.nyt.com/images/2018/05/08/opinion/08Hampton1/08Hampton1-videoSixteenByNineJumbo1600.jpg',
+        'https://i.pinimg.com/originals/0d/a1/fb/0da1fbc2544a74f7d7c016746439cfd0.jpg'
     ];
 
     var card_num = 8;
 
     var used_index = [];
     var used_images = [];
+
+    var timerTestFlag = false;
+    var cFlag = true;
+    var hoverId = null;
+    var hoverWait = true;
+    var currCardId = null;
+
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
+    var Timer = function(callback, delay) {
+        var timerId, start, remaining = delay;
+        this.paused = false;
+        this.pause = function() {
+            window.clearTimeout(timerId);
+            timerId = null;
+            this.paused = true;
+            console.log(`Paused timer with time remaining: ${remaining}`);
+        };
+    
+        this.resume = function(callback) {
+            if (timerId) {
+                return;
+            }
+    
+            start = Date.now();
+            timerId = window.setTimeout(callback,remaining);
+            console.log(`Resumed timer with time remaining: ${remaining}`);
+        };
+        this.reset = function(){
+            timerId = null;
+            remaining = delay;
+
+        }
+    
+    };
+    //Make this longer.
+    var timer = new Timer(function() {
+        console.log("Done Waiting!");
+    }, 2000);
 
     function createImage(src){
         var image = new Image();
@@ -52,7 +90,9 @@ $(document).ready(function(){
 
     function fadeOutImage(index, image){
         index += 1;
-        console.log(`Fading out: card-image-${index}`)
+        console.log(`Fading out: card-image-${index}`);
+        //edge case appears here when I leave windows and come back, duplicate images start occurring. Might have to do with hover idk
+        //Test this more later when I feel like it.
         used_images.push($(`#card-image-${index}`).attr('src'));
         $(`#card-image-${index}`).fadeOut(600,function(){
             $(`#card-image-${index}`).attr("src", image.src);
@@ -98,8 +138,8 @@ $(document).ready(function(){
         console.log(`Used_Images: ${used_index}`)
         list_length = image_list.length
         console.log(image_list);
-        var flag = true;
-        while(flag){
+
+        while(cFlag){
             if(card_num == used_index.length){
                 console.log('Resetting index list...')
                 used_index= [];
@@ -111,9 +151,14 @@ $(document).ready(function(){
                 console.log('Resetting Image list...');
                 console.log(image_list)
             }
-            fadeNextImage()
-            await new Promise(r => setTimeout(r, 2000));
-            console.log("Faded image and waited. Processing next image...");
+            if(!timer.paused){
+                fadeNextImage();
+            }
+            await new Promise(r => {
+                timer.resume(r);
+            });
+            timer.reset();
+            console.log("Faded image and waited.");
         }
     }
 
@@ -122,12 +167,59 @@ $(document).ready(function(){
     temp_image.src = "https://c4.wallpaperflare.com/wallpaper/238/241/106/shakira-singer-grayscale-of-woman-wallpaper-preview.jpg";
     temp_image.id= 'new_image';
 
+    $('#g-test').click(function(){
+        if(!timer.paused){
+            timer.pause()
+            cFlag = false;
+        }else{
+            cFlag = true;
+            timer.paused = false;
+            startGridCarousel();
+        }
+    });
+
+
+    $('.artist-card').hover(
+        function(){
+            console.log("Setting mouse hover over image")
+            hoverId = window.setTimeout(function(){
+                if(!timer.paused){
+                    timer.pause()
+                    cFlag = false;
+                    hoverWait = false;
+                    console.log("Executing timeout")
+                }
+            },500)
+
+        },
+        function(){
+            if(timer.paused && hoverWait == false){
+                cFlag = true;
+                timer.paused = false;
+                hoverWait = null;
+                console.log("Finished timeout, resuming carousel.");
+                startGridCarousel();
+                return
+            }else {
+                window.clearTimeout(hoverId)
+                console.log("Did not finish timeout, not resuming carousel.");
+                hoverId = null;
+                hoverWait = true;
+                return
+
+            }
+
+        }
+    );
+
     $('#card-image-3').click(function(){
-        startGridCarousel();
+        //NOTE: hover to start
+       // startGridCarousel();
         var test = [1,2,3,4];
         console.log(test)
         test.push(123);
         console.log(test);
+
         /*
         $('#test-card').fadeOut(600,function(){
             $('#test-card').attr("src", temp_image.src);
