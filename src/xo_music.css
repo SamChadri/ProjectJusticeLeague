@@ -294,9 +294,9 @@ div.card{
   }
 
 
-#info-div{
+.info-div{
     position: absolute;
-    height: 500px;
+    height: 100%;
     width: 100%;
     top:0;
     left:0;
@@ -310,7 +310,7 @@ div.card{
 
     
   }
-  .feature-pic{
+ .feature-pic{
     position: absolute;
     width: 100%;
     padding-left: inherit;
@@ -320,6 +320,22 @@ div.card{
     -webkit-filter:blur(0);
     filter:blur(0);
     transition: .4s ease-in-out;
+}
+.slick-slide .feature-pic{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding-left: inherit;
+    padding-right: inherit;
+    left:0px;
+    right: 0px;
+    -webkit-filter:blur(0);
+    filter:blur(0);
+    transition: .4s ease-in-out;
+}
+.media-carousel{
+    width: 95%;
+    margin: 0px auto;
 }
 
 
@@ -347,7 +363,7 @@ div.card{
       visibility: visible;
 
   }
-  .img-div:hover #info-div{
+  .img-div:hover .info-div{
     visibility: visible;
     opacity: 1;
 
@@ -358,4 +374,22 @@ div.card{
 
   .artist-card:hover{
     transform: scale(1.1);
+  }
+
+  .media-pic{
+    transform: rotate(-5deg);
+    box-shadow: 0 20px 35px -25px rgb(2, 2, 2);
+
+  }
+
+  .featurette{
+    border:2px solid grey;
+  }
+
+  .card-heading{
+      font-size: 12px;
+  }
+
+  .mcard-footer{
+    transform: translateY(150px);
   }

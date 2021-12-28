@@ -8,11 +8,11 @@ $(document).ready(function(){
     });
     $('.album-carousel').slick('refresh');
 
-    $('.carousel').slick({
+    $('.media-carousel').slick({
         slidesToShow: 1,
         dots:true,
-        centerMode: true,
         arrows: true,
+        fade: true,
         });
 
     var grid = new Masonry( '#grid', {
@@ -242,6 +242,9 @@ $(document).ready(function(){
     var player_state = 'PLAYING';
 
     $('#bf-1').click(function(){ playerButtonOnClick(this,true); });
+    $('#bf-2').click(function(){ playerButtonOnClick(this,false); });
+    $('#bf-3').click(function(){ playerButtonOnClick(this,false); });
+
     function onPlayerReady(event){
         var id = event.target.getIframe().id;
         var num_id = id.substring(id.length - 1);
@@ -272,7 +275,7 @@ $(document).ready(function(){
         video.autoplay = true;
         video.setAttribute("controls", "controls");
         video.height = height;
-        video.width = featurette_width;
+        video.width = width;
         video.style.objectFit = 'fill';
 
         video.appendChild(source)
@@ -284,16 +287,17 @@ $(document).ready(function(){
         
         var id = $(curr_obj).attr('id');
         var num_id = id.substring(id.length - 1);
-        id = `info-div`
-        var fheight = $('.feature-pic').height();
-        var fwidth = $('.feature-pic').width();
+        id = `vdiv-${num_id}`;
+        var pic_id = `fpic-${num_id}`;
+        var fheight = $(`#${pic_id}`).height();
+        var fwidth = $(`#${pic_id}`).width();
         console.log(`Height: ${fheight}, `);
         console.log(`Width: ${fwidth}`);
         if (local_vid == true){
             var video = createLocalVideo(fwidth, fheight);
-            $('#info-div').html(video);
+            $(`#${id}`).html(video);
             player_state = 'PLAYING';
-            $("#info-div").hover(
+            $(`#${id}`).hover(
                 function(){
                     if (player_state == 'PAUSED'){
                         video.play();
@@ -308,12 +312,11 @@ $(document).ready(function(){
                 });
             
         }else{
-            var videoId = '';
             console.log(id);
-            if (id == 'vid-test2'){
-                videoId = '1ZHTurVaGus';
+            if (id == 'vdiv-2'){
+                videoId = 'gSOFQN0UKpk';
             }else{
-                videoId = '5ngeO703yA4';
+                videoId = 'D7nj1mPkLzc';
             }  
             var player = new YT.Player(id, {
                 height: fheight,
