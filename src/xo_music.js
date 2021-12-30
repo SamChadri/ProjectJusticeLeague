@@ -244,6 +244,7 @@ $(document).ready(function(){
     $('#bf-1').click(function(){ playerButtonOnClick(this,true); });
     $('#bf-2').click(function(){ playerButtonOnClick(this,false); });
     $('#bf-3').click(function(){ playerButtonOnClick(this,false); });
+    $('#bf-4').click(function(){ playerButtonOnClick(this,true); });
 
     function onPlayerReady(event){
         var id = event.target.getIframe().id;
@@ -265,7 +266,7 @@ $(document).ready(function(){
     }
     function onPlayerStateChange(event){}
 
-    function createLocalVideo(width, height){
+    function createLocalVideo(width, height, id=null){
         var video = document.createElement('video');
         var source = document.createElement('source');
 
@@ -273,6 +274,11 @@ $(document).ready(function(){
         source.src = '../pics/XO_MUSIC_TRAILER_MP4.mp4';
 
         video.autoplay = true;
+        if(id == '1'){
+            source.src = '../pics/XO_MUSIC_TRAILER_MP4.mp4';
+        }else{
+            source.src = '../pics/XO_GEMS_I.mp4';
+        }
         video.setAttribute("controls", "controls");
         video.height = height;
         video.width = width;
@@ -294,7 +300,7 @@ $(document).ready(function(){
         console.log(`Height: ${fheight}, `);
         console.log(`Width: ${fwidth}`);
         if (local_vid == true){
-            var video = createLocalVideo(fwidth, fheight);
+            var video = createLocalVideo(fwidth, fheight, num_id);
             $(`#${id}`).html(video);
             player_state = 'PLAYING';
             $(`#${id}`).hover(
