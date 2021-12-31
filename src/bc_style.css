@@ -240,9 +240,7 @@ hr.fade-in-ani{
     transition: background-color 1s ease;
   }
 
-  .nav-trans {
 
-  }
 
   
   @media (min-width:768px) {
@@ -416,5 +414,6 @@ hr.fade-in-ani{
     border-radius: 50%;
     color: #ffb3de;
 }
+
 
   

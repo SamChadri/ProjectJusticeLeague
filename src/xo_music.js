@@ -241,10 +241,10 @@ $(document).ready(function(){
     var player_ready = false;
     var player_state = 'PLAYING';
 
-    $('#bf-1').click(function(){ playerButtonOnClick(this,true); });
-    $('#bf-2').click(function(){ playerButtonOnClick(this,false); });
-    $('#bf-3').click(function(){ playerButtonOnClick(this,false); });
-    $('#bf-4').click(function(){ playerButtonOnClick(this,true); });
+   // $('#bf-1').click(function(){ playerButtonOnClick(this,true); });
+   // $('#bf-2').click(function(){ playerButtonOnClick(this,false); });
+   // $('#bf-3').click(function(){ playerButtonOnClick(this,false); });
+   // $('#bf-4').click(function(){ playerButtonOnClick(this,true); });
 
     function onPlayerReady(event){
         var id = event.target.getIframe().id;
