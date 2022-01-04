@@ -393,3 +393,70 @@ div.card{
   .mcard-footer{
     transform: translateY(150px);
   }
+
+  .album-container{
+    overflow: hidden;
+    position:relative;
+    height: 300px;
+    box-shadow: 0 20px 25px -25px rgb(138, 137, 137);
+
+      
+  }
+  .album-div{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left:0;
+    padding-left: inherit;
+    padding-right: inherit;
+
+    visibility: hidden;
+    opacity: 0;
+    transition:visibility 0.3s linear,opacity 0.3s linear;
+    
+
+  }
+
+  .album-button{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+  }
+
+  .album-pic{
+    position: absolute;
+    width: 100%;
+    padding-left: inherit;
+    padding-right: inherit;
+    left:0px;
+    right: 0px;
+    -webkit-filter:blur(0);
+    filter:blur(0);
+    transition: .4s ease-in-out;
+    
+
+  }
+
+  .album-container:hover .album-button{
+    visibility: visible;
+  }
+
+  .album-container:hover .album-pic{
+    -webkit-filter:  blur(3px);
+    filter: blur(3px);
+    opacity: 0.7;
+    transition: filter ease 1.5s;
+    transition: opacity ease 0.5s;
+    overflow: hidden;
+  }
+  .album-container:hover .album-div{
+    visibility: visible;
+    opacity: 1;
+
+  }
+
+
+

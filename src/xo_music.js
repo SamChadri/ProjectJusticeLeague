@@ -2,11 +2,30 @@ $(document).ready(function(){
     $('.album-carousel').slick({
         dots: true,
         slidesToShow: 3,
+        slidesToScroll: 1,
         arrows: true,
         centerMode: true,
+        infinite: true,
+
 
     });
-    $('.album-carousel').slick('refresh');
+
+    /**
+     * REPORT: There is a rendering issue that seems to come when the first slide of the set reappers during infinite scrolling(ex. 10 -> 1)
+     * 
+     * The player state seems to render the button again, but none of the logs seem to indicate any state changes.
+     * Hence it appears broken until it becomes the main focus again.
+     * This seems to be a slick issue, which I think stems from the focus feature on slick.
+     * Peep the Documentation: 'Enables tabbing and arrow key navigation. Unless autoplay:
+     *      true, sets browser focus to current slide (or first of current slide set, if multiple slidesToShow) after slide change.
+     *      For full a11y compliance enable focusOnChange in addition to this.'
+     * The things seem to reset on the first slide of the set. And anything previous of the first slide resets also.
+     * This seems to happen when the slides are not in view, I checked the inspection code.
+     * TESTING: I tried multiple rednering options as you can see using react, while achieving the same result.
+     * NOTE: I did not try to without react out of laziness
+     * ALSO: Explored most of the slick settings and I think I came to the conclusion above
+     * Feel free to correct me or help, I know the gone feds hate.
+     */
 
     $('.media-carousel').slick({
         slidesToShow: 1,
