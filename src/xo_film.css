@@ -1,0 +1,409 @@
+@keyframes fade-in {
+    from {opacity: 0.0;}
+    to {opacity: var(--op);}
+}
+
+@keyframes fade-out {
+    from {opacity: inherit;}
+    to {opacity: 0.0;}
+}
+
+@keyframes slide-down {
+    from {transform: translateY(-50px);}
+    to {transform: translateY(0px);}
+}
+
+@keyframes slide-up {
+    from {transform: translateY(50px);}
+    to {transform: translateY(0px);}
+}
+
+@keyframes slide-left {
+    from {transform: translateX(50px);}
+    to {transform: translateX(0px);}
+}
+
+@keyframes slide-right {
+    from {transform: translateX(-50px);}
+    to {transform: translateY(0px);}
+}
+
+@keyframes zoom-in {
+    from {transform: scale(0);}
+    to {transform: scale(1.0);}
+}
+
+@keyframes zoom-out {
+    from {transform: scale(1.0);}
+    to {transform: scale(0);}
+}
+
+.pt-6,
+.py-6{
+    padding-top: 4rem;
+}
+
+.pb-6,
+.py-6{
+    padding-bottom: 4rem;
+}
+.pr-6,
+.px-6{
+    padding-right: 4rem;
+}
+
+.pl-6,
+.px-6{
+    padding-left: 4rem;
+}
+
+
+.pt-7,
+.py-7{
+    padding-top: 8rem;
+}
+
+.pb-7,
+.py-7{
+    padding-bottom: 8rem;
+}
+.pr-7,
+.px-7{
+    padding-right: 8rem;
+}
+
+.pl-7,
+.px-7{
+    padding-left: 8rem;
+}
+
+.pt-8,
+.py-8{
+    padding-top: 12rem;
+}
+
+.pb-8,
+.py-8{
+    padding-bottom: 12rem;
+}
+.pr-8,
+.px-8{
+    padding-right: 12rem;
+}
+
+.pl-8,
+.px-8{
+    padding-left: 12rem;
+}
+
+
+
+
+
+hr.fade-in-ani{
+    --op: .3;
+    animation: fade-in 2s ease;
+    animation-fill-mode: forwards;
+}
+
+.fade-in-ani{
+    --op: 1;
+    animation: fade-in 3s;
+    animation-fill-mode: forwards;
+}
+
+.fade-out-ani {
+    animation: fade-out 1s;
+    animation-fill-mode: forwards
+}
+
+.fade-in-down-ani {
+    animation: fade-in 1s, slide-down 1s
+}
+
+.fade-in-up-ani {
+    animation: fade-in 1s, slide-up 1s
+}
+
+.fade-in-left-ani {
+    animation: fade-in 1s, slide-left 1s 
+}
+
+.fade-in-right-ani {
+    animation: fade-in 1s, slide-right 1s
+}
+
+.zoom-in-ani {
+    animation: zoom-in 1.5s
+}
+
+.zoom-out-ani {
+    animation: zoom-out 1.5s
+}
+
+.slide-down-ani {
+    animation: slide-down 1s
+}
+
+.slide-up-ani {
+    animation: slide-up 1s
+}
+
+.slide-left-ani{
+    animation: slide-left 1s
+}
+
+.slide-right-ani{
+    animation: slide-right 1s
+}
+
+.nav-masthead .nav-link {
+    padding: .25rem 0;
+    margin-left: 1rem;
+    color: rgba(255, 255, 255, .5);
+    background-color: transparent;
+    border-bottom: .25rem solid transparent;
+}
+
+.navbar{
+    top: 0;
+    left: 0;
+    transition: background-color 1s ease 0s;
+}
+#navBrand{
+    color: #ffb3de;
+    text-decoration: none;
+}
+#navBrand:hover{
+    color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .active {
+    color: #ffb3de;
+    border-bottom-color: #ffb3de;
+    
+}
+
+.nav-trans {
+    background-color: #000;
+    -webkit-transition: background-color 1s ease;
+    -moz-transition: background-color 1s ease;  
+    -o-transition: background-color 1s ease;         
+    transition: background-color 1s ease;
+  }
+
+.banner-image{
+    height: 100vh;
+    width: 100vw;
+    position:relative;
+
+    background-image: url('../pics/164915.jpeg');
+    background-size: 100% 100%;
+}
+
+
+.xo_style{
+    color: #ffb3de;
+}
+.media-pic{
+    transform: rotate(-5deg);
+    box-shadow: 0 20px 35px -25px rgb(2, 2, 2);
+
+  }
+.featurette{
+    border:2px solid grey;
+}
+
+  .info-div{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left:0;
+    padding-left: inherit;
+    padding-right: inherit;
+    
+    visibility: hidden;
+    opacity: 0;
+    transition:visibility 0.3s linear,opacity 0.3s linear;
+
+
+    
+  }
+  .img-div{
+    overflow: hidden;
+    position:relative;
+    height: 500px;
+  }
+  .feature-pic{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding-left: inherit;
+    padding-right: inherit;
+    left:0px;
+    right: 0px;
+    -webkit-filter:blur(0);
+    filter:blur(0);
+    transition: .4s ease-in-out;
+}
+.slick-slide .feature-pic{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding-left: inherit;
+    padding-right: inherit;
+    left:0px;
+    right: 0px;
+    -webkit-filter:blur(0);
+    filter:blur(0);
+    transition: .4s ease-in-out;
+}
+.media-carousel{
+    width: 95%;
+    margin: 0px auto;
+}
+
+
+/* Why does this only work with div */
+.img-div:hover .feature-pic{
+  -webkit-filter:  blur(3px);
+  filter: blur(3px);
+  opacity: 0.7;
+  transition: filter ease 1.5s;
+  transition: opacity ease 0.5s;
+  overflow: hidden;
+}
+
+
+  .feature-button{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    color: white;    
+  }
+
+  .img-div:hover .feature-button{
+      visibility: visible;
+
+  }
+  .img-div:hover .info-div{
+    visibility: visible;
+    opacity: 1;
+
+  }
+  .artist-card{
+    transition: transform .2s ease-in-out;
+  }
+
+  .artist-card:hover{
+    transform: scale(1.1);
+  }
+
+
+
+  .album-display .slide{
+
+    width: 100%;
+    text-align: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease;
+    -webkit-transition: opacity 1s ease;
+}
+
+.movie-display .slick-initialized .slide{
+    width: 100%;
+    text-align: center;
+    visibility: visible;
+    transition: opacity 1s ease;
+    -webkit-transition: opacity 1s ease;
+    opacity: 1; 
+}
+
+.movie-display{
+    padding-bottom: 4rem;
+}
+
+
+.movie-carousel{
+    width: 90%;
+    margin: 0px auto;
+}
+.movie-slide img {
+    display: block;
+    height: 400px;
+  }
+
+.movie-slide{
+    margin-right: 20px;
+    opacity: .5;
+    overflow: hidden;
+
+}
+
+.movie-slide.is-selected{
+    opacity: 1;
+    transform: opacity 1s ease; 
+
+
+  }
+
+.nav-slide{
+    opacity: 0.5;
+    height: 100px;
+    width: 80px;
+    transition: opacity 2s ease;
+}
+
+.cnav-display{
+
+}
+.nav-slide.is-selected{
+    opacity: 1;
+}
+.flickity-button {
+    background: #333;
+    visibility: hidden;
+  }
+/*
+.slick-slide{
+    margin:10px;
+
+}*/
+@keyframes y-axis-animation {
+    from {transform: rotateY(0deg)}
+    to {transform: rotateY(20deg)}
+  }
+.slick-slide {
+    transform: scale(1);
+    opacity: 0.6;
+    margin: 10px;
+    transition: transform 1s ease, opacity 2s ease;
+
+  }
+.slick-center {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.slick-slide img{
+    width:400px;
+    height: 500px;
+    margin:auto;
+    display: block;
+
+
+}
+
+.movie-display .slick-dots li button:before {
+    color:white;
+}
