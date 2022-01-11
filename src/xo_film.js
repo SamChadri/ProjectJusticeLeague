@@ -1,18 +1,15 @@
 $(document).ready(function(){
-    /*
-    $('.movie-carousel').slick({
+    
+    $('.media-carousel').slick({
         dots: true,
-        slidesToShow: 3,
-        slidesToScroll: 1,
+        slidesToShow: 1,
         arrows: true,
-        centerMode: true,
         infinite: true,
-        centerPadding: '30px',
 
 
 
     });
-*/
+
     var $carousel= $('.movie-carousel').flickity({
         // options
         cellAlign: 'center',

@@ -38,7 +38,7 @@ class VidContainer extends React.Component{
                 {'id': 1, 'video_code': '../pics/XO_MUSIC_TRAILER_MP4.mp4', 'local': true},
                 {'id': 2, 'video_code': 'gSOFQN0UKpk', 'local': false},
                 {'id': 3, 'video_code': 'K9l8wmyfKDU', 'local': false},
-                {'id': 4, 'video_code': '../pics/XO_GEMS_I.mp4', 'local': true},
+                {'id': 4, 'video_code': '../pics/XO_NIKE_TRAILER.mp4', 'local': true},
             ],
             playerState: 'PAUSED',
             showVid: false
@@ -170,7 +170,7 @@ class VidContainer extends React.Component{
         this.state = {
             id: 1,
             items:[
-                {'id': 1, 'spotify_code': '7dK54iZuOxXFarGhXwEXfF', 'showPlayer': true},
+                {'id': 1, 'spotify_code': '2nLOHgzXzwFEpl62zAgCEC', 'showPlayer': true},
                 {'id': 2, 'spotify_code': '5B6W3GmGmcCktXVFLfOsfI', 'showPlayer': true},
                 {'id': 3, 'spotify_code': '06nzu940k6jhkJ5TacM6y5', 'showPlayer': true},
                 {'id': 4, 'spotify_code': '6tJKIc90Q5FuHbAWsrBPkI', 'showPlayer': true},

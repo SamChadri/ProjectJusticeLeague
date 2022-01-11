@@ -3,7 +3,8 @@ const path = require('path');
 module.exports = {
     entry:{
       main: path.join(__dirname, "src", "index.js"),
-      mMusic: path.join(__dirname, "src", "music.js")
+      mMusic: path.join(__dirname, "src", "music.js"),
+      mFilm: path.join(__dirname, "src", "film.js")
 
     }, 
     output: {
