@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import ReactDOMServer from 'react-dom/server';
 
 
-import styles from './xo_film.css'
 const title = 'React with Webpack and Babel';
 let instanceCounter = 0;
 let vidItems = 2;
@@ -35,8 +34,8 @@ class VidContainer extends React.Component{
         this.state = {
             id: 1,
             items:[
-                {'id': 1, 'video_code': 'kOYS9lX2pgg', 'local': false},
-                {'id': 2, 'video_code': 'TbkUwE_Po-s', 'local': false},
+                {'id': 1, 'video_code': 'vvo3TTfgQ_0', 'local': false},
+                {'id': 2, 'video_code': '4xVVFJuycww', 'local': false},
             ],
             playerState: 'PAUSED',
             showVid: false
@@ -151,10 +150,99 @@ class VidContainer extends React.Component{
     }
   }
 
-  for(let i=1; i< vidItems + 1; i++){
+for(let i=1; i< vidItems + 1; i++){
     ReactDOM.render(
         <VidContainer/>,
         document.getElementById(`vdiv-${i}`)
-      );
+    );
       
-  }
+}
+
+class MovieContainer extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            id: 1,
+            items:[
+                {
+                    'id': 1,
+                    'name': 'Spiderman No Way Home',
+                    'director': 'Jon Watts',
+                    'release_date': 'December 17, 2021',
+                    'producers': 'Kevin Feige; Amy Pascal',
+                    'cast':[
+                        {'name': 'Tom Holland', 'image': 'https://i.pinimg.com/originals/67/a0/5d/67a05dcce41c8172c9ce644ede67274e.jpg'},
+                        {'name': 'Tobey Maguire', 'image': 'https://wallpaperaccess.com/full/2136145.jp'},
+                        {'name': 'Andrew Garfield','image':'https://i.pinimg.com/originals/95/99/43/95994348a11cfe9d01c0ac1951a906c4.jpg'},
+                        {'name': 'Zendaya', 'image': 'https://i.pinimg.com/564x/87/4a/6c/874a6cb28ca2c0950df7303325273001.jpg'},
+                    ],
+                    'imdb_score': '9.9/10',
+                    'rt_score': '80%',
+                    'mt_score': '70%'
+
+                },
+                {
+                    'id': 2,
+                    'name': 'The Matrix Resurrections',
+                    'director': 'Lana Wachowski',
+                    'release_date': 'December 22, 2021',
+                    'producers': 'Village Roadshow Pictures; Venus Castina Productions',
+                    'music by':'Johnny Klimek; Tom Tykwer',
+                    'cast':[
+                        {'name': 'Keanu Reeves', 'image': 'https://i.pinimg.com/originals/93/b4/31/93b4312aafe30f96d3c33334c839c669.jpg'},
+                        {'name': 'Jessica Henwick', 'image': 'https://m.media-amazon.com/images/M/MV5BYTk2NmFjNzQtYTNiNy00ODk5LWE4NGUtZTFjNjI4N2JjZDMxXkEyXkFqcGdeQXVyMTAwODk1MDk@._V1_.jpg'},
+                        {'name': 'Carrie-Anne Moss','image':'https://i.pinimg.com/originals/54/7e/91/547e91e336263192b1324df89ada658b.jpg'},
+                        {'name': 'Yahya Abdul-Mateen II', 'image': 'https://content.api.news/v3/images/bin/326cdb4d60ebf2e146b4972c0e7be99e'},
+                    ],
+                    'imdb_score': 'n/a',
+                    'rt_score': '64%',
+                    'mt_score': '63%'
+
+                },
+                {
+                    'id': 3,
+                    'name': 'Love and Monsters',
+                    'director': 'Michael Matthews',
+                    'release_date': 'October 16, 2020',
+                    'producers': 'Shawn Levy; Dan Cohen',
+                    'music by':'Marco Beltrami & Marcus Trumpp',
+                    'cast':[
+                        {'name': "Dylan O'Brien", 'image': 'https://pbs.twimg.com/profile_images/441438607828451328/g24eSR4S_400x400.jpeg'},
+                        {'name': 'Jessica Henwick', 'image': 'https://m.media-amazon.com/images/M/MV5BYTk2NmFjNzQtYTNiNy00ODk5LWE4NGUtZTFjNjI4N2JjZDMxXkEyXkFqcGdeQXVyMTAwODk1MDk@._V1_.jpg'},
+                        {'name': 'Ariana Greenblatt ','image':'https://m.media-amazon.com/images/M/MV5BZTIxMmYyNTYtYzY5Yy00OWZhLTkxN2QtNmY2NzJmNTgyZjVmXkEyXkFqcGdeQXVyNDM1NjQzOQ@@._V1_.jpg'},
+                        {'name': 'Yahya Abdul-Mateen II', 'image': 'https://content.api.news/v3/images/bin/326cdb4d60ebf2e146b4972c0e7be99e'},
+                    ],
+                    'imdb_score': '7/10',
+                    'rt_score': '94%',
+                    'mt_score': 'n/a'
+
+                },
+                {
+                    'id': 4,
+                    'name': 'Tenet',
+                    'director': 'Christopher Nolan',
+                    'release_date': 'August 12, 2020',
+                    'producers': 'Christopher Nolan; Emma Thomas',
+                    'music by':'Ludwig Göransson',
+                    'cast':[
+                        {'name': "Elizabeth Debicki", 'image': 'https://static.wikia.nocookie.net/people-dont-have-to-be-anything-else/images/1/1c/4c56fb6a4168db05e5df6423405cb364.jpg/revision/latest?cb=20140629181816'},
+                        {'name': 'Robert Pattinson', 'image': 'http://images4.fanpop.com/image/photos/24100000/robert-pattinson-robert-pattinson-24105926-1154-1280.jpg'},
+                        {'name': 'John David Washington ','image':'https://cdn.celpox.com/bby_uploads/celeb/cb3e9aac7445113a2200aa8aea678228.jpg'},
+                        {'name': 'Kenneth Branagh', 'image': 'https://i.pinimg.com/736x/eb/3d/9e/eb3d9e17f6e82f3271d1204007cbecd5--kenneth-branagh-tv-star.jpg'},
+                    ],
+                    'imdb_score': '7.4/10',
+                    'rt_score': '69%',
+                    'mt_score': '69%'
+
+                },
+            ],
+        }
+
+    }
+
+    render(){
+
+        
+    }
+
+}

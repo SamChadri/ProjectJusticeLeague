@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import ReactDOMServer from 'react-dom/server';
 
 
-import styles from './xo_music.css'
 const title = 'React with Webpack and Babel';
 let instanceCounter = 0;
 let vidItems = 4;
@@ -36,8 +35,8 @@ class VidContainer extends React.Component{
             id: 1,
             items:[
                 {'id': 1, 'video_code': '../pics/XO_MUSIC_TRAILER_MP4.mp4', 'local': true},
-                {'id': 2, 'video_code': 'gSOFQN0UKpk', 'local': false},
-                {'id': 3, 'video_code': 'K9l8wmyfKDU', 'local': false},
+                {'id': 2, 'video_code': 'mm7hdKdPnLQ', 'local': false},
+                {'id': 3, 'video_code': 'R6NF49HeiaU', 'local': false},
                 {'id': 4, 'video_code': '../pics/XO_NIKE_TRAILER.mp4', 'local': true},
             ],
             playerState: 'PAUSED',
