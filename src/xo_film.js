@@ -15,14 +15,14 @@ $(document).ready(function(){
         wrapAround: true,
         pageDots: false
     });
-
+/*
     var $carousel= $('.movie-carousel').flickity({
         // options
         cellAlign: 'center',
         wrapAround: true,
         imagesLoaded: true,
         percentPosition: false, 
-      });
+      });*/
       $('.nav-carousel').flickity({
         asNavFor: '.movie-carousel',
         contain: true,
@@ -33,8 +33,7 @@ $(document).ready(function(){
 
 
     $carousel.on( 'select.flickity', function( event, index ) {
-        var img = $imgs[index];
-        img.addClass('movie-slideNew');
+
     });
 
 

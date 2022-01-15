@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Button from 'react-bootstrap/Button';
 import ReactDOMServer from 'react-dom/server';
+import { Container } from 'react-bootstrap';
+import { Col, Row, } from "react-bootstrap";
+
 
 
 const title = 'React with Webpack and Babel';
@@ -34,8 +37,8 @@ class VidContainer extends React.Component{
         this.state = {
             id: 1,
             items:[
-                {'id': 1, 'video_code': 'vvo3TTfgQ_0', 'local': false},
-                {'id': 2, 'video_code': '4xVVFJuycww', 'local': false},
+                {'id': 1, 'video_code': 'C2jj6qIWuUM', 'local': false},
+                {'id': 2, 'video_code': 'mkoytz_MB_Y', 'local': false},
             ],
             playerState: 'PAUSED',
             showVid: false
@@ -170,15 +173,17 @@ class MovieContainer extends React.Component{
                     'director': 'Jon Watts',
                     'release_date': 'December 17, 2021',
                     'producers': 'Kevin Feige; Amy Pascal',
+                    'screenplay':'Erik Sommers, Chris McKenna',
+                    'music':' Michael Giacchino',
                     'cast':[
                         {'name': 'Tom Holland', 'image': 'https://i.pinimg.com/originals/67/a0/5d/67a05dcce41c8172c9ce644ede67274e.jpg'},
-                        {'name': 'Tobey Maguire', 'image': 'https://wallpaperaccess.com/full/2136145.jp'},
+                        {'name': 'Tobey Maguire', 'image': 'https://wallpaperaccess.com/full/2136145.jpg'},
                         {'name': 'Andrew Garfield','image':'https://i.pinimg.com/originals/95/99/43/95994348a11cfe9d01c0ac1951a906c4.jpg'},
                         {'name': 'Zendaya', 'image': 'https://i.pinimg.com/564x/87/4a/6c/874a6cb28ca2c0950df7303325273001.jpg'},
                     ],
-                    'imdb_score': '9.9/10',
-                    'rt_score': '80%',
-                    'mt_score': '70%'
+                    'imdb_score': '8.8/10',
+                    'rt_score': '93%',
+                    'mt_score': '71%'
 
                 },
                 {
@@ -187,7 +192,8 @@ class MovieContainer extends React.Component{
                     'director': 'Lana Wachowski',
                     'release_date': 'December 22, 2021',
                     'producers': 'Village Roadshow Pictures; Venus Castina Productions',
-                    'music by':'Johnny Klimek; Tom Tykwer',
+                    'music':'Johnny Klimek; Tom Tykwer',
+                    'screenplay':'Lana Wachowski, David Mitchell, Aleksandar Hemon',
                     'cast':[
                         {'name': 'Keanu Reeves', 'image': 'https://i.pinimg.com/originals/93/b4/31/93b4312aafe30f96d3c33334c839c669.jpg'},
                         {'name': 'Jessica Henwick', 'image': 'https://m.media-amazon.com/images/M/MV5BYTk2NmFjNzQtYTNiNy00ODk5LWE4NGUtZTFjNjI4N2JjZDMxXkEyXkFqcGdeQXVyMTAwODk1MDk@._V1_.jpg'},
@@ -205,7 +211,8 @@ class MovieContainer extends React.Component{
                     'director': 'Michael Matthews',
                     'release_date': 'October 16, 2020',
                     'producers': 'Shawn Levy; Dan Cohen',
-                    'music by':'Marco Beltrami & Marcus Trumpp',
+                    'music':'Marco Beltrami & Marcus Trumpp',
+                    'screenplay':'Brian Duffield, Matthew Robinson',
                     'cast':[
                         {'name': "Dylan O'Brien", 'image': 'https://pbs.twimg.com/profile_images/441438607828451328/g24eSR4S_400x400.jpeg'},
                         {'name': 'Jessica Henwick', 'image': 'https://m.media-amazon.com/images/M/MV5BYTk2NmFjNzQtYTNiNy00ODk5LWE4NGUtZTFjNjI4N2JjZDMxXkEyXkFqcGdeQXVyMTAwODk1MDk@._V1_.jpg'},
@@ -223,9 +230,10 @@ class MovieContainer extends React.Component{
                     'director': 'Christopher Nolan',
                     'release_date': 'August 12, 2020',
                     'producers': 'Christopher Nolan; Emma Thomas',
-                    'music by':'Ludwig Göransson',
+                    'music':'Ludwig Göransson',
+                    'screenplay':'Christopher Nolan',
                     'cast':[
-                        {'name': "Elizabeth Debicki", 'image': 'https://static.wikia.nocookie.net/people-dont-have-to-be-anything-else/images/1/1c/4c56fb6a4168db05e5df6423405cb364.jpg/revision/latest?cb=20140629181816'},
+                        {'name': "Elizabeth Debicki", 'image': 'https://celebmafia.com/wp-content/uploads/2015/12/elizabeth-debicki-b-w-photo-shoot-for-the-last-2015-1.jpg'},
                         {'name': 'Robert Pattinson', 'image': 'http://images4.fanpop.com/image/photos/24100000/robert-pattinson-robert-pattinson-24105926-1154-1280.jpg'},
                         {'name': 'John David Washington ','image':'https://cdn.celpox.com/bby_uploads/celeb/cb3e9aac7445113a2200aa8aea678228.jpg'},
                         {'name': 'Kenneth Branagh', 'image': 'https://i.pinimg.com/736x/eb/3d/9e/eb3d9e17f6e82f3271d1204007cbecd5--kenneth-branagh-tv-star.jpg'},
@@ -235,14 +243,160 @@ class MovieContainer extends React.Component{
                     'mt_score': '69%'
 
                 },
+                {
+                    'id': 5,
+                    'name': 'The Last Duel',
+                    'director': 'Ridley Scott',
+                    'release_date': 'October 15, 2021',
+                    'producers': 'Christopher Nolan; Emma Thomas',
+                    'music':'Harry Gregson-Williams',
+                    'screenplay':'Eric Jager',
+                    'cast':[
+                        {'name': "Jodie Comer", 'image': 'http://images6.fanpop.com/image/photos/43300000/Jodie-Comer-jodie-comer-43353198-1080-1350.jpg'},
+                        {'name': 'Matt Damon', 'image': 'https://data.whicdn.com/images/88994055/original.jpg'},
+                        {'name': 'Ben Affleck','image':'https://actorheadshot.files.wordpress.com/2013/02/affleck1-e1361822631156.jpg?w=450'},
+                        {'name': 'Kenneth Branagh', 'image': 'https://i.pinimg.com/736x/eb/3d/9e/eb3d9e17f6e82f3271d1204007cbecd5--kenneth-branagh-tv-star.jpg'},
+                    ],
+                    'imdb_score': '7.4/10',
+                    'rt_score': '86%',
+                    'mt_score': 'n/a'
+
+                },
             ],
+
+            curr_item: {
+                'id': 1,
+                'name': 'Spiderman No Way Home',
+                'director': 'Jon Watts',
+                'release_date': 'December 17, 2021',
+                'producers': 'Kevin Feige; Amy Pascal',
+                'music':' Michael Giacchino',
+                'screenplay':'Erik Sommers, Chris McKenna',
+                'cast':[
+                    {'name': 'Tom Holland', 'image': 'https://i.pinimg.com/originals/67/a0/5d/67a05dcce41c8172c9ce644ede67274e.jpg'},
+                    {'name': 'Tobey Maguire', 'image': 'https://wallpaperaccess.com/full/2136145.jpg'},
+                    {'name': 'Andrew Garfield','image':'https://i.pinimg.com/originals/95/99/43/95994348a11cfe9d01c0ac1951a906c4.jpg'},
+                    {'name': 'Zendaya', 'image': 'https://i.pinimg.com/564x/87/4a/6c/874a6cb28ca2c0950df7303325273001.jpg'},
+                ],
+                'imdb_score': '9.9/10',
+                'rt_score': '80%',
+                'mt_score': '70%'
+            }
         }
+        this.updateData = this.updateData.bind(this);
+
 
     }
+    componentDidMount(){
+        this.setState(function(state, props) {
+            return {
+              curr_item: this.state.items[0]
+            };
+          });
+        
+    }
+
+    updateData(index){
+        this.setState(function(state, props) {
+            return {
+              curr_item: this.state.items[index]
+            };
+          });
+    }
+
 
     render(){
+        return(
+            <Container>
+                    <Row>
+                        <Col md="6" >
+                            <p style={{fontSize:'small'}}>Director: <span style={{fontWeight:'lighter'}} >{this.state.curr_item.director}</span></p>
+                            <p style={{fontSize:'small'}}>Screenplay:<span  style={{fontWeight:'lighter'}}> {this.state.curr_item.screenplay} </span> </p>
+                            <p style={{fontSize:'small'}}>Music by:<span  style={{fontWeight:'lighter'}}> {this.state.curr_item.music}</span></p>
+
+                        </Col>
+                        <Col md="5">
+                            <Row className="my-0">
+                                <Col>
+                                    <img  className="w-75 h-50" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/320px-IMDB_Logo_2016.svg.png"/>
+                                </Col>
+                                <Col className="text-center">
+                                    <p className="my-2" style={{fontSize:'small'}}>{this.state.curr_item.imdb_score}</p>
+
+                                </Col>
+                            </Row>
+                            <Row className="my-1 ">
+                                <Col>
+                                    <img className="w-75 h-50" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Rotten_Tomatoes_logo.svg/320px-Rotten_Tomatoes_logo.svg.png"/>
+                                </Col>
+                                <Col className="text-center">
+                                    <p className="my-2 w-75 h-75" style={{fontSize:'small'}}>{this.state.curr_item.rt_score}</p>
+                                </Col>
+                            </Row>
+                            <Row className="my-1">
+                                <Col>
+                                    <img className="w-100 h-100" src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Metacritic_logo.png"/> 
+                                </Col>
+                                <Col className="text-center">
+                                    <p style={{fontSize:'small'}}>{this.state.curr_item.mt_score}</p>
+                                </Col>
+                            </Row>
+
+                        </Col>
+
+                    </Row>
+                    <div className="cast-carousel my-2">
+                        <div className="member-slide">
+                            <img className="headshot" src={this.state.curr_item.cast[0].image}/>
+                            <p style={{fontSize:'small', display:'inline'}} >{this.state.curr_item.cast[0].name}</p>
+                        </div>
+                        <div class="member-slide">
+                            <img className="headshot" src={this.state.curr_item.cast[1].image}/>
+                            <p style={{fontSize:'small', display:'inline'}} >{this.state.curr_item.cast[1].name}</p>
+                        </div>
+                        <div class="member-slide">
+                            <img className="headshot" src={this.state.curr_item.cast[2].image}/>
+                            <p style={{fontSize:'small', display:'inline'}} >{this.state.curr_item.cast[2].name}</p>
+                        </div>
+                        <div class="member-slide">
+                            <img className="headshot" src={this.state.curr_item.cast[3].image}/>
+                            <p style={{fontSize:'small', display:'inline'}} >{this.state.curr_item.cast[3].name}</p>
+                        </div>
+
+                    </div>
+            </Container>
+        );
 
         
     }
 
 }
+
+
+
+var rMovieElement = ReactDOM.render(
+    <MovieContainer/>,
+    document.getElementById(`info-container`)
+);
+
+var $carousel= $('.movie-carousel').flickity({
+    // options
+    cellAlign: 'center',
+    wrapAround: true,
+    imagesLoaded: true,
+    percentPosition: false, 
+  });
+var $castCarousel = $('.cast-carousel').flickity({
+    cellAlign: 'left',
+    wrapAround: true,
+    pageDots: false
+});
+  $carousel.on( 'change.flickity', function( event, index ) {
+    rMovieElement.updateData(index);
+    $castCarousel.flickity('destroy');
+    $castCarousel.flickity({
+        cellAlign: 'left',
+        wrapAround: true,
+        pageDots: false
+    });
+  });
