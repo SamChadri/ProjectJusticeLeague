@@ -37,7 +37,7 @@ class VidContainer extends React.Component{
                 {'id': 1, 'video_code': '../pics/XO_MUSIC_TRAILER_MP4.mp4', 'local': true},
                 {'id': 2, 'video_code': 'mm7hdKdPnLQ', 'local': false},
                 {'id': 3, 'video_code': 'R6NF49HeiaU', 'local': false},
-                {'id': 4, 'video_code': '../pics/XO_NIKE_TRAILER.mp4', 'local': true},
+                {'id': 4, 'video_code': '../pics/XO_FlawsAndAll_B.mp4', 'local': true},
             ],
             playerState: 'PAUSED',
             showVid: false
