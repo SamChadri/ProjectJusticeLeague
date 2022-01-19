@@ -37,8 +37,8 @@ class VidContainer extends React.Component{
         this.state = {
             id: 1,
             items:[
-                {'id': 1, 'video_code': 'C2jj6qIWuUM', 'local': false},
-                {'id': 2, 'video_code': 'mkoytz_MB_Y', 'local': false},
+                {'id': 1, 'video_code': 'Ub53c95Soqk', 'local': false},
+                {'id': 2, 'video_code': '../pics/XO_F5_GEM.mp4', 'local': true},
             ],
             playerState: 'PAUSED',
             showVid: false
@@ -161,7 +161,7 @@ for(let i=1; i< vidItems + 1; i++){
       
 }
 
-class MovieContainer extends React.Component{
+class MovieInfoContainer extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -375,7 +375,7 @@ class MovieContainer extends React.Component{
 
 
 var rMovieElement = ReactDOM.render(
-    <MovieContainer/>,
+    <MovieInfoContainer/>,
     document.getElementById(`info-container`)
 );
 
@@ -391,7 +391,196 @@ var $castCarousel = $('.cast-carousel').flickity({
     wrapAround: true,
     pageDots: false
 });
-  $carousel.on( 'change.flickity', function( event, index ) {
+
+
+var movieElements = 5;
+var movieInstances = 0;
+var last_index = 0
+
+class MovieContainer extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            'id': 1,
+            items:[
+            {'id': 1, 'video_code': 'JfVOs4VSpmA', 'local': false},
+            {'id': 2, 'video_code': '9ix7TUGVYIo', 'local': false},
+            {'id': 3, 'video_code': '-19tBHrZwOM', 'local': false},
+            {'id': 4, 'video_code': 'AZGcmvrTX9M', 'local': false},
+            {'id': 5, 'video_code': 'mgygUwPJvYk', 'local': false},
+            ],
+            playback: false
+        }
+        this.handleClick = this.handleClick.bind(this);
+        this.triggerEvent = this.triggerEvent.bind(this);
+    }
+    componentDidMount(){
+        movieInstances += 1;
+  
+        this.setState(function(state, props) {
+          return {
+            id: movieInstances,
+          };
+        });
+        console.log(`Mounting ID: ${this.state.id}`);
+    }
+    createLocalVideo(width, height, src, id){
+        var video = document.createElement('video');
+        var source = document.createElement('source');
+    
+        source.type = 'video/mp4';
+        source.src = src
+    
+        video.setAttribute("controls", "controls");
+        video.height = height;
+        video.width = width;
+        video.id = id
+        video.style.objectFit = 'fill';
+    
+        video.appendChild(source)
+        return video
+    }
+
+    handleClick(){
+        if(this.state.playback){
+            this.setState(function(state, props) {
+                return {
+                    playback: false
+                };
+                });
+        }else{
+            this.setState(function(state, props) {
+                return {
+                    playback: true
+                };
+                });
+
+        }
+        $(".movie-info").fadeOut(600, function(){
+            console.log("fadeout Trigger");
+            var id = $('.is-selected').attr('id');
+            $(`#${id}`).mouseenter(function(){
+                $(".movie-info").fadeOut(600,function(){console.log("Hover in")});
+            });
+            $(`#${id}`).mouseleave( function(){
+                $(".movie-info").fadeIn(600,function(){console.log("Hover out")});
+                }
+            );
+        });
+
+        var vidItem = this.state.items[this.state.id -1];
+        var num_id = vidItem.id;
+        var id = `mvdiv-${num_id}`;
+        var pic_id = `mpic-${num_id}`;
+        var vid_id = `mvid-${num_id}`;
+        var fheight = $(`#${pic_id}`).height();
+        var fwidth = $(`#${pic_id}`).width();
+        console.log(id);
+        
+        if(vidItem.local){
+          var video = this.createLocalVideo(fwidth, fheight, vidItem.video_code, vid_id);
+          var vidContainer = document.getElementById(id)
+          vidContainer.innerHTML = video.outerHTML;
+          this.setState(function(state, props) {
+            document.getElementById(vid_id).play();
+            return {
+              playerState: 'PLAYING'
+            };
+          });
+          
+          vidContainer.addEventListener('mouseenter', e => {
+            if (this.state.playerState == 'PAUSED'){
+              console.log('PLaying Video');
+              this.setState(function(state, props) {
+                document.getElementById(vid_id).play();
+                return {
+                  playerState: 'PLAYING'
+                };
+              });
+            }
+          });
+          vidContainer.addEventListener('mouseleave', e => {
+            if (this.state.playerState == 'PLAYING'){
+              console.log('Pausing Video');
+              this.setState(function(state, props) {
+                document.getElementById(vid_id).pause();
+                return {
+                  playerState: 'PAUSED'
+                };
+              });
+            }
+          });
+        }else{
+          console.log(`id is : ${this.state.id}`);
+          var player = new YT.Player(id, {
+            height: fheight,
+            width: fwidth,
+            host:`${window.location.protocol}//www.youtube.com`,
+            videoId: vidItem.video_code,//TrailerCode Goes here,
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    
+        }
+        
+
+    }
+
+    triggerEvent(){
+        if(this.state.playback){
+            var id = this.state.id;
+            
+            $('.is-selected').trigger('mouseenter');
+            // 
+            //Autoplay feature seems to work with keyboard keys, but problem with youtube fast foward feature
+            //When using flickity buttons(prolly the feds again -_-), hover effect kicks in, causing audio with no video
+            // I could write a flickity-button hover: show player-vid, however I like the default pause onHover feature without transition
+            // Also seems to be a another mouseleave trigger when approaching the sides of the movie-slide. Which can create some edge cases(litterally) when transitioning
+            //Bit of lag when transitioning but I'm pretty sure thats just my cpu.
+            // I will probably end up up going with just the arrow feature no keyboard autoplay.
+            $(`#mvdiv-${this.state.id}`).trigger('mouseenter');
+            /*
+            Doesn't work
+            $(`#mvdiv-${this.state.id}`).hide().fadeIn(600,function(){});
+            */
+            $(`#slide-${this.state.id}`).trigger('mouseenter');
+            //$(`.flickity-button`).trigger('mouseleave');
+            console.log(`Triggering mouseleave for mvdiv-${last_index + 1}`);
+            $(`#mvdiv-${last_index +1}`).trigger('mouseleave');
+
+        }else{
+            $('.movie-info').fadeIn(600,function(){});
+            console.log(`Triggering mouseleave for mvdiv-${last_index + 1}`);
+            $(`#mvdiv-${last_index +1}`).trigger('mouseleave');
+            //$(`#mvdiv-${this.state.id}`).trigger('mouseenter');
+        }
+
+    }
+
+    render(){
+        return(
+            <>
+            <Button id={`mb-${this.state.id}`} onClick={this.handleClick} variant="outline-light" style={{borderRadius:'50%'}}  type="button" className="movie-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" className="bi bi-play" viewBox="0 0 16 16">
+                    <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/>
+                </svg>
+            </Button>
+            </>
+        );
+    }
+}
+//store these in a dictionary
+var mContainerDict = {}
+for(let i =1; i < movieElements+1; i++){
+    mContainerDict[`mc-${i}`] = ReactDOM.render(
+        <MovieContainer/>,
+        document.getElementById(`mdiv-${i}`)
+    );
+}
+
+$carousel.on( 'change.flickity', function( event, index ) {
     rMovieElement.updateData(index);
     $castCarousel.flickity('destroy');
     $castCarousel.flickity({
@@ -399,4 +588,11 @@ var $castCarousel = $('.cast-carousel').flickity({
         wrapAround: true,
         pageDots: false
     });
-  });
+    var mContainer = mContainerDict[`mc-${index+1}`];
+    console.log(`Triggering mc-${index+1}`);
+    mContainer.triggerEvent();
+    last_index = index
+
+
+});
+

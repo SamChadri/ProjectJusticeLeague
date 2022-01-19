@@ -358,9 +358,96 @@ hr.fade-in-ani{
     border:1px solid grey;
     transform: translate(-50%, -50%);
 
-    z-index: 2;
+    z-index: 3;
 
 }
+
+.mc-div{
+    overflow: hidden;
+    position:relative;
+    height: 100px;
+
+}
+
+.movie-button{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 5;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+
+}
+
+
+
+.movie-button:hover .movie-display{
+}
+
+.player-blur{
+    -webkit-filter:blur(0);
+    filter:blur(0);
+    opacity: 1;
+    transition: filter ease 1.5s, opacity ease 0.5s;
+
+
+}
+
+.player-blur:hover{
+    -webkit-filter:  blur(3px);
+    filter: blur(3px);
+    opacity: 0.7;
+    -webkit-transition: fliter 1.5s ease;
+    transition: filter ease 1.5s;
+    -webkit-transition: opacity 0.5s ease;
+    transition: opacity ease 0.5s;
+
+}
+.player-container{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border:1px solid grey;
+    transform: translate(-50%, -50%);
+    transition:visibility 0.3s linear,opacity 0.3s linear;
+}
+
+.movie-slide.is-selected:hover .player-container{
+    opacity: 1;
+    visibility: visible;
+}
+.mc-info{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    color: white;   
+    transition: .4s ease-in-out; 
+}
+.mc-div:hover .mc-info{
+    -webkit-filter:  blur(3px);
+    filter: blur(3px);
+    opacity: 0.1;
+    transition: filter ease 1.5s;
+    transition: opacity ease 0.5s;
+    overflow: hidden;
+}
+
+.mc-div:hover .info-div{
+    visibility: visible;
+    opacity: 1;
+
+}
+.mc-div:hover .movie-button{
+    visibility: visible;
+}
+
 .headshot{
     height: 50px;
     width: 50px;
@@ -370,6 +457,7 @@ hr.fade-in-ani{
 .member-slide{
     margin-right: 10px;
 }
+
 
 
 .info-card{
@@ -383,6 +471,9 @@ hr.fade-in-ani{
     transform: translate(-50%, -50%);
     border:1px solid grey;
     box-shadow: 0 20px 35px -25px rgb(117, 117, 117);
+}
+.movie-info{
+    
 }
 
 .movie-slide img{
@@ -424,10 +515,46 @@ hr.fade-in-ani{
 .nav-slide.is-selected{
     opacity: 1;
 }
-.flickity-button {
+
+/* Flickity button styles-START*/
+
+.movie-carousel .flickity-button {
+    background: #333;
+}
+.movie-carousel .flickity-button:hover {
+    background: #F90;
+}
+  
+.movie-carousel .flickity-prev-next-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+  /* icon color */
+.movie-carousel .flickity-button-icon {
+    fill: white;
+}
+  /* position outside */
+.movie-carousel .flickity-prev-next-button.previous {
+    left: 100px;
+}
+.movie-carousel .flickity-prev-next-button.next {
+    right: 100px;
+}
+
+
+
+.cast-carousel .flickity-button {
     background: #333;
     visibility: hidden;
-  }
+
+}
+
+
+
+
+
+/* Flickity button styles-END */
 /*
 .slick-slide{
     margin:10px;
