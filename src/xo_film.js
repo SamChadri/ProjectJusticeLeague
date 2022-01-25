@@ -16,6 +16,20 @@ $(document).ready(function(){
         pageDots: false,
         prevNextButtons: false,
     });
+
+    var card_elems = $('.acard-image');
+    console.log(card_elems);
+    for(let i =0; i < card_elems.length; i++){
+        var img = new Image();
+        img.src = card_elems[i].src;
+        var height = .5 * img.height;
+        console.log(img);
+        console.log(card_elems[i].parentElement);
+        console.log(img.height);
+        card_elems[i].parentElement.setAttribute('style',`height:${height}px`);
+        card_elems[i].parentElement.style.width = img.width;
+        console.log(card_elems[i].parentElement.style.height)
+    }
 /*
     var $carousel= $('.movie-carousel').flickity({
         // options

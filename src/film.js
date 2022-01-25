@@ -37,8 +37,8 @@ class VidContainer extends React.Component{
         this.state = {
             id: 1,
             items:[
-                {'id': 1, 'video_code': 'R5oYt_J9OJE', 'local': false},
-                {'id': 2, 'video_code': 'lXed5Inp844', 'local': false},
+                {'id': 1, 'video_code': 'XWokU7SGVaY', 'local': false},
+                {'id': 2, 'video_code': 'XY6PkEisVfI', 'local': false},
             ],
             playerState: 'PAUSED',
             showVid: false
@@ -596,3 +596,127 @@ $carousel.on( 'change.flickity', function( event, index ) {
 
 });
 
+
+class ArtistInfo extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            'id': 1,
+            'items':[
+                {
+                    'id': 1,
+                    'name': 'Will Smith',
+                    'occupation': 'Actor',
+                    'description':'Willard Carroll Smith II, also known by his stage name The Fresh Prince, is an American actor, rapper, and film producer. Primarily known for comedic and dramatic acting roles, Smith is the recipient of numerous accolades, including four Grammy Awards, one Golden Globe Award, and two Academy Award nominations.',
+                    'movies':[
+                        {'name': 'Pursuit of Happiness', 'image':'https://m.media-amazon.com/images/M/MV5BYTcyNmY4ZGEtYmE4Zi00ZDViLTlmYzMtMmQ4ZTM4OWNmZjQxXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg'},
+                        {'name': 'King Richard', 'image': 'https://www.sonypictures.com/sites/default/files/styles/max_560x840/public/title-key-art/thepursuitofhappyness_onesheet_1400x2100.png?itok=BSpvsOsJ'},
+                        {'name': 'Hancock','image':'https://m.media-amazon.com/images/M/MV5BMTgyMzc4ODU3NV5BMl5BanBnXkFtZTcwNjk5Mzc1MQ@@._V1_FMjpg_UX1000_.jpg'}
+                    ]
+                },
+                {
+                    'id': 2,
+                    'name': 'Christopher Nolan',
+                    'occupation': 'Director',
+                    'description':'Christopher Edward Nolan CBE is a British-American film director, producer, and screenwriter. His films have grossed more than US$5 billion worldwide, and have garnered 11 Academy Awards from 36 nominations. Born and raised in London, Nolan developed an interest in filmmaking from a young age.',
+                    'movies':[
+                        {'name': 'The Dark Knight', 'image':'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_FMjpg_UX1000_.jpg'},
+                        {'name': 'Interstellar', 'image': 'https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg'},
+                        {'name': 'Inception','image':'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg'}
+                    ]
+                },
+                {
+                    'id': 3,
+                    'name': 'Tom Hardy',
+                    'occupation': 'Actor',
+                    'description':'Edward Thomas Hardy CBE is an English actor, producer, writer and former model. After studying acting at the Drama Centre London, he made his film debut in Ridley Scotts Black Hawk Down.',
+                    'movies':[
+                        {'name': 'The Dark Knight Rises', 'image':'https://m.media-amazon.com/images/M/MV5BMTk4ODQzNDY3Ml5BMl5BanBnXkFtZTcwODA0NTM4Nw@@._V1_FMjpg_UX1000_.jpg'},
+                        {'name': 'Legend', 'image': 'https://m.media-amazon.com/images/M/MV5BMjE0MjkyODQ3NF5BMl5BanBnXkFtZTgwNDM1OTk1NjE@._V1_.jpg'},
+                        {'name': 'This Means War','image':'https://m.media-amazon.com/images/M/MV5BMTYyOTQ4MDE2MV5BMl5BanBnXkFtZTcwOTE0MTgwNw@@._V1_FMjpg_UX1000_.jpg'}
+                    ]
+                },
+                {
+                    'id': 4,
+                    'name': 'Jodie Comer',
+                    'occupation': 'Actor',
+                    'description':'Jodie Marie Comer is an English actress. She plays Oksana Astankova / Villanelle in the British drama spy thriller Killing Eve, for which she has received critical acclaim and won the Primetime Emmy Award for Outstanding Lead Actress in a Drama Series and the British Academy Television Award for Best Actress.',
+                    'movies':[
+                        {'name': 'Free Guy', 'image':'https://m.media-amazon.com/images/M/MV5BOTY2NzFjODctOWUzMC00MGZhLTlhNjMtM2Y2ODBiNGY1ZWRiXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg'},
+                        {'name': 'The Last Duel', 'image': 'https://m.media-amazon.com/images/M/MV5BZGExZTUzYWQtYWJjZi00OTI4LTk4OGYtNTA2YzcwMmNiZTMxXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_FMjpg_UX1000_.jpg'},
+                        {'name': 'Help','image':'https://m.media-amazon.com/images/M/MV5BNjI4ZDlmZmEtY2U1ZC00NTZmLWFhYjUtMTg2ZTIwNzZkNjM1XkEyXkFqcGdeQXVyOTMyODgwOTQ@._V1_.jpg'}
+                    ]
+                },
+            ],
+            'curr_item': {
+                'id': 1,
+                'name': 'Will Smith',
+                'occupation': 'Actor',
+                'description':'Willard Carroll Smith II, also known by his stage name The Fresh Prince, is an American actor, rapper, and film producer. Primarily known for comedic and dramatic acting roles, Smith is the recipient of numerous accolades, including four Grammy Awards, one Golden Globe Award, and two Academy Award nominations.',
+                'movies':[
+                    {'name': 'Pursuit of Happiness', 'image':'https://m.media-amazon.com/images/M/MV5BYTcyNmY4ZGEtYmE4Zi00ZDViLTlmYzMtMmQ4ZTM4OWNmZjQxXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg'},
+                    {'name': 'King Richard', 'image': 'https://www.sonypictures.com/sites/default/files/styles/max_560x840/public/title-key-art/thepursuitofhappyness_onesheet_1400x2100.png?itok=BSpvsOsJ'},
+                    {'name': 'Hancock','image':'https://m.media-amazon.com/images/M/MV5BMTgyMzc4ODU3NV5BMl5BanBnXkFtZTcwNjk5Mzc1MQ@@._V1_FMjpg_UX1000_.jpg'}
+                ]
+            }
+        }
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+    componentDidMount(){
+        var instance = this;
+        $(`.artist-card`).mouseenter(function(){
+            var id  = $(this).find('img').attr('id');
+            id = parseInt(id.substring(id.length - 1));
+            instance.setState(function(state, props) {
+                return {
+                    curr_item: this.state.items[id - 1]
+                };
+            });
+            $(`#artist-detail`).fadeIn(600);
+            console.log('Fade in Artist Detail')
+        });
+        $(`.artist-card`).mouseleave( function(){
+
+            $(`#artist-detail`).fadeOut(600);
+        });
+
+    }
+
+    handleClick(){
+
+    }
+
+    render(){
+        return(
+            <>
+                <h3 className="fw-lighter mt-4">About</h3>
+                <div className="catalouge-display text-center"> 
+                    <Row class="row">
+                        <Col class=" ccard">
+                            <img className="cmovie rounded h-100 w-100 " src={this.state.curr_item.movies[0].image}/>
+                        </Col>
+                        <Col class=" ccard ">
+                            <img className="cmovie rounded h-100 w-100 " src={this.state.curr_item.movies[1].image}/>
+                        </Col>
+                        <Col class=" ccard">
+                            <img className="cmovie rounded h-100 w-100 " src={this.state.curr_item.movies[2].image}/>
+
+                        </Col>
+
+                    </Row>
+
+
+                </div>
+
+
+                <h3 className="fw-lighter mt-4"></h3>
+                <p style={{fontSize:'small'}} className="lead">{this.state.curr_item.description}.</p>
+            </>
+        );
+    }
+}
+ReactDOM.render(
+    <ArtistInfo/>,
+    document.getElementById(`artist-detail`)
+);

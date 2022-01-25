@@ -299,13 +299,7 @@ hr.fade-in-ani{
     opacity: 1;
 
   }
-  .artist-card{
-    transition: transform .2s ease-in-out;
-  }
 
-  .artist-card:hover{
-    transform: scale(1.1);
-  }
 
 
 
@@ -582,3 +576,71 @@ hr.fade-in-ani{
 .movie-display .slick-dots li button:before {
     color:white;
 }
+
+/* artist-cards - START */
+div.card{
+    background: black;
+    border-color: #ffffff;
+    box-shadow: 0 20px 15px -25px rgb(184, 182, 182);
+}
+
+.artist-card{
+    position: relative;
+    opacity: 1;
+
+    transition: transform .3s ease-in-out;
+
+}
+
+
+.artist-card:hover {
+    transform: scale(1.05);
+    
+}
+.artist-card img{
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.artist-card:hover img{
+    opacity: 0.7;
+}
+
+
+
+.acard-image{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 100%;
+    width: 100%;
+}
+
+.acard-info{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    transition: opacity 1s ease;
+
+}
+
+.artist-card:hover .acard-info{
+    opacity: 1;
+}
+
+/* artist-cards - END */
+
+.ccard.ccard{
+}
+#artist-detail{
+    display: none;
+}
+.cmovie{
+    border: 1px solid white;
+    
+}
+
+
