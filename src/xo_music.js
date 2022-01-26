@@ -11,7 +11,7 @@ $(document).ready(function(){
     });
 
     /**
-     * REPORT: There is a rendering issue that seems to come when the first slide of the set reappers during infinite scrolling(ex. 10 -> 1)
+     * REPORT: There is a rendering issue that seems to come when the first slide of the set of slides during infinite scrolling(ex. 10 -> 1)
      * 
      * The player state seems to render the button again, but none of the logs seem to indicate any state changes.
      * Hence it appears broken until it becomes the main focus again.
@@ -151,7 +151,7 @@ $(document).ready(function(){
         //console.log(`NextPic: ${nextPic}`);
 
     }
-
+    //Add image ID to tag so that I can track it using React.
     async function startGridCarousel(){
         console.log('Starting carousel')
         console.log(`Used_Images: ${used_index}`)
@@ -217,7 +217,7 @@ $(document).ready(function(){
                 timer.paused = false;
                 hoverWait = null;
                 console.log("Finished timeout, resuming carousel.");
-                startGridCarousel();
+                //startGridCarousel();
                 return
             }else {
                 window.clearTimeout(hoverId)

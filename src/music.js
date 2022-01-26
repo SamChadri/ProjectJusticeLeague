@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useState }  from 'react';
 import ReactDOM from 'react-dom';
 import Button from 'react-bootstrap/Button';
 import ReactDOMServer from 'react-dom/server';
+import { Offcanvas} from "react-bootstrap";
 
 
 const title = 'React with Webpack and Babel';
@@ -259,4 +260,175 @@ class VidContainer extends React.Component{
         document.getElementById(`adiv-${i}`)
       );
       
-  }
+}
+
+let acardCounter = 0;
+let artistCards = 8;
+
+class ArtistCard extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            id: 1,
+            items:[
+                {
+                    'id': 1,
+                    'name':'Hans Zimmer',
+                    'occupation': 'Film Score Composer',
+                    'description':"Hans Florian Zimmer is a German film score composer and record producer. His works are notable for integrating electronic music sounds with traditional orchestral arrangements. Since the 1980s, Zimmer has composed music for over 150 films.",
+                    'demo_url':'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/179526871&color=%23ffb3de&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true'
+                },
+                {
+                    'id': 2,
+                    'name':'Drake',
+                    'occupation': 'Rapper Songwriter',
+                    'description':"Aubrey Drake Graham is a Canadian rapper, singer, and actor. Gaining recognition by starring in the teen drama series Degrassi: The Next Generation, Drake pursued a career in music releasing his debut mixtape Room for Improvement in 2006; he subsequently released the mixtapes Comeback Season (2007) and So Far Gone (2009) before signing with Young Money Entertainment.",
+                    'demo_url': 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/396615804&color=%23ffb3de&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=true&visual=true',
+                },
+                {
+                    'id': 3,
+                    'name':'Shakira',
+                    'occupation': 'Singer Songwriter',
+                    'description':"Shakira Isabel Mebarak Ripoll, known mononymously as Shakira, is a Colombian singer and songwriter. Born and raised in Barranquilla, Shakira has been referred to as the 'Queen of Latin Music'and is noted for her versatility in music.",
+                    'demo_url': 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/140377856&color=%23ffb3de&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true',
+                },
+
+                {
+                    'id': 4,
+                    'name':'Beyoncé',
+                    'occupation': 'Singer Songwriter',
+                    'description':"Beyoncé Giselle Knowles-Carter is an American singer, songwriter, and actress. Born and raised in Houston, Texas, Beyoncé performed in various singing and dancing competitions as a child. She rose to fame in the late 1990s as the lead singer of Destiny's Child, one of the best-selling girl groups of all time.",
+                    'demo_url': 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/125172547&color=%23ffb3de&auto_play=false&hide_related=true&show_comments=true&show_user=false&show_reposts=false&show_teaser=false&visual=true',
+                },
+                {
+                    'id': 5,
+                    'name':'Chris Brown',
+                    'occupation': 'Singer Songwriter',
+                    'description':"Christopher Maurice Brown is an American singer, songwriter, dancer and actor. According to Billboard, Brown is one of the most influential and successful R&B singers ever, with several considering him the 'King of R&B' alongside Usher and R. Kelly.",
+                    'demo_url': 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/247978957&color=%23ffb3de&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true',
+                },
+                {
+                    'id': 6,
+                    'name':'Bryson Tiller',
+                    'occupation': 'Singer Songwriter',
+                    'description':"Bryson Djuan Tiller is an American singer, songwriter and rapper. Born in Louisville, Kentucky, he began his career in 2011 with a mixtape entitled Killer Instinct Vol. 1. Tiller initially gained mainstream success in 2015 following the release of the single, 'Don't', which reached the top 20 on the Billboard Hot 100.",
+                    'demo_url': 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/322173885&color=%23ffb3de&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true',
+                },
+                {
+                    'id': 7,
+                    'name':'Col3trane',
+                    'occupation': 'Singer Songwriter',
+                    'description':"Col3trane aka. Cole Basta is an American singer and song-writer. He is famous for his genre R&B and Dance/ Electric. He recently released his song Penelope in association with COLORS SHOW.",
+                    'demo_url': 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/708454342&color=%23ffb3de&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true',
+                },
+                {
+                    'id': 8,
+                    'name':'Chris Webby',
+                    'occupation': 'Rapper Songwriter',
+                    'description':"Known Christian Walcott Webster, better known by his stage name Chris Webby, is an American rapper from Norwalk, Connecticut. Chris Webby has released many mixtapes such as the DJ Drama-hosted Bars On Me and his EP There Goes the Neighborhood, which peaked at number 101 on the Billboard 200.",
+                    'demo_url': 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1188656497&color=%23ffb3de&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true',
+                },
+                
+
+            ],
+            showInfo: false,
+            curr_item:
+                {
+                    'id': 1,
+                    'name':'Beyoncé',
+                    'occupation': 'Singer-Songwriter',
+                    'description':"Beyoncé Giselle Knowles-Carter is an American singer, songwriter, and actress. Born and raised in Houston, Texas, Beyoncé performed in various singing and dancing competitions as a child. She rose to fame in the late 1990s as the lead singer of Destiny's Child, one of the best-selling girl groups of all time.",
+                    'demo_url': 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/125172547&color=%23ffb3de&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&&player_type=tiny',
+                }
+        }
+
+        this.handleClick = this.handleClick.bind(this);
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        
+    }
+
+
+    componentDidMount(){
+        acardCounter += 1;
+        var item = this.state.items[acardCounter - 1];
+        this.setState(function(state, props){
+            return{
+                curr_item: item,
+            };
+        });
+
+
+    }
+
+    handleClick(){
+        $(`.acard-info`).fadeOut(600);
+        this.setState(function(state, props){
+            return{
+                showInfo: true,
+            };
+        });
+        $(`.acard-info`).fadeIn(600);
+
+    }
+
+    handleShow(){
+        this.setState(function(state, props){
+            return{
+                showInfo: true,
+            };
+        });
+    }
+
+    handleClose(){
+        this.setState(function(state, props){
+            return{
+                showInfo: false,
+            };
+        });
+
+    }
+
+
+    render(){
+ 
+
+        return(
+            <>
+                <div className="text-center w-100 acard-info">
+                    <h3 style={{fontWeight: '100'}}> {this.state.curr_item.name}</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ffb3de" className="bi bi-x-diamond-fill " viewBox="0 0 16 16">
+                        <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L4.047 3.339 8 7.293l3.954-3.954L9.049.435zm3.61 3.611L8.708 8l3.954 3.954 2.904-2.905c.58-.58.58-1.519 0-2.098l-2.904-2.905zm-.706 8.614L8 8.708l-3.954 3.954 2.905 2.904c.58.58 1.519.58 2.098 0l2.905-2.904zm-8.614-.706L7.292 8 3.339 4.046.435 6.951c-.58.58-.58 1.519 0 2.098l2.904 2.905z"/>
+                    </svg>
+                    <p>{this.state.curr_item.occupation}</p>
+                    <Button onClick={this.handleShow} variant="outline-light" size="sm">Learn More &raquo;</Button>
+                </div>
+                <Offcanvas style={{height: '40vh', backgroundColor: 'black'}} placement='bottom' scroll='true' show={this.state.showInfo} onHide={this.handleClose}>
+                    <div className="text-center w-75 mx-auto">
+                        <h3 className="fw-lighter my-2">About</h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ffb3de" className="bi bi-x-diamond-fill " viewBox="0 0 16 16">
+                            <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L4.047 3.339 8 7.293l3.954-3.954L9.049.435zm3.61 3.611L8.708 8l3.954 3.954 2.904-2.905c.58-.58.58-1.519 0-2.098l-2.904-2.905zm-.706 8.614L8 8.708l-3.954 3.954 2.905 2.904c.58.58 1.519.58 2.098 0l2.905-2.904zm-8.614-.706L7.292 8 3.339 4.046.435 6.951c-.58.58-.58 1.519 0 2.098l2.904 2.905z"/>
+                        </svg>
+
+                        <p style={{fontSize:'small'}} className="lead my-2">{this.state.curr_item.description}</p>
+
+                    </div>
+                    <div class="artist-demo w-100">
+                        <iframe width="100%" height="80" scrolling="no" frameborder="no" allow="autoplay" src={this.state.curr_item.demo_url}></iframe>
+                    </div>
+                </Offcanvas>
+
+            </>
+        );
+
+    }
+}
+for(let i=1; i< artistCards + 1; i++){
+    ReactDOM.render(
+        <ArtistCard/>,
+        document.getElementById(`artist-card-${i}`)
+      );
+      
+}
+
+

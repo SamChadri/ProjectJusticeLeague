@@ -368,14 +368,69 @@ div.card{
     opacity: 1;
 
   }
-  .artist-card{
+
+  /*Artist card START*/
+.artist-card{
+    position: relative;
+    opacity: 1;
+    overflow: scroll;
     transition: transform .2s ease-in-out;
-  }
+}
 
-  .artist-card:hover{
+.artist-card:hover{
     transform: scale(1.1);
-  }
+}
 
+.artist-card img{
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.artist-card:hover img{
+    opacity: 0.7;
+}
+
+
+
+.acard-image{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 100%;
+    width: 100%;
+}
+
+.acard-info{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    transition: opacity 1s ease;
+
+}
+.artist-demo{
+    position: absolute;
+    bottom: 0px;
+
+    transition: opacity 1s ease;
+
+}
+
+.acard-detail{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: opacity 1s ease;
+
+}
+
+.artist-card:hover .acard-info{
+    opacity: 1;
+}
+  /*Artist card END*/
   .media-pic{
     transform: rotate(-5deg);
     box-shadow: 0 20px 35px -25px rgb(2, 2, 2);
@@ -457,6 +512,11 @@ div.card{
     opacity: 1;
 
   }
+
+
+
+
+  
 
 
 
