@@ -7,7 +7,7 @@ import { Offcanvas} from "react-bootstrap";
 
 const title = 'React with Webpack and Babel';
 let instanceCounter = 0;
-let vidItems = 4;
+let vidItems = 5;
 
 function onPlayerReady(event){
     var id = event.target.getIframe().id;
@@ -38,7 +38,8 @@ class VidContainer extends React.Component{
                 {'id': 1, 'video_code': '../pics/XO_MUSIC_TRAILER_MP4.mp4', 'local': true},
                 {'id': 2, 'video_code': 'qqGsOVDj2K0', 'local': false},
                 {'id': 3, 'video_code': 'R6NF49HeiaU', 'local': false},
-                {'id': 4, 'video_code': '../pics/XO_B_LMYB.mp4', 'local': true},
+                {'id': 4, 'video_code': '../pics/XO_GrownWoman_B.mp4', 'local': true},
+                {'id': 5, 'video_code': '../pics/XO_XPOSED_VPHONE.mp4', 'local': true},
             ],
             playerState: 'PAUSED',
             showVid: false

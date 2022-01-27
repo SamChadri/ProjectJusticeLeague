@@ -9,7 +9,7 @@ import { Col, Row, } from "react-bootstrap";
 
 const title = 'React with Webpack and Babel';
 let instanceCounter = 0;
-let vidItems = 2;
+let vidItems = 3;
 
 function onPlayerReady(event){
     var id = event.target.getIframe().id;
@@ -37,8 +37,9 @@ class VidContainer extends React.Component{
         this.state = {
             id: 1,
             items:[
-                {'id': 1, 'video_code': 'lBv_6aFRRTU', 'local': false},
-                {'id': 2, 'video_code': 'VpmnPgUwVO8', 'local': false},
+                {'id': 1, 'video_code': 'jkh9B7qqPt4', 'local': false},
+                {'id': 2, 'video_code': 'B2G9-KhBek8', 'local': false},
+                {'id': 3, 'video_code': 'iM2RqOd0eEo', 'local': false},
             ],
             playerState: 'PAUSED',
             showVid: false
@@ -169,40 +170,40 @@ class MovieInfoContainer extends React.Component{
             items:[
                 {
                     'id': 1,
-                    'name': 'Spiderman No Way Home',
-                    'director': 'Jon Watts',
-                    'release_date': 'December 17, 2021',
-                    'producers': 'Kevin Feige; Amy Pascal',
-                    'screenplay':'Erik Sommers, Chris McKenna',
-                    'music':' Michael Giacchino',
+                    'name': 'Rumor Has It...',
+                    'director': 'Rob Reiner',
+                    'release_date': 'December 25, 2005',
+                    'producers': 'Ben Cosgrove Paula Weinstein',
+                    'screenplay':'Ted Griffin',
+                    'music':'Marc Shaiman',
                     'cast':[
-                        {'name': 'Tom Holland', 'image': 'https://i.pinimg.com/originals/67/a0/5d/67a05dcce41c8172c9ce644ede67274e.jpg'},
-                        {'name': 'Tobey Maguire', 'image': 'https://wallpaperaccess.com/full/2136145.jpg'},
-                        {'name': 'Andrew Garfield','image':'https://i.pinimg.com/originals/95/99/43/95994348a11cfe9d01c0ac1951a906c4.jpg'},
-                        {'name': 'Zendaya', 'image': 'https://i.pinimg.com/564x/87/4a/6c/874a6cb28ca2c0950df7303325273001.jpg'},
+                        {'name': 'Jennifer Aniston', 'image': 'https://cdn.justjared.com/wp-content/uploads/headlines/2016/08/aniston-eye.jpg'},
+                        {'name': 'Kevin Costner', 'image': 'https://pyxis.nymag.com/v1/imgs/ead/14d/ede84b0345bdfb70291cabe65e227bfd30-23-encounter-kevin-costner.rvertical.w330.jpg'},
+                        {'name': 'Shirley Maclaine ','image':'https://upload.wikimedia.org/wikipedia/commons/a/a9/Shirley_MacLaine_-_1960.jpg'},
+                        {'name': 'Mark Ruffalo', 'image': 'https://i.pinimg.com/originals/ae/fa/35/aefa3513a35e2416313d9211f532baab.jpg'},
                     ],
-                    'imdb_score': '8.8/10',
-                    'rt_score': '93%',
-                    'mt_score': '71%'
+                    'imdb_score': '5.5/10',
+                    'rt_score': '20%',
+                    'mt_score': 'Sips Tea...😗'
 
                 },
                 {
                     'id': 2,
-                    'name': 'The Matrix Resurrections',
-                    'director': 'Lana Wachowski',
-                    'release_date': 'December 22, 2021',
-                    'producers': 'Village Roadshow Pictures; Venus Castina Productions',
-                    'music':'Johnny Klimek; Tom Tykwer',
-                    'screenplay':'Lana Wachowski, David Mitchell, Aleksandar Hemon',
+                    'name': 'On the Rocks',
+                    'director': 'Sofia Coppola',
+                    'release_date': 'September 22, 2020',
+                    'producers': 'American Zoetrope',
+                    'music':'Phoenix',
+                    'screenplay':'Sofia Coppola',
                     'cast':[
-                        {'name': 'Keanu Reeves', 'image': 'https://i.pinimg.com/originals/93/b4/31/93b4312aafe30f96d3c33334c839c669.jpg'},
-                        {'name': 'Jessica Henwick', 'image': 'https://m.media-amazon.com/images/M/MV5BYTk2NmFjNzQtYTNiNy00ODk5LWE4NGUtZTFjNjI4N2JjZDMxXkEyXkFqcGdeQXVyMTAwODk1MDk@._V1_.jpg'},
-                        {'name': 'Carrie-Anne Moss','image':'https://i.pinimg.com/originals/54/7e/91/547e91e336263192b1324df89ada658b.jpg'},
-                        {'name': 'Yahya Abdul-Mateen II', 'image': 'https://content.api.news/v3/images/bin/326cdb4d60ebf2e146b4972c0e7be99e'},
+                        {'name': 'Rashida Jones', 'image': 'https://data.whicdn.com/images/7106785/original.png'},
+                        {'name': 'Bill Murray', 'image': 'https://movies-b26f.kxcdn.com/wp-content/uploads/2014/08/Bill-Murray-New-York-Times-e1407027143318.jpg'},
+                        {'name': 'Marlon Wayans','image':'https://pbs.twimg.com/media/DhMWU2FWsAEqW2j.jpg'},
+                        {'name': 'Jessica Henwick', 'image': 'https://64.media.tumblr.com/273341fb1c48751090d73633f6ccfd50/tumblr_otk6lrBiVJ1tdz49po7_1280.jpg'},
                     ],
-                    'imdb_score': 'n/a',
-                    'rt_score': '64%',
-                    'mt_score': '63%'
+                    'imdb_score': '6.5/10',
+                    'rt_score': '87%',
+                    'mt_score': '😌'
 
                 },
                 {
@@ -403,8 +404,8 @@ class MovieContainer extends React.Component{
         this.state = {
             'id': 1,
             items:[
-            {'id': 1, 'video_code': 'JfVOs4VSpmA', 'local': false},
-            {'id': 2, 'video_code': '9ix7TUGVYIo', 'local': false},
+            {'id': 1, 'video_code': 'QWYqikq6YuE', 'local': false},
+            {'id': 2, 'video_code': '_qawW01eTG0', 'local': false},
             {'id': 3, 'video_code': '-19tBHrZwOM', 'local': false},
             {'id': 4, 'video_code': 'AZGcmvrTX9M', 'local': false},
             {'id': 5, 'video_code': 'mgygUwPJvYk', 'local': false},
@@ -596,6 +597,9 @@ $carousel.on( 'change.flickity', function( event, index ) {
 
 });
 
+let cardCount = 0;
+
+let aInfoItems = 9;
 
 class ArtistInfo extends React.Component{
     constructor(props){
@@ -627,6 +631,28 @@ class ArtistInfo extends React.Component{
                 },
                 {
                     'id': 3,
+                    'name': 'Jessica Henwick',
+                    'occupation': 'Actor-Screenwriter-Director',
+                    'description':"Jessica Yu-Li Henwick is a British actress and writer. She is known for her roles as Nymeria Sand in the HBO series Game of Thrones, X-wing pilot Jessika Pava in Star Wars: The Force Awakens, the character Colleen Wing in Marvel's Netflix television series and her role as Bugs in The Matrix Resurrections.",
+                    'movies':[
+                        {'name': 'Bus Girl', 'image':'https://m.media-amazon.com/images/M/MV5BMTkwZjM0NzEtNzQ1Mi00OGM5LWI0YTYtYmUyZDBiN2QxYmFmXkEyXkFqcGdeQXVyMTIzODYxODgz._V1_.jpg'},
+                        {'name': 'The Matrix Resurrections', 'image': 'https://m.media-amazon.com/images/M/MV5BMGJkNDJlZWUtOGM1Ny00YjNkLThiM2QtY2ZjMzQxMTIxNWNmXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg'},
+                        {'name': 'Love and Monsters','image':'https://m.media-amazon.com/images/M/MV5BYWVkMWEyMDUtZTVmOC00MTYxLWE1ZTUtNjk4M2IzMjY2OTIxXkEyXkFqcGdeQXVyMDk5Mzc5MQ@@._V1_.jpg'}
+                    ]
+                },
+                {
+                    'id': 4,
+                    'name': 'Yoshihiro Togashi',
+                    'occupation': 'Screenwriter',
+                    'description':"Yoshihiro Togashi is a Japanese manga artist. He began drawing manga at an early age; while he attended college, the publishing company Shueisha recognized his talent. Togashi has authored numerous manga series in different genres during the past three decades.",
+                    'movies':[
+                        {'name': 'Hunter X Hunter', 'image':'https://m.media-amazon.com/images/M/MV5BZjNmZDhkN2QtNDYyZC00YzJmLTg0ODUtN2FjNjhhMzE3ZmUxXkEyXkFqcGdeQXVyNjc2NjA5MTU@._V1_FMjpg_UX1000_.jpg'},
+                        {'name': 'Level E', 'image': 'https://m.media-amazon.com/images/M/MV5BZDAyZTU4MDItMzc2ZC00MjgyLWI5OWMtMzNjNzkyYzZiNDgyXkEyXkFqcGdeQXVyMjc4OTQ1OTA@._V1_.jpg'},
+                        {'name': 'Yu Yu Hakusho','image':'https://m.media-amazon.com/images/M/MV5BYjBlYmVmNzYtZTY5Ni00NTc0LTljODMtMzExMGRiY2YxYzcyXkEyXkFqcGdeQXVyMzM4MjM0Nzg@._V1_FMjpg_UX1000_.jpg'}
+                    ]
+                },
+                {
+                    'id': 5,
                     'name': 'Tom Hardy',
                     'occupation': 'Actor',
                     'description':'Edward Thomas Hardy CBE is an English actor, producer, writer and former model. After studying acting at the Drama Centre London, he made his film debut in Ridley Scotts Black Hawk Down.',
@@ -637,14 +663,36 @@ class ArtistInfo extends React.Component{
                     ]
                 },
                 {
-                    'id': 4,
+                    'id': 6,
                     'name': 'Jodie Comer',
-                    'occupation': 'Actor',
+                    'occupation': 'Actor-Screenwriter',
                     'description':'Jodie Marie Comer is an English actress. She plays Oksana Astankova / Villanelle in the British drama spy thriller Killing Eve, for which she has received critical acclaim and won the Primetime Emmy Award for Outstanding Lead Actress in a Drama Series and the British Academy Television Award for Best Actress.',
                     'movies':[
                         {'name': 'Free Guy', 'image':'https://m.media-amazon.com/images/M/MV5BOTY2NzFjODctOWUzMC00MGZhLTlhNjMtM2Y2ODBiNGY1ZWRiXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg'},
                         {'name': 'The Last Duel', 'image': 'https://m.media-amazon.com/images/M/MV5BZGExZTUzYWQtYWJjZi00OTI4LTk4OGYtNTA2YzcwMmNiZTMxXkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_FMjpg_UX1000_.jpg'},
                         {'name': 'Help','image':'https://m.media-amazon.com/images/M/MV5BNjI4ZDlmZmEtY2U1ZC00NTZmLWFhYjUtMTg2ZTIwNzZkNjM1XkEyXkFqcGdeQXVyOTMyODgwOTQ@._V1_.jpg'}
+                    ]
+                },
+                {
+                    'id': 7,
+                    'name': 'Taika Waititi',
+                    'occupation': 'Actor-Filmmaker',
+                    'description':'Taika David Cohen ONZM, known professionally as Taika Waititi, is a New Zealand filmmaker, actor, and comedian. He is a recipient of an Academy Award, a BAFTA Award, and a Grammy Award, and has received two nominations at the Primetime Emmy Awards',
+                    'movies':[
+                        {'name': 'Thor: Ragnarok', 'image':'https://www.themoviedb.org/t/p/w500/rzRwTcFvttcN1ZpX2xv4j3tSdJu.jpg'},
+                        {'name': 'Jojo Rabbit', 'image': 'https://m.media-amazon.com/images/M/MV5BZjU0Yzk2MzEtMjAzYy00MzY0LTg2YmItM2RkNzdkY2ZhN2JkXkEyXkFqcGdeQXVyNDg4NjY5OTQ@._V1_.jpg'},
+                        {'name': 'What We Do in the Shadows','image':'https://m.media-amazon.com/images/M/MV5BMjAwNDA5NzEwM15BMl5BanBnXkFtZTgwMTA1MDUyNDE@._V1_FMjpg_UX1000_.jpg'}
+                    ]
+                },
+                {
+                    'id': 8,
+                    'name': 'Patty Jenkins',
+                    'occupation': 'Director',
+                    'description':'Patricia Lea Jenkins is an American film director, screenwriter, and producer. She has directed the feature films Monster, Wonder Woman, and Wonder Woman 1984. For the film Monster, she won the Independent Spirit Award for Best First Feature and the Franklin J. Schaffner Award from the American Film Institute.',
+                    'movies':[
+                        {'name': 'Wonder Woman', 'image':'https://m.media-amazon.com/images/M/MV5BMTYzODQzYjQtNTczNC00MzZhLTg1ZWYtZDUxYmQ3ZTY4NzA1XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg'},
+                        {'name': 'Monster', 'image': 'https://m.media-amazon.com/images/M/MV5BMTI4NzI5NzEwNl5BMl5BanBnXkFtZTcwNjc1NjQyMQ@@._V1_FMjpg_UX1000_.jpg'},
+                        {'name': 'Wonder Woman 1984','image':'https://images.moviesanywhere.com/607cde33edb94043a969a6594c536c82/474bedac-a2cc-466c-8133-aaadefece01f.jpg'}
                     ]
                 },
             ],
@@ -658,28 +706,46 @@ class ArtistInfo extends React.Component{
                     {'name': 'King Richard', 'image': 'https://www.sonypictures.com/sites/default/files/styles/max_560x840/public/title-key-art/thepursuitofhappyness_onesheet_1400x2100.png?itok=BSpvsOsJ'},
                     {'name': 'Hancock','image':'https://m.media-amazon.com/images/M/MV5BMTgyMzc4ODU3NV5BMl5BanBnXkFtZTcwNjk5Mzc1MQ@@._V1_FMjpg_UX1000_.jpg'}
                 ]
-            }
+            },
+            'isCard': true
         }
 
         this.handleClick = this.handleClick.bind(this);
     }
     componentDidMount(){
-        var instance = this;
-        $(`.artist-card`).mouseenter(function(){
-            var id  = $(this).find('img').attr('id');
-            id = parseInt(id.substring(id.length - 1));
-            instance.setState(function(state, props) {
-                return {
-                    curr_item: this.state.items[id - 1]
-                };
+        if(cardCount == 0){
+            this.setState(function(state,props){
+                return{
+                    isCard: false
+                }
             });
-            $(`#artist-detail`).fadeIn(600);
-            console.log('Fade in Artist Detail')
-        });
-        $(`.artist-card`).mouseleave( function(){
 
-            $(`#artist-detail`).fadeOut(600);
-        });
+            var instance = this;
+            $(`.artist-card`).mouseenter(function(){
+                var id  = $(this).find('img').attr('id');
+                id = parseInt(id.substring(id.length - 1));
+                instance.setState(function(state, props) {
+                    return {
+                        curr_item: this.state.items[id - 1]
+                    };
+                });
+                $(`#artist-detail`).fadeIn(600);
+                console.log('Fade in Artist Detail')
+            });
+            $(`.artist-card`).mouseleave( function(){
+
+                $(`#artist-detail`).fadeOut(600);
+            });
+            cardCount += 1;
+        }else{
+            var item = this.state.items[cardCount - 1];
+            this.setState(function(state,props){
+                return{
+                    curr_item: item
+                }
+            });
+            cardCount += 1;
+        }
 
     }
 
@@ -688,35 +754,67 @@ class ArtistInfo extends React.Component{
     }
 
     render(){
+        const isCard = this.state.isCard;
+        let content;
+        if(isCard){
+            content = 
+                    <div className="text-center w-100 acard-info">
+                        <h3 style={{fontWeight: '100'}}> {this.state.curr_item.name}</h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ffb3de" className="bi bi-x-diamond-fill " viewBox="0 0 16 16">
+                            <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L4.047 3.339 8 7.293l3.954-3.954L9.049.435zm3.61 3.611L8.708 8l3.954 3.954 2.904-2.905c.58-.58.58-1.519 0-2.098l-2.904-2.905zm-.706 8.614L8 8.708l-3.954 3.954 2.905 2.904c.58.58 1.519.58 2.098 0l2.905-2.904zm-8.614-.706L7.292 8 3.339 4.046.435 6.951c-.58.58-.58 1.519 0 2.098l2.904 2.905z"/>
+                        </svg>
+                        <p>{this.state.curr_item.occupation}</p>
+                    </div>
+        }else{
+            content =
+                    <>
+                        <h3 className="fw-lighter mt-4">About</h3>
+                        <div className="catalouge-display text-center"> 
+                            <Row class="row">
+                                <Col class=" ccard">
+                                    <img className="cmovie rounded h-100 w-100 " src={this.state.curr_item.movies[0].image}/>
+                                </Col>
+                                <Col class=" ccard ">
+                                    <img className="cmovie rounded h-100 w-100 " src={this.state.curr_item.movies[1].image}/>
+                                </Col>
+                                <Col class=" ccard">
+                                    <img className="cmovie rounded h-100 w-100 " src={this.state.curr_item.movies[2].image}/>
+
+                                </Col>
+
+                            </Row>
+
+
+                        </div>
+
+
+                        <h3 className="fw-lighter mt-4"></h3>
+                        <p style={{fontSize:'small'}} className="lead">{this.state.curr_item.description}.</p>
+                    </>
+
+
+        }
         return(
             <>
-                <h3 className="fw-lighter mt-4">About</h3>
-                <div className="catalouge-display text-center"> 
-                    <Row class="row">
-                        <Col class=" ccard">
-                            <img className="cmovie rounded h-100 w-100 " src={this.state.curr_item.movies[0].image}/>
-                        </Col>
-                        <Col class=" ccard ">
-                            <img className="cmovie rounded h-100 w-100 " src={this.state.curr_item.movies[1].image}/>
-                        </Col>
-                        <Col class=" ccard">
-                            <img className="cmovie rounded h-100 w-100 " src={this.state.curr_item.movies[2].image}/>
-
-                        </Col>
-
-                    </Row>
-
-
-                </div>
-
-
-                <h3 className="fw-lighter mt-4"></h3>
-                <p style={{fontSize:'small'}} className="lead">{this.state.curr_item.description}.</p>
+                {content}
             </>
+            
+
         );
     }
 }
-ReactDOM.render(
-    <ArtistInfo/>,
-    document.getElementById(`artist-detail`)
-);
+for(let i = 0; i < aInfoItems; i++){
+    if(i == 0){
+        ReactDOM.render(
+            <ArtistInfo/>,
+            document.getElementById(`artist-detail`)
+        );
+    }else{
+        ReactDOM.render(
+            <ArtistInfo/>,
+            document.getElementById(`cc-card-${i}`)
+        );
+
+    }
+}
+
