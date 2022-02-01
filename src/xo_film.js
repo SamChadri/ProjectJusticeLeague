@@ -9,6 +9,41 @@ $(document).ready(function(){
 
 
     });
+    console.log( $(`#cc-card-2`).children(':first').attr("id"));
+    var newImage = new Image();
+    newImage.src = '../pics/XO_RussoBros.jpeg';
+    console.log(newImage.height)
+    var height = newImage.getAttribute('height')  * .5
+    newImage.setAttribute('height', height) 
+    newImage.onload = function() {
+        console.log(this.naturalHeight);
+        var width = document.getElementById('card-image-1').clientWidth;
+        console.log(`Client Width: ${width}`);
+        var naturalWidth = this.naturalWidth;
+        var naturalHeight = this.naturalHeight;
+
+        console.log(`Natural Width: ${naturalWidth}`);
+        var ratio = naturalHeight / naturalWidth;
+        console.log(`Ratio: ${ratio}`);
+        var nHeight = width * ratio
+        $('#test-button').click(function(){
+            $("#card-image-1").parent().animate({
+                opacity: `0`
+            }, 500, function(){
+                $("#card-image-1").animate({
+                    height: `${nHeight}px`
+                }, 700, function(){
+                    $(`#card-image-1`).attr("src", newImage.src);
+                    $("#card-image-1").parent().animate({opacity: '1'},500);
+                });
+
+            });
+
+        });
+    }
+    console.log(newImage.naturalHeight)
+    
+
 
     $('.cast-carousel').flickity({
         cellAlign: 'left',

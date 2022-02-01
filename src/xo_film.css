@@ -314,6 +314,8 @@ hr.fade-in-ani{
     -webkit-transition: opacity 1s ease;
 }
 
+
+
 .test{
     position: relative;
     height: 700px;
@@ -582,6 +584,7 @@ div.card{
     background: black;
     border-color: #ffffff;
     box-shadow: 0 20px 15px -25px rgb(184, 182, 182);
+    transition: all .5s linear;
 }
 
 .artist-card{
@@ -626,9 +629,14 @@ div.card{
     transition: opacity 1s ease;
 
 }
+.card-container{
+    position: relative;
+    transition: transform .3s ease-in-out;
+
+}
 
 .artist-card:hover .acard-info{
-    opacity: 1;
+    opacity: 1.0;
 }
 
 /* artist-cards - END */
@@ -649,4 +657,8 @@ div.card{
     
 }
 
+
+.row [class*='col-'] {
+    transition: all 0.5s ease-in-out;
+}
 

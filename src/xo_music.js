@@ -155,7 +155,7 @@ $(document).ready(function(){
     async function startGridCarousel(){
         console.log('Starting carousel')
         console.log(`Used_Images: ${used_index}`)
-        list_length = image_list.length
+        var list_length = image_list.length
         console.log(image_list);
 
         while(cFlag){

@@ -37,9 +37,9 @@ class VidContainer extends React.Component{
         this.state = {
             id: 1,
             items:[
-                {'id': 1, 'video_code': 'mFNeNnSrep4', 'local': false},
-                {'id': 2, 'video_code': 'B2G9-KhBek8', 'local': false},
-                {'id': 3, 'video_code': 'pGBBZn6nOxw', 'local': false},
+                {'id': 1, 'video_code': 'lA4i8fNTfnU', 'local': false},
+                {'id': 2, 'video_code': 'akwGjUeU6YA', 'local': false},
+                {'id': 3, 'video_code': 'cBa-SgbaNEc', 'local': false},
             ],
             playerState: 'PAUSED',
             showVid: false
@@ -695,6 +695,61 @@ class ArtistInfo extends React.Component{
                         {'name': 'Wonder Woman 1984','image':'https://images.moviesanywhere.com/607cde33edb94043a969a6594c536c82/474bedac-a2cc-466c-8133-aaadefece01f.jpg'}
                     ]
                 },
+                {
+                    'id': 9,
+                    'name': 'Russo Brothers',
+                    'occupation': 'Directors',
+                    'description':'Anthony Russo and Joseph Russo, collectively known as the Russo brothers, are American directors, producers, and screenwriters. They direct most of their work together',
+                    'movies':[
+                        {'name': 'Avengers Endgame', 'image':'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg'},
+                        {'name': 'Captain America Civil War', 'image': 'https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_.jpg'},
+                        {'name': 'Chery','image':'https://upload.wikimedia.org/wikipedia/en/8/86/Cherry_2021_poster.jpg'}
+                    ]
+                },
+                {
+                    'id': 10,
+                    'name': 'Idris Elba',
+                    'occupation': 'Actor',
+                    'description':'Idrissa Akuna Elba OBE is an English actor, producer and musician. He is known for roles including Stringer Bell in the HBO series The Wire, DCI John Luther in the BBC One series Luther, and Nelson Mandela in the biographical film Mandela: Long Walk to Freedom.',
+                    'movies':[
+                        {'name': 'The Harder They Fall', 'image':'https://m.media-amazon.com/images/M/MV5BZTQwYThhZTYtZTQ3MC00NDQ0LWFkZGMtMzdiMTU3OGJiYTY0XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg'},
+                        {'name': 'Suicide Squad', 'image': 'https://m.media-amazon.com/images/I/818KRi8rtnL._SL1500_.jpg'},
+                        {'name': 'The Mountain Between Us','image':'https://m.media-amazon.com/images/M/MV5BNjllMWJmZTEtODA2Mi00MzY3LThiYmMtZDFjYjQ2NDM2MWJkXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg'}
+                    ]
+                },
+                {
+                    'id': 11,
+                    'name': 'Jennifer Aniston',
+                    'occupation': 'Actor',
+                    'description':'Jennifer Joanna Aniston is an American actress and producer. The daughter of actors John Aniston and Nancy Dow, she began working as an actress at an early age with an uncredited role in the 1988 film Mac and Me; her first major film role came in the 1993 horror comedy Leprechaun.',
+                    'movies':[
+                        {'name': 'Horrible Bosses', 'image':'https://m.media-amazon.com/images/M/MV5BNzYxNDI5Njc5NF5BMl5BanBnXkFtZTcwMDUxODE1NQ@@._V1_FMjpg_UX1000_.jpg'},
+                        {'name': 'Just Go With It', 'image': 'https://m.media-amazon.com/images/M/MV5BMTM3MzM3NDE5MV5BMl5BanBnXkFtZTcwNDE5MTUxNA@@._V1_.jpg'},
+                        {'name': "We're the Millers",'image':'https://m.media-amazon.com/images/M/MV5BMjA5Njc0NDUxNV5BMl5BanBnXkFtZTcwMjYzNzU1OQ@@._V1_FMjpg_UX1000_.jpg'}
+                    ]
+                },
+                {
+                    'id': 12,
+                    'name': 'Viola Davis',
+                    'occupation': 'Actor',
+                    'description':'Viola Davis is an American actress and producer. The recipient of an Academy Award, a Primetime Emmy Award, and two Tony Awards, she is the first African-American to achieve the "Triple Crown of Acting". Time magazine named her one of the 100 most influential people in the world in 2012 and 2017.',
+                    'movies':[
+                        {'name': 'Help', 'image':'https://m.media-amazon.com/images/M/MV5BMTM5OTMyMjIxOV5BMl5BanBnXkFtZTcwNzU4MjIwNQ@@._V1_.jpg'},
+                        {'name': 'Fences', 'image': 'https://images-na.ssl-images-amazon.com/images/I/91PKlwJN7JL.jpg'},
+                        {'name': "Ma Rainey's Black Bottom",'image':'https://m.media-amazon.com/images/M/MV5BNTBlZGY1OTAtN2RjMC00ZThiLWFiZmUtN2VkOGMxNmMyYjQwXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg'}
+                    ]
+                },
+                {
+                    'id': 13,
+                    'name': 'Benedict Cumberbatch',
+                    'occupation': 'Actor',
+                    'description':'Benedict Timothy Carlton Cumberbatch CBE is an English actor. Known for his roles on the stage and screen, he has received various accolades throughout his career, including a Primetime Emmy Award, a British Academy Television Award, and a Laurence Olivier Award.',
+                    'movies':[
+                        {'name': 'Doctor Strange', 'image':'https://m.media-amazon.com/images/M/MV5BNjgwNzAzNjk1Nl5BMl5BanBnXkFtZTgwMzQ2NjI1OTE@._V1_.jpg'},
+                        {'name': 'The Power of the Dog', 'image': 'https://m.media-amazon.com/images/M/MV5BZGRhYjE2NWUtN2FkNy00NGI3LTkxYWMtMDk4Yjg5ZjI3MWI2XkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_FMjpg_UX1000_.jpg'},
+                        {'name': "The Imitation Game",'image':'https://m.media-amazon.com/images/M/MV5BOTgwMzFiMWYtZDhlNS00ODNkLWJiODAtZDVhNzgyNzJhYjQ4L2ltYWdlXkEyXkFqcGdeQXVyNzEzOTYxNTQ@._V1_FMjpg_UX1000_.jpg'}
+                    ]
+                },
             ],
             'curr_item': {
                 'id': 1,
@@ -711,6 +766,7 @@ class ArtistInfo extends React.Component{
         }
 
         this.handleClick = this.handleClick.bind(this);
+        this.updateCard = this.updateCard.bind(this);
     }
     componentDidMount(){
         if(cardCount == 0){
@@ -722,8 +778,8 @@ class ArtistInfo extends React.Component{
 
             var instance = this;
             $(`.artist-card`).mouseenter(function(){
-                var id  = $(this).find('img').attr('id');
-                id = parseInt(id.substring(id.length - 1));
+                var id  = $(this).find('.acard-info').attr('id');
+                id = parseInt(id);
                 instance.setState(function(state, props) {
                     return {
                         curr_item: this.state.items[id - 1]
@@ -748,6 +804,14 @@ class ArtistInfo extends React.Component{
         }
 
     }
+    updateCard(id){
+        var item = this.state.items[id -1];
+        this.setState(function(state,props){
+            return{
+                curr_item: item
+            }
+        });
+    }
 
     handleClick(){
 
@@ -758,8 +822,8 @@ class ArtistInfo extends React.Component{
         let content;
         if(isCard){
             content = 
-                    <div className="text-center w-100 acard-info">
-                        <h3 style={{fontWeight: '100'}}> {this.state.curr_item.name}</h3>
+                    <div id={this.state.curr_item.id} className="text-center w-100 acard-info">
+                        <h3 id="artist-name" style={{fontWeight: '100'}}> {this.state.curr_item.name}</h3>
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ffb3de" className="bi bi-x-diamond-fill " viewBox="0 0 16 16">
                             <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L4.047 3.339 8 7.293l3.954-3.954L9.049.435zm3.61 3.611L8.708 8l3.954 3.954 2.904-2.905c.58-.58.58-1.519 0-2.098l-2.904-2.905zm-.706 8.614L8 8.708l-3.954 3.954 2.905 2.904c.58.58 1.519.58 2.098 0l2.905-2.904zm-8.614-.706L7.292 8 3.339 4.046.435 6.951c-.58.58-.58 1.519 0 2.098l2.904 2.905z"/>
                         </svg>
@@ -768,6 +832,7 @@ class ArtistInfo extends React.Component{
         }else{
             content =
                     <>
+                        
                         <h3 className="fw-lighter mt-4">About</h3>
                         <div className="catalouge-display text-center"> 
                             <Row class="row">
@@ -803,6 +868,7 @@ class ArtistInfo extends React.Component{
         );
     }
 }
+var ccCardDict = {};
 for(let i = 0; i < aInfoItems; i++){
     if(i == 0){
         ReactDOM.render(
@@ -810,11 +876,250 @@ for(let i = 0; i < aInfoItems; i++){
             document.getElementById(`artist-detail`)
         );
     }else{
-        ReactDOM.render(
+        ccCardDict[i] =  ReactDOM.render(
             <ArtistInfo/>,
             document.getElementById(`cc-card-${i}`)
         );
+       
 
     }
 }
+var image_list = [
+    {'id': 9,'name':'Russo Brothers','image': '../pics/XO_RussoBros.jpeg'},
+    {'id': 10, 'name':'Idris Elba', 'image':'https://static01.nyt.com/images/2015/09/13/arts/13ELBA2/13ELBA2-articleLarge.jpg?quality=75&auto=webp&disable=upscale'},
+    {'id': 11, 'name': 'Jennifer Aniston','image':'https://c4.wallpaperflare.com/wallpaper/819/363/588/jennifer-aniston-black-and-white-hd-wallpaper-preview.jpg'},
+    {'id': 12, 'name':'Viola Davis', 'image':'https://cache.net-a-porter.com/content/images/story-body-content-v1-0-1519750866935.jpeg/w1900_q65.jpeg'},
+    {'id': 13, 'name':'Benedict Cumberbatch', 'image':'https://api.time.com/wp-content/uploads/2013/10/resized-for-lb.jpg'},
+];
+
+var card_num = 8;
+
+var used_index = [];
+var used_images = [];
+
+var timerTestFlag = false;
+var cFlag = true;
+var hoverId = null;
+var hoverWait = true;
+var currCardId = null;
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+var Timer = function(callback, delay) {
+    var timerId, start, remaining = delay;
+    this.paused = false;
+    this.pause = function() {
+        window.clearTimeout(timerId);
+        timerId = null;
+        this.paused = true;
+        console.log(`Paused timer with time remaining: ${remaining}`);
+    };
+
+    this.resume = function(callback) {
+        if (timerId) {
+            return;
+        }
+
+        start = Date.now();
+        timerId = window.setTimeout(callback,remaining);
+        console.log(`Resumed timer with time remaining: ${remaining}`);
+    };
+    this.reset = function(){
+        timerId = null;
+        remaining = delay;
+
+    }
+
+};
+//Make this longer.
+var timer = new Timer(function() {
+    console.log("Done Waiting!");
+}, 6000);
+
+function createImage(src){
+    var image = new Image();
+    image.src = src;
+    return image
+}
+
+
+function fadeOutImage(index, item){
+    index += 1;
+    console.log(`Fading out: card-image-${index}`);
+    //edge case appears here when I leave windows and come back, duplicate images start occurring. Might have to do with hover idk
+    //Test this more later when I feel like it.
+    var currCardId = parseInt($(`#cc-card-${index}`).children(':first').attr("id"));
+    var artistName = $(`#cc-card-${index}`).find(`h3#artist-name`).text();
+    var image = $(`#card-image-${index}`).attr('src');
+    var used_entry = {'id': currCardId,'name': artistName,'image':image};
+    console.log('Used Entry')
+    console.log(used_entry);
+    used_images.push(used_entry);
+    var nextImage = createImage(item.image);
+    nextImage.onload = function() {
+        console.log(this.naturalHeight);
+        var width = document.getElementById(`card-image-${index}`).clientWidth;
+        console.log(`Client Width: ${width}`);
+        var naturalWidth = this.naturalWidth;
+        var naturalHeight = this.naturalHeight;
+        console.log(`Natural Width: ${naturalWidth}`);
+        var ratio = naturalHeight / naturalWidth;
+
+        console.log(`Ratio: ${ratio}`);
+        var nHeight = width * ratio;
+        //REPORT:
+        // When animating opacity transition, the onHover class seems to be rendered null, and applying it manually gets some spooky results.
+        //This still messes with the css to. FadeOut and fadeIn mess with visibility which is why they are not used.
+        // Might be a me thing, who knows.
+        /*
+        $(`#card-image-${index}`).fadeTo(600, 0.1,function(){
+            $(`#card-image-${index}`).animate({
+                height: `${nHeight}px`
+            }, 500, function(){
+                $(`#card-image-${index}`).attr("src", nextImage.src);
+                ccCardDict[index].updateCard(item.id);
+                $(`#card-image-${index}`).fadeTo(600,1);
+
+            });
+        })*/
+        
+        $(`#card-image-${index}`).parent().animate({
+            opacity: `0`
+        }, 500, function(){
+            $(`#card-image-${index}`).animate({
+                height: `${nHeight}px`
+            }, 500, function(){
+                $(`#card-image-${index}`).attr("src", nextImage.src);
+                ccCardDict[index].updateCard(item.id);
+                $(`#card-image-${index}`).parent().animate({opacity: '1'},500,function(){
+
+                });
+
+            });
+
+    
+        });
+
+    }
+    /*
+    $(`#card-image-${index}`).fadeOut(600,function(){
+        var nextImage = createImage(item.image);
+        $(`#card-image-${index}`).attr("src", nextImage.src);
+        console.log(item);
+        ccCardDict[index].updateCard(item.id);
+        $(`#card-image-${index}`).fadeIn(600,function(){
+        });
+
+    });*/
+
+}
+
+function fadeNextImage(){
+    var nextPic= image_list.pop();
+    var nextIndex = getRandomInt(card_num);
+    console.log("Checking next Index")
+    //used_images.push(i)
+    //console.log( used_images);
+    var elem = {index: nextIndex, image: nextPic}
+    var result = used_index.indexOf(nextIndex);
+    var counter = 0
+    console.log(`result: ${result}`)
+    while(result != -1 ){
+        console.log('Looping for unique random...')
+        nextIndex = getRandomInt(card_num);
+        result = used_index.indexOf(nextIndex);
+        console.log(result);
+        console.log(nextIndex);
+        counter += 1;
+    }
+    console.log("Found valid index")
+    fadeOutImage(nextIndex, nextPic);
+    used_index.push(nextIndex)
+    console.log(used_index)
+    //console.log(`NextIndex: ${nextIndex}`);
+    //console.log(`NextPic: ${nextPic}`);
+
+}
+//Add image ID to tag so that I can track it using React.
+async function startGridCarousel(){
+    console.log('Starting carousel')
+    console.log(`Used_Images: ${used_index}`)
+    var list_length = image_list.length
+    console.log(image_list);
+
+    while(cFlag){
+        if(card_num == used_index.length){
+            console.log('Resetting index list...')
+            used_index= [];
+        }
+        if(image_list.length == 0){
+            console.log('Used Images');
+            console.log(used_images);
+            image_list = used_images;
+            used_images = [];
+            //flag = false;
+            console.log('Resetting Image list...');
+            console.log(image_list)
+        }
+        if(!timer.paused){
+            fadeNextImage();
+        }
+        await new Promise(r => {
+            timer.resume(r);
+        });
+        timer.reset();
+        console.log("Faded image and waited.");
+    }
+}
+
+//Gotta worry about sizing when absolute positioning which is a pain and fixed sizes kinda destroy defeat the point
+var temp_image = new Image();
+temp_image.src = "https://c4.wallpaperflare.com/wallpaper/238/241/106/shakira-singer-grayscale-of-woman-wallpaper-preview.jpg";
+temp_image.id= 'new_image';
+/*
+$('#g-test').click(function(){
+    if(!timer.paused){
+        timer.pause()
+        cFlag = false;
+    }else{
+        cFlag = true;
+        timer.paused = false;
+        startGridCarousel();
+    }
+});
+*/
+
+$('.artist-card').hover(
+    function(){
+        console.log("Setting mouse hover over image")
+        hoverId = window.setTimeout(function(){
+            if(!timer.paused){
+                timer.pause()
+                cFlag = false;
+                hoverWait = false;
+                console.log("Executing timeout")
+            }
+        },500)
+
+    },
+    function(){
+        if(timer.paused && hoverWait == false){
+            cFlag = true;
+            timer.paused = false;
+            hoverWait = null;
+            console.log("Finished timeout, resuming carousel.");
+            startGridCarousel();
+            return
+        }else {
+            window.clearTimeout(hoverId)
+            console.log("Did not finish timeout, not resuming carousel.");
+            hoverId = null;
+            hoverWait = true;
+            return
+
+        }
+
+    }
+);
 
