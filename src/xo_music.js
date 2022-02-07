@@ -33,7 +33,8 @@ $(document).ready(function(){
         arrows: true,
         fade: true,
         });
-
+    
+    /*
     var grid = new Masonry( '#grid', {
         percentPosition: true
     });
@@ -250,11 +251,12 @@ $(document).ready(function(){
             })
 
         
-        });*/
+        });
 
 
 
     });
+    */
     var featurette_height = $('.feature-pic').height();
     var featurette_width = $('.feature-pic').width();
     var player_ready = false;
