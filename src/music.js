@@ -38,8 +38,8 @@ class VidContainer extends React.Component{
                 {'id': 1, 'video_code': '../pics/XO_MUSIC_TRAILER_MP4.mp4', 'local': true},
                 {'id': 2, 'video_code': 'qqGsOVDj2K0', 'local': false},
                 {'id': 3, 'video_code': 'R6NF49HeiaU', 'local': false},
-                {'id': 4, 'video_code': '../pics/XO_B_Imperfection.mp4', 'local': true},
-                {'id': 5, 'video_code': '../pics/XO_TIMBO_INT.mp4', 'local': true},
+                {'id': 4, 'video_code': '../pics/XO_B_JimmyFallon.mp4', 'local': true},
+                {'id': 5, 'video_code': 'jIXMq7yByXA', 'local': false},
             ],
             playerState: 'PAUSED',
             showVid: false
@@ -326,10 +326,75 @@ class ArtistCard extends React.Component{
                     'id': 8,
                     'name':'Chris Webby',
                     'occupation': 'Rapper Songwriter',
-                    'description':"Known Christian Walcott Webster, better known by his stage name Chris Webby, is an American rapper from Norwalk, Connecticut. Chris Webby has released many mixtapes such as the DJ Drama-hosted Bars On Me and his EP There Goes the Neighborhood, which peaked at number 101 on the Billboard 200.",
+                    'description':"Christian Walcott Webster, better known by his stage name Chris Webby, is an American rapper from Norwalk, Connecticut. Chris Webby has released many mixtapes such as the DJ Drama-hosted Bars On Me and his EP There Goes the Neighborhood, which peaked at number 101 on the Billboard 200.",
                     'demo_url': 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1188656497&color=%23ffb3de&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true',
                 },
-                
+                {
+                    'id': 9,
+                    'name':'Eminem',
+                    'occupation': 'Rapper',
+                    'description':"Marshall Bruce Mathers III, known professionally as Eminem, is an American rapper, songwriter, and record producer. Eminem is among the best-selling music artists of all time, with estimated worldwide sales of over 220 million records",
+                    'demo_url': 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1188656497&color=%23ffb3de&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true',
+                },
+                {
+                    'id': 10,
+                    'name':'Pharrell Williams',
+                    'occupation': 'Rapper Producer',
+                    'description':"Pharrell Lanscilo Williams, is an American rapper, record producer, singer, songwriter, and entrepreneur. Alongside close colleague Chad Hugo, he formed the hip hop and R&B production duo The Neptunes in the early 1990s, with whom he has produced songs for various recording artists.",
+                    'demo_url': '',
+                },
+                {
+                    'id': 11,
+                    'name':'Bad Bunny',
+                    'occupation': 'Puerto Rican rapper',
+                    'description':"Benito Antonio Martínez Ocasio, known by his stage name Bad Bunny, is a Puerto Rican rapper, singer, and songwriter. His music is often defined as Latin trap and reggaeton, but he has incorporated various other genres into his music, including rock, bachata, and soul.",
+                    'demo_url': '',
+                },
+                {
+                    'id': 12,
+                    'name':'J Balvin',
+                    'occupation': 'Colombian singer',
+                    'description':"José Álvaro Osorio 'J' Balvín is a Colombian singer and rapper. He has been referred to as the 'Prince of Reggaeton', and is one of the best-selling Latin music artists with sales of more than 35 million records worldwide. Balvin was born in Medellín, Colombia.",
+                    'demo_url': '',
+                },
+                {
+                    'id': 13,
+                    'name':'Ariana Grande',
+                    'occupation': 'Singer',
+                    'description':"Ariana Grande-Butera is an American singer, songwriter, and actress. Her four-octave vocal range has received critical acclaim, and her personal life has been the subject of widespread media attention.",
+                    'demo_url': 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1188656497&color=%23ffb3de&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true',
+                },
+                {
+                    'id': 14,
+                    'name':'JCole',
+                    'occupation': 'Rapper Songwriter',
+                    'description':"Jermaine Lamarr Cole is an American rapper, singer, songwriter, and record producer. Cole is regarded as one of the most influential rappers of his generation.",
+                    'demo_url': 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1188656497&color=%23ffb3de&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true',
+                },
+                {
+                    'id': 15,
+                    'name':'Adele',
+                    'occupation': 'English Singer-Songwriter',
+                    'description':"Adele Laurie Blue Adkins MBE is an English singer and songwriter. She is one of the world's best-selling music artists, with sales of over 120 million records. After graduating in arts from the BRIT School in 2006, Adele signed a record deal with XL Recordings.",
+                    'demo_url': '',
+
+                },
+                {
+                    'id': 16,
+                    'name':'Kanye West',
+                    'occupation': 'Rapper Producer',
+                    'description':"Ye, commonly known by his birth name Kanye West, is an American rapper, record producer, and fashion designer. He is regarded as one of the most influential musicians of all time.",
+                    'demo_url': '',
+
+                },
+                {
+                    'id': 17,
+                    'name':'The Weeknd',
+                    'occupation': 'Canadian Singer',
+                    'description':"Abel Makkonen Tesfaye, known professionally as the Weeknd, is a Canadian singer-songwriter and record producer. Known for his sonic versatility and dark lyricism, Tesfaye's music explores escapism, romance, and melancholia, and is often inspired by personal experiences.",
+                    'demo_url': '',
+
+                }
 
             ],
             showInfo: false,
@@ -346,6 +411,7 @@ class ArtistCard extends React.Component{
         this.handleClick = this.handleClick.bind(this);
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.updateCard = this.updateCard.bind(this);
         
     }
 
@@ -373,11 +439,12 @@ class ArtistCard extends React.Component{
 
     }
 
-    updateData(index){
-        this.setState(function(state, props) {
-            return {
-              curr_item: this.state.items[index]
-            };
+    updateCard(id){
+        var item = this.state.items[id -1];
+        this.setState(function(state,props){
+            return{
+                curr_item: item
+            }
         });
     }
 
@@ -404,8 +471,8 @@ class ArtistCard extends React.Component{
 
         return(
             <>
-                <div className="text-center w-100 acard-info">
-                    <h3 style={{fontWeight: '100'}}> {this.state.curr_item.name}</h3>
+                <div id={this.state.curr_item.id} className="text-center w-100 acard-info">
+                    <h3 id='artist-name' style={{fontWeight: '100'}}> {this.state.curr_item.name}</h3>
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ffb3de" className="bi bi-x-diamond-fill " viewBox="0 0 16 16">
                         <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L4.047 3.339 8 7.293l3.954-3.954L9.049.435zm3.61 3.611L8.708 8l3.954 3.954 2.904-2.905c.58-.58.58-1.519 0-2.098l-2.904-2.905zm-.706 8.614L8 8.708l-3.954 3.954 2.905 2.904c.58.58 1.519.58 2.098 0l2.905-2.904zm-8.614-.706L7.292 8 3.339 4.046.435 6.951c-.58.58-.58 1.519 0 2.098l2.904 2.905z"/>
                     </svg>
@@ -432,12 +499,14 @@ class ArtistCard extends React.Component{
 
     }
 }
+var artistCardDict = {};
 for(let i=1; i< artistCards + 1; i++){
-  /*  ReactDOM.render(
-        <ArtistCard/>,
-        document.getElementById(`artist-card-${i}`)
-      );
-    */
+    
+    artistCardDict[i] = ReactDOM.render(
+            <ArtistCard/>,
+            document.getElementById(`artist-card-${i}`)
+        );
+    
 }
 
 var grid = new Masonry( '#grid', {
@@ -450,15 +519,15 @@ var grid = new Masonry( '#grid', {
 //(need alot of images, and randomness is a bit weird) option 4: statically add images then use slick for transitioning
 
 var image_list = [
-    'https://theglobal-post.com/wp-content/uploads/2021/01/5ea30d348dcb7.image_.jpg',
-    'https://cdn.wallpapersafari.com/37/29/4lR2sb.jpg',
-    'https://d18ufwot1963hr.cloudfront.net/wp-content-production/uploads/2021/03/Web_Photo_Editor-14.png',
-    'https://w0.peakpx.com/wallpaper/254/789/HD-wallpaper-black-and-white-of-j-balvin-is-facing-one-side-wearing-rings-and-having-tattoos-on-hands-music.jpg',
-    'https://cdn.wallpapersafari.com/63/25/QWLRut.jpg',
-    'https://wp.stanforddaily.com/wp-content/uploads/2021/05/JCole.png',
-    'https://www.billboard.com/wp-content/uploads/2021/11/adele-2021-billboar-1548.jpg',
-    'https://static01.nyt.com/images/2018/05/08/opinion/08Hampton1/08Hampton1-videoSixteenByNineJumbo1600.jpg',
-    'https://i.pinimg.com/originals/0d/a1/fb/0da1fbc2544a74f7d7c016746439cfd0.jpg'
+    {'id':9,'name':'Eminem','image':'https://theglobal-post.com/wp-content/uploads/2021/01/5ea30d348dcb7.image_.jpg'},
+    {'id':10,'name':'Pharell Williams', 'image': 'https://cdn.wallpapersafari.com/37/29/4lR2sb.jpg'},
+    {'id': 11, 'name':'Bad Bunny','image':'https://d18ufwot1963hr.cloudfront.net/wp-content-production/uploads/2021/03/Web_Photo_Editor-14.png'},
+    {'id': 12, 'name':'J Balvin','image':'https://w0.peakpx.com/wallpaper/254/789/HD-wallpaper-black-and-white-of-j-balvin-is-facing-one-side-wearing-rings-and-having-tattoos-on-hands-music.jpg'},
+    {'id': 13, 'name':'Ariana Grande', 'image':'https://cdn.wallpapersafari.com/63/25/QWLRut.jpg'},
+    {'id': 14, 'name':'JCole','image':'https://wp.stanforddaily.com/wp-content/uploads/2021/05/JCole.png'},
+    {'id': 15, 'name':'Adele', 'image':'https://www.billboard.com/wp-content/uploads/2021/11/adele-2021-billboar-1548.jpg'},
+    {'id': 16, 'name':'Kanye West', 'image': 'https://static01.nyt.com/images/2018/05/08/opinion/08Hampton1/08Hampton1-videoSixteenByNineJumbo1600.jpg'},
+    {'id': 17, 'name':'The Weeknd', 'image': 'https://i.pinimg.com/originals/0d/a1/fb/0da1fbc2544a74f7d7c016746439cfd0.jpg'}
 ];
 
 var card_num = 8;
@@ -512,27 +581,63 @@ function createImage(src){
     return image
 }
 
-
-function fadeOutImage(index, image){
+function fadeOutImage(index, item){
     index += 1;
     console.log(`Fading out: card-image-${index}`);
     //edge case appears here when I leave windows and come back, duplicate images start occurring. Might have to do with hover idk
     //Test this more later when I feel like it.
-    used_images.push($(`#card-image-${index}`).attr('src'));
-    $(`#card-image-${index}`).fadeOut(600,function(){
-        $(`#card-image-${index}`).attr("src", image.src);
-        window.setTimeout(function(){
-            grid.layout();
-        },100)
-        $(`#card-image-${index}`).fadeIn(600,function(){
-        })
+    console.log(item);
+    var currCardId = parseInt($(`#artist-card-${index}`).children(':first').attr("id"));
+    var artistName = $(`#artist-card-${index}`).find(`h3#artist-name`).text();
+    var image = $(`#card-image-${index}`).attr('src');
+    var used_entry = {'id': currCardId,'name': artistName,'image':image};
+    console.log('Used Entry')
+    console.log(used_entry);
+    used_images.push(used_entry);
+    var nextImage = createImage(item.image);
+    nextImage.onload = function() {
+        console.log(this.naturalHeight);
+        var width = document.getElementById(`card-image-${index}`).clientWidth;
+        console.log(`Client Width: ${width}`);
+        var naturalWidth = this.naturalWidth;
+        var naturalHeight = this.naturalHeight;
+        console.log(`Natural Width: ${naturalWidth}`);
+        var ratio = naturalHeight / naturalWidth;
 
-    });
+        console.log(`Ratio: ${ratio}`);
+        var nHeight = width * ratio;
+
+        $(`#card-image-${index}`).parent().animate({
+            opacity: `0`
+        }, 500, function(){
+            $(`#card-image-${index}`).animate({
+                height: `${nHeight}px`
+            }, 500, function(){
+                $(`#card-image-${index}`).attr("src", nextImage.src);
+                console.log('Next Item');
+                console.log(item);
+                artistCardDict[index].updateCard(item.id);
+                $(`#card-image-${index}`).parent().animate({opacity: '1'},500);;
+
+                
+                window.setTimeout(function(){
+                    grid.layout();
+                },100)
+            });
+
+
+
+
+    
+        });
+
+    }
+
 
 }
 
 function fadeNextImage(){
-    var nextPic= createImage(image_list.pop());
+    var nextPic= image_list.pop();
     var nextIndex = getRandomInt(card_num);
     console.log("Checking next Index")
     //used_images.push(i)
@@ -623,7 +728,7 @@ $('.artist-card').hover(
             timer.paused = false;
             hoverWait = null;
             console.log("Finished timeout, resuming carousel.");
-            //startGridCarousel();
+            startGridCarousel();
             return
         }else {
             window.clearTimeout(hoverId)
