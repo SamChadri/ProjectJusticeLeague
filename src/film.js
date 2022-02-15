@@ -37,9 +37,9 @@ class VidContainer extends React.Component{
         this.state = {
             id: 1,
             items:[
-                {'id': 1, 'video_code': '1BXwNrcgf2A', 'local': false},
-                {'id': 2, 'video_code': 'wRWMGlktQAc', 'local': false},
-                {'id': 3, 'video_code': '../pics/XO_ITonya.mp4', 'local': true},
+                {'id': 1, 'video_code': 'A2yU0BPFqFk', 'local': false},
+                {'id': 2, 'video_code': 'wRcVgJjnFLo', 'local': false},
+                {'id': 3, 'video_code': '../pics/XO_Yesterday_XPOSED.mp4', 'local': true},
             ],
             playerState: 'PAUSED',
             showVid: false
@@ -170,21 +170,21 @@ class MovieInfoContainer extends React.Component{
             items:[
                 {
                     'id': 1,
-                    'name': 'Rumor Has It...',
-                    'director': 'Rob Reiner',
-                    'release_date': 'December 25, 2005',
-                    'producers': 'Ben Cosgrove Paula Weinstein',
-                    'screenplay':'Ted Griffin',
-                    'music':'Marc Shaiman',
+                    'name': 'The Suicide Squad',
+                    'director': 'James Gunn',
+                    'release_date': 'August 6, 2021',
+                    'producers': 'Charles Roven; Peter Safran',
+                    'screenplay':'James Gunn',
+                    'music':'John Murphy',
                     'cast':[
-                        {'name': 'Jennifer Aniston', 'image': 'https://cdn.justjared.com/wp-content/uploads/headlines/2016/08/aniston-eye.jpg'},
-                        {'name': 'Kevin Costner', 'image': 'https://pyxis.nymag.com/v1/imgs/ead/14d/ede84b0345bdfb70291cabe65e227bfd30-23-encounter-kevin-costner.rvertical.w330.jpg'},
-                        {'name': 'Shirley Maclaine ','image':'https://upload.wikimedia.org/wikipedia/commons/a/a9/Shirley_MacLaine_-_1960.jpg'},
-                        {'name': 'Mark Ruffalo', 'image': 'https://i.pinimg.com/originals/ae/fa/35/aefa3513a35e2416313d9211f532baab.jpg'},
+                        {'name': 'Margot Robbie', 'image': 'https://images.mubicdn.net/images/cast_member/302807/cache-579912-1602750820/image-w856.jpg?size=800x'},
+                        {'name': 'John Cena', 'image': 'https://s3-us-west-2.amazonaws.com/photoawardscom/upload/2014/large/8-117620-16_IPA_John-Cena.jpg'},
+                        {'name': 'Idris Elba','image':'https://i.pinimg.com/originals/00/c1/5e/00c15e3626ae92e343c4ed9f233e098e.jpg'},
+                        {'name': 'Daniela Melchior', 'image': 'https://m.media-amazon.com/images/M/MV5BOGUwZWUyMDYtZjQyZS00ZTdiLWFhNzQtYzljYTI0YjgyN2Y0XkEyXkFqcGdeQXVyMTAyNDczMTA5._V1_.jpg'},
                     ],
-                    'imdb_score': '5.5/10',
-                    'rt_score': '20%',
-                    'mt_score': 'Sips Tea...😗'
+                    'imdb_score': '7.2/10',
+                    'rt_score': '90%',
+                    'mt_score': '😂 👌'
 
                 },
                 {
@@ -404,7 +404,7 @@ class MovieContainer extends React.Component{
         this.state = {
             'id': 1,
             items:[
-            {'id': 1, 'video_code': 'QWYqikq6YuE', 'local': false},
+            {'id': 1, 'video_code': '../pics/XO_SS_Trailer.mp4', 'local': true},
             {'id': 2, 'video_code': '_qawW01eTG0', 'local': false},
             {'id': 3, 'video_code': '-19tBHrZwOM', 'local': false},
             {'id': 4, 'video_code': 'AZGcmvrTX9M', 'local': false},

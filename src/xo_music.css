@@ -202,7 +202,16 @@ hr.fade-in-ani{
     width: 100vw;
     position:relative;
 
-    background-image: url('../pics/XO_Studio3.jpeg');
+    background-image:
+    linear-gradient(
+        rgba(0, 0, 0, 0.2) 0%,
+        rgba(0, 0, 0, 0.4) 70%,
+        rgba(0, 0, 0, 0.5) 80%,
+        rgba(0, 0, 0, 0.7) 90%,
+        rgba(0, 0, 0, 0.9) 95%,
+        rgba(0, 0, 0, 1.0) 100%
+      ),
+    url('../pics/XO_Studio3.jpeg');
     background-size: 100% 100%;
 }
 

@@ -19,4 +19,9 @@ $(document).ready(function(){
     
     
     });
+    var $tvCarousel = $('.tv-carousel').flickity({
+        cellAlign: 'left',
+        wrapAround: true,
+        pageDots: false
+    });
 });
