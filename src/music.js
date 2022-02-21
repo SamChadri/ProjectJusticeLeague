@@ -35,11 +35,11 @@ class VidContainer extends React.Component{
         this.state = {
             id: 1,
             items:[
-                {'id': 1, 'video_code': '../pics/XO_MUSIC_TRAILER_MP4.mp4', 'local': true},
+                {'id': 1, 'video_code': '../media/video/XO_MUSIC_TRAILER_MP4.mp4', 'local': true},
                 {'id': 2, 'video_code': '16PdQtsygTU', 'local': false},
                 {'id': 3, 'video_code': 'R6NF49HeiaU', 'local': false},
-                {'id': 4, 'video_code': '../pics/XO_JBWWB_GEMS.mp4', 'local': true},
-                {'id': 5, 'video_code': 'WMMgtjVCq3E', 'local': false},
+                {'id': 4, 'video_code': '../media/video/XO_JBWWB_GEMS.mp4', 'local': true},
+                {'id': 5, 'video_code': 'Z6iFvGyae28', 'local': false},
             ],
             playerState: 'PAUSED',
             showVid: false

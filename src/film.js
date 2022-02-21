@@ -37,8 +37,8 @@ class VidContainer extends React.Component{
         this.state = {
             id: 1,
             items:[
-                {'id': 1, 'video_code': 'rL73erU76M0', 'local': false},
-                {'id': 2, 'video_code': 'Qo9yvbFB9yA', 'local': false},
+                {'id': 1, 'video_code': 'gwHDSDIpMVs', 'local': false},
+                {'id': 2, 'video_code': '4q_0GL3J0ag', 'local': false},
                 {'id': 3, 'video_code': '2Cwaneq2w-4', 'local': false},
             ],
             playerState: 'PAUSED',
@@ -404,7 +404,7 @@ class MovieContainer extends React.Component{
         this.state = {
             'id': 1,
             items:[
-            {'id': 1, 'video_code': '../pics/XO_SS_Trailer.mp4', 'local': true},
+            {'id': 1, 'video_code': '../media/video/XO_SS_Trailer.mp4', 'local': true},
             {'id': 2, 'video_code': '_qawW01eTG0', 'local': false},
             {'id': 3, 'video_code': '-19tBHrZwOM', 'local': false},
             {'id': 4, 'video_code': 'AZGcmvrTX9M', 'local': false},
@@ -885,7 +885,7 @@ for(let i = 0; i < aInfoItems; i++){
     }
 }
 var image_list = [
-    {'id': 9,'name':'Russo Brothers','image': '../pics/XO_RussoBros.jpeg'},
+    {'id': 9,'name':'Russo Brothers','image': '../media/pics/XO_RussoBros.jpeg'},
     {'id': 10, 'name':'Idris Elba', 'image':'https://static01.nyt.com/images/2015/09/13/arts/13ELBA2/13ELBA2-articleLarge.jpg?quality=75&auto=webp&disable=upscale'},
     {'id': 11, 'name': 'Jennifer Aniston','image':'https://c4.wallpaperflare.com/wallpaper/819/363/588/jennifer-aniston-black-and-white-hd-wallpaper-preview.jpg'},
     {'id': 12, 'name':'Viola Davis', 'image':'https://cache.net-a-porter.com/content/images/story-body-content-v1-0-1519750866935.jpeg/w1900_q65.jpeg'},

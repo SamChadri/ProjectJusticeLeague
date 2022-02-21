@@ -61,7 +61,7 @@ class VidContainer extends React.Component{
     var source = document.createElement('source');
 
     source.type = 'video/mp4';
-    source.src = '../pics/XO_TRAILER20.mp4';
+    source.src = '../media/video/XO_TRAILER20.mp4';
 
     video.setAttribute("controls", "controls");
     video.height = height;
@@ -181,7 +181,7 @@ class VidContainer extends React.Component{
         <>
           {this.state.showVid ?
             <video controls width={this.state.width} height={this.state.height}>
-              <source src="../pics/XO_TRAILER20.mp4" type="video/mp4"></source>
+              <source src="../media/video/XO_TRAILER20.mp4" type="video/mp4"></source>
             </video>
           :
           <Button id={`bf-${this.state.id}`} onClick={this.handleClick} variant="outline-light" style={{borderRadius:'50%', color:'white'}}  type="button" className="feature-button">

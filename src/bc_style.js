@@ -40,7 +40,7 @@ $(document).ready(function(){
         var source = document.createElement('source');
 
         source.type = 'video/mp4';
-        source.src = '../pics/XO_TRAILER20.mp4';
+        source.src = '../media/video/XO_TRAILER20.mp4';
 
         video.autoplay = true;
         video.setAttribute("controls", "controls");
