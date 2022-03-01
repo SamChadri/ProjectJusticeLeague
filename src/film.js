@@ -37,9 +37,9 @@ class VidContainer extends React.Component{
         this.state = {
             id: 1,
             items:[
-                {'id': 1, 'video_code': 'CKQQymh8oQY', 'local': false},
-                {'id': 2, 'video_code': 'ienFZf0QMiQ', 'local': false},
-                {'id': 3, 'video_code': 'uR-2TiQVY-k', 'local': false},
+                {'id': 1, 'video_code': '-aWeIZxfT4E', 'local': false},
+                {'id': 2, 'video_code': 'mMh1EvAQOQ8', 'local': false},
+                {'id': 3, 'video_code': 'aURe7hHL-Dw', 'local': false},
             ],
             playerState: 'PAUSED',
             showVid: false
@@ -189,21 +189,21 @@ class MovieInfoContainer extends React.Component{
                 },
                 {
                     'id': 2,
-                    'name': 'On the Rocks',
-                    'director': 'Sofia Coppola',
-                    'release_date': 'September 22, 2020',
-                    'producers': 'American Zoetrope',
-                    'music':'Phoenix',
-                    'screenplay':'Sofia Coppola',
+                    'name': 'The Night Clerk',
+                    'director': 'Michael Cristofer',
+                    'release_date': 'February 21, 2020 ',
+                    'producers': 'David M. Wulf; Arianne Fraser; Tye Sheridan',
+                    'music':'Erik Hall',
+                    'screenplay':'Michael Cristofer',
                     'cast':[
-                        {'name': 'Rashida Jones', 'image': 'https://data.whicdn.com/images/7106785/original.png'},
-                        {'name': 'Bill Murray', 'image': 'https://movies-b26f.kxcdn.com/wp-content/uploads/2014/08/Bill-Murray-New-York-Times-e1407027143318.jpg'},
-                        {'name': 'Marlon Wayans','image':'https://pbs.twimg.com/media/DhMWU2FWsAEqW2j.jpg'},
-                        {'name': 'Jessica Henwick', 'image': 'https://64.media.tumblr.com/273341fb1c48751090d73633f6ccfd50/tumblr_otk6lrBiVJ1tdz49po7_1280.jpg'},
+                        {'name': 'Tye Sheridan', 'image': 'https://media.gq.com/photos/5abbb57a63dd3e6409aff28a/master/w_2447,h_3000,c_limit/tye-sheridan-brad-torchia-04.jpg'},
+                        {'name': 'Ana de Armas', 'image': 'https://data.whicdn.com/images/312336643/original.jpg'},
+                        {'name': 'Helen Hunt','image':'https://i.pinimg.com/236x/24/a5/36/24a536fe7dc669487f548122ca28a584.jpg'},
+                        {'name': 'John Leguizamo', 'image': 'https://www.interviewmagazine.com/wp-content/uploads/2016/05/img-john-leguizamo_083710467748.jpg'},
                     ],
-                    'imdb_score': '6.5/10',
-                    'rt_score': '87%',
-                    'mt_score': '😌'
+                    'imdb_score': '5.6/10',
+                    'rt_score': '36%',
+                    'mt_score': '🤓...😔'
 
                 },
                 {
@@ -405,7 +405,7 @@ class MovieContainer extends React.Component{
             'id': 1,
             items:[
             {'id': 1, 'video_code': '../media/video/XO_SS_Trailer.mp4', 'local': true},
-            {'id': 2, 'video_code': '_qawW01eTG0', 'local': false},
+            {'id': 2, 'video_code': '8j6wDoyiyd4', 'local': false},
             {'id': 3, 'video_code': '-19tBHrZwOM', 'local': false},
             {'id': 4, 'video_code': 'AZGcmvrTX9M', 'local': false},
             {'id': 5, 'video_code': 'mgygUwPJvYk', 'local': false},

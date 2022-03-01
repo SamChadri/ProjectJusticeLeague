@@ -1,19 +1,81 @@
+
+
+const initializeApp = require("firebase/app").initializeApp;
+const analytics = require("firebase/analytics");
+const getAnalytics = require("firebase/analytics").getAnalytics;
+const XO_Auth = require("../backend/xo_auth.js").XO_Auth;
+const XO_Database = require("../backend/xo_database.js").XO_Database;
 const http = require('http');
 const fsp = require('fs').promises;
 const fs = require('fs');
 var path = require('path');
+var qs = require('querystring');
 
 const hostname = '127.0.0.1';
 const port = 3005;
 
+const firebaseConfig = {
+    apiKey: "AIzaSyCCWjqHm5NyfZdytfmLRJhVWaJlPI1OinE",
+    authDomain: "projectjusticeleague.firebaseapp.com",
+    projectId: "projectjusticeleague",
+    storageBucket: "projectjusticeleague.appspot.com",
+    messagingSenderId: "526020515693",
+    appId: "1:526020515693:web:8d48034452c396c245ec64",
+    measurementId: "G-KSC4M5RH33"
+};
+const app = initializeApp(firebaseConfig);
+
+analytics.isSupported().then((isSupported) => {
+    if (isSupported) {
+      const fbAnalytics = getAnalytics(app);
+    }
+})
+
+
+XO_Auth.initAuth();
+XO_Database.initDatabase();
+
+
 const requestListener = function (req, res){
     if(req.url == "/"){
-        fsp.readFile(__dirname + "/../dist/home.html")
+        fsp.readFile(__dirname + "/../dist/register_1.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
             res.end(contents);
         });
+
+
+    }
+    else if(req.url == "/register" && req.method == 'POST'){
+        console.log(`POST on /register route`);
+        var body = ""
+        req.on('data', function(data) {
+            body += data
+            console.log('Partial body: ' + body);
+          })
+          req.on('end', function() {
+            var postData = qs.parse(body);
+            const callback  = function(id){
+                var userData = {
+                    id: id,
+                    age: postData.age,
+                    displayName : postData.displayName,
+                    email: postData.email,
+                };
+                var dbCallback = function(){
+                    console.log("xo_database::createUser:: Reigstriation complete. Informing client.");
+                    res.end('post received');
+
+                }
+                XO_Database.createUser(id, userData, dbCallback);
+                console.log("xo_auth::createUser::Executed Auth callback")
+            }
+            XO_Auth.createUser(postData.email, postData.password, postData.displayName, callback);
+            console.log(postData.email);
+            console.log('Body: ' + body);
+            res.writeHead(200, {'Content-Type': 'text/html'});
+          })
 
     }
     else if(req.url.match("\.css$")){
