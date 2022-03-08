@@ -47,12 +47,25 @@ const requestListener = function (req, res){
 
 
     }
+    else if(req.url == "/#"){
+        console.log(req.url);
+        fsp.readFile(__dirname + "/../dist/register_1.html")
+        .then(contents => {
+            res.setHeader("Content-Type", "text/html");
+            res.setHeader("oobCode", XO_Auth.getActionCode());
+            res.writeHead(200);
+            res.end(contents);
+        
+        });
+
+    }
+
     else if(req.url == "/register" && req.method == 'POST'){
-        console.log(`POST on /register route`);
+        console.log(`xo_app::POST on /register route`);
         var body = ""
         req.on('data', function(data) {
             body += data
-            console.log('Partial body: ' + body);
+            console.log('xo_app::Partial body: ' + body);
           })
           req.on('end', function() {
             var postData = qs.parse(body);
@@ -77,6 +90,37 @@ const requestListener = function (req, res){
             res.writeHead(200, {'Content-Type': 'text/html'});
           })
 
+    }
+
+    else if(req.url == "/send_verification_email"){
+        console.log(`xo_app::GET of /send_verification_email`);
+        res.setHeader("Content-Type", "text/html");
+        res.writeHead(200);
+        var callback = function(){
+            console.log(`xo_auth::sendVerification::Email Verification sent. Informing client`);
+            res.end("Sent Email")
+        }
+        XO_Auth.sendVerification(callback);
+    }
+
+    else if(req.url == "/verify_email" && req.method == 'POST'){
+        console.log(`xo_app::POST on /verify_email route`);
+        var body = ""
+        req.on('data', function(data){
+            body += data;
+            console.log(`xo_app::Partial body: ${body}`);
+
+        });
+        req.on('end', function(){
+            var postData = qs.parse(body);
+            var callback = function() {
+                console.log(`xo_auth::handleVerification:: Verification complete. Informing client`);
+                res.end("Email Verified")
+            }
+            console.log(postData);
+            console.log(`Code: ${postData.actionCode}`);
+            XO_Auth.handleVerification(postData.actionCode, callback);
+        });
     }
     else if(req.url.match("\.css$")){
         console.log(req.url)
