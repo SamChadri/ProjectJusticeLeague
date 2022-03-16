@@ -227,3 +227,35 @@ hr.fade-in-ani{
     background-size: 100% 100%;
 
 }
+
+.forgot-password{
+    float: right;
+    text-decoration: none;
+    color: white;
+    border-bottom: .25rem solid transparent;
+
+}
+a {
+     cursor: pointer; 
+}
+.forgot-password:hover{
+    color:#ffb3de;
+    border-bottom-color: #ffb3de;
+}
+
+.password-visual{
+    height: 500px;
+    width : 100%;
+    background-image:
+    radial-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 1.0)),
+    url('https://www.virtru.com/wp-content/uploads/2018/05/End-to-End-Security-for-a-Zero-Trust-Default-Secure-Future.jpg');
+    background-size: 100% 100%;
+}
+
+.password-div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

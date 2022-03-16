@@ -7,6 +7,7 @@ module.exports = {
       mFilm: path.join(__dirname, "src", "film.js"),
       mMedia: path.join(__dirname, "src", "media.js"),
       mRegister: path.join(__dirname, "src", "register.js"),
+      mReset: path.join(__dirname, "src", "password_reset.js"),
 
     }, 
     output: {

@@ -4,19 +4,24 @@ const createUserWithEmailAndPassword = require("firebase/auth").createUserWithEm
 const updateProfile = require("firebase/auth").updateProfile;
 const sendEmailVerification = require("firebase/auth").sendEmailVerification;
 const applyActionCode = require("firebase/auth").applyActionCode;
+const sendPasswordResetEmail = require("firebase/auth").sendPasswordResetEmail;
+const updatePassword = require("firebase/auth").updatePassword;
+const reauthenticateWithCredential = require("firebase/auth").reauthenticateWithCredential;
+const signInWithEmailAndPassword =  require("firebase/auth").signInWithEmailAndPassword
 
 class XO_Auth{
     constructor(){
 
     }
     static #auth;
-    static currUserId = '';
+    static currUserEmail = '';
     static errorCode = -1;
     static errorMessage = "";
 
     //Attach code to user later;
 
     static #actionCode = "#1234";
+    static #resetCode = "#6969";
 
     static initAuth(){
         XO_Auth.#auth  = getAuth();
@@ -77,8 +82,8 @@ class XO_Auth{
         .catch((error) => {
             XO_Auth.errorMessage = error.message;
             XO_Auth.errorCode = error.code;
-            console.log(`xo_auth::createUser::Error Occurred: ${XO_Auth.errorMessage}`);
-
+            
+            console.log(`xo_auth::handleVerification::Error Occurred: ${XO_Auth.errorMessage}`);
         });
     }
     static handleVerification(oobCode, callback=null){
@@ -107,6 +112,61 @@ class XO_Auth{
 
 
         });*/
+    }
+
+    static sendResetEmail(email, callback=null){
+        const actionCodeSettings = {
+            url: `http://localhost:3005/${XO_Auth.#resetCode}`,
+            handleCodeInApp: false
+          };
+        sendPasswordResetEmail(XO_Auth.#auth, email, actionCodeSettings)
+        .then(() => {
+            console.log(`xo_auth::sendResetEmail:: Password Reset Email send successfully`);
+            XO_Auth.currUserEmail = email;
+            if( callback != null){
+                console.log(`xo_auth::sendResetEmail:: Executing callback.`)
+                callback();
+            }
+
+        })
+        .catch((error) => {
+            XO_Auth.errorMessage = error.message;
+            XO_Auth.errorCode = error.code;
+            console.log(`xo_auth::sendResetEmail::Error Occurred: ${XO_Auth.errorMessage}`);
+
+        })
+    }
+
+
+    static updateUserPassword(old_password, new_password, callback=null){
+
+        console.log(`Email: ${XO_Auth.currUserEmail}`)
+        signInWithEmailAndPassword(XO_Auth.#auth, XO_Auth.currUserEmail, old_password)
+        .then((userCredential) =>{
+            console.log(`xo_auth::SignInUser:: Reauthenticated user: ${userCredential.user}`)
+            updatePassword(XO_Auth.#auth.currentUser,new_password)
+            .then(() => {
+                console.log(`xo_auth::updateUserPassword:: Updated password successfully.`);
+                if( callback != null){
+                    console.log(`xo_auth::updateUserPassword:: Executing callback.`)
+                    callback();
+                }
+            })
+            .catch((error) => {
+                XO_Auth.errorMessage = error.message;
+                XO_Auth.errorCode = error.code;
+                console.log(`xo_auth::updateUserPassword::Error Occurred: ${XO_Auth.errorMessage}`);
+            })
+        })
+        .catch((error) => {
+            XO_Auth.errorMessage = error.message;
+            XO_Auth.errorCode = error.code;
+            console.log(`xo_auth::SignInUser::Error Occurred: ${XO_Auth.errorMessage}`);
+
+        })
+
+
+
     }
 
 }

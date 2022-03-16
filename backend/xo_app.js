@@ -38,7 +38,7 @@ XO_Database.initDatabase();
 
 const requestListener = function (req, res){
     if(req.url == "/"){
-        fsp.readFile(__dirname + "/../dist/register_1.html")
+        fsp.readFile(__dirname + "/../dist/password_reset.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
@@ -49,10 +49,10 @@ const requestListener = function (req, res){
     }
     else if(req.url == "/#"){
         console.log(req.url);
-        fsp.readFile(__dirname + "/../dist/register_1.html")
+        fsp.readFile(__dirname + "/../dist/password_reset.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
-            res.setHeader("oobCode", XO_Auth.getActionCode());
+            //res.setHeader("oobCode", XO_Auth.getActionCode());
             res.writeHead(200);
             res.end(contents);
         
@@ -122,6 +122,45 @@ const requestListener = function (req, res){
             XO_Auth.handleVerification(postData.actionCode, callback);
         });
     }
+    else if(req.url == "/reset_email" && req.method == 'POST'){
+        console.log(`xo_app::POST of /reset_email`);
+        var body = ""
+        req.on('data', function(data){
+            body += data;
+            console.log(`xo_app::Partial body: ${body}`);
+
+        });
+        req.on('end', function(){
+            var postData = qs.parse(body);
+            var callback = function() {
+                console.log(`xo_auth::sendResetEmail::Reset Email sent. Informing client`);
+                res.end("Sent Email")
+            }
+            console.log(`xo_app::Post Data Email: ${postData.email}`);
+            XO_Auth.sendResetEmail(postData.email, callback);
+        });
+
+    }
+    else if(req.url == "/update_password" && req.method == 'POST'){
+        console.log(`xo_app::POST of /reset_email`);
+        var body = ""
+        req.on('data', function(data){
+            body += data;
+            console.log(`xo_app::Partial body: ${body}`);
+
+        });
+        req.on('end', function(){
+            var postData = qs.parse(body);
+            var callback = function() {
+                console.log(`xo_auth::updateUserPassword::Reset Email sent. Informing client`);
+                res.end("Updated Password")
+            }
+            console.log(`xo_app::Post Data Email: ${postData.email}`);
+            XO_Auth.updateUserPassword(postData.old_password,postData.new_password, callback);
+        });
+
+    }
+
     else if(req.url.match("\.css$")){
         console.log(req.url)
         var cssPath = path.join(__dirname + "/../", req.url);
