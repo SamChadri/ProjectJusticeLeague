@@ -1,44 +1,34 @@
 
 
-const initializeApp = require("firebase/app").initializeApp;
-const analytics = require("firebase/analytics");
-const getAnalytics = require("firebase/analytics").getAnalytics;
+
 const XO_Auth = require("../backend/xo_auth.js").XO_Auth;
+//import {XO_Auth}from '../backend/xo_auth.ts';
+//import { XO_Database } from './xo_database.js';
 const XO_Database = require("../backend/xo_database.js").XO_Database;
+//import * as http from 'http';
 const http = require('http');
-const fsp = require('fs').promises;
+//import { promises }  from 'fs';
+const promises = require('fs').promises;
+//import * as fs from 'fs';
 const fs = require('fs');
-var path = require('path');
-var qs = require('querystring');
+//import * as path from 'path';
+const path = require('path');
+//import * as qs from 'querystring';
+
+const qs = require('querystring');
 
 const hostname = '127.0.0.1';
 const port = 3005;
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCCWjqHm5NyfZdytfmLRJhVWaJlPI1OinE",
-    authDomain: "projectjusticeleague.firebaseapp.com",
-    projectId: "projectjusticeleague",
-    storageBucket: "projectjusticeleague.appspot.com",
-    messagingSenderId: "526020515693",
-    appId: "1:526020515693:web:8d48034452c396c245ec64",
-    measurementId: "G-KSC4M5RH33"
-};
-const app = initializeApp(firebaseConfig);
-
-analytics.isSupported().then((isSupported) => {
-    if (isSupported) {
-      const fbAnalytics = getAnalytics(app);
-    }
-})
 
 
-XO_Auth.initAuth();
-XO_Database.initDatabase();
+const authDB = new XO_Auth();
+const xoDB = new XO_Database();
 
 
 const requestListener = function (req, res){
     if(req.url == "/"){
-        fsp.readFile(__dirname + "/../dist/password_reset.html")
+        promises.readFile(__dirname + "/../dist/register_1.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
@@ -49,7 +39,7 @@ const requestListener = function (req, res){
     }
     else if(req.url == "/#"){
         console.log(req.url);
-        fsp.readFile(__dirname + "/../dist/password_reset.html")
+        promises.readFile(__dirname + "/../dist/register_1.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             //res.setHeader("oobCode", XO_Auth.getActionCode());
@@ -71,7 +61,7 @@ const requestListener = function (req, res){
             var postData = qs.parse(body);
             const callback  = function(id){
                 var userData = {
-                    id: id,
+                    _id: id,
                     age: postData.age,
                     displayName : postData.displayName,
                     email: postData.email,
@@ -81,10 +71,10 @@ const requestListener = function (req, res){
                     res.end('post received');
 
                 }
-                XO_Database.createUser(id, userData, dbCallback);
+                xoDB.createUser(id, userData, dbCallback);
                 console.log("xo_auth::createUser::Executed Auth callback")
             }
-            XO_Auth.createUser(postData.email, postData.password, postData.displayName, callback);
+            authDB.createUser(postData.email, postData.password, postData.displayName, callback);
             console.log(postData.email);
             console.log('Body: ' + body);
             res.writeHead(200, {'Content-Type': 'text/html'});
@@ -100,7 +90,7 @@ const requestListener = function (req, res){
             console.log(`xo_auth::sendVerification::Email Verification sent. Informing client`);
             res.end("Sent Email")
         }
-        XO_Auth.sendVerification(callback);
+        authDB.sendVerification(callback);
     }
 
     else if(req.url == "/verify_email" && req.method == 'POST'){
@@ -119,7 +109,7 @@ const requestListener = function (req, res){
             }
             console.log(postData);
             console.log(`Code: ${postData.actionCode}`);
-            XO_Auth.handleVerification(postData.actionCode, callback);
+            authDB.handleVerification(postData.actionCode, callback);
         });
     }
     else if(req.url == "/reset_email" && req.method == 'POST'){
@@ -137,7 +127,7 @@ const requestListener = function (req, res){
                 res.end("Sent Email")
             }
             console.log(`xo_app::Post Data Email: ${postData.email}`);
-            XO_Auth.sendResetEmail(postData.email, callback);
+            authDB.sendResetEmail(postData.email, callback);
         });
 
     }
@@ -156,7 +146,7 @@ const requestListener = function (req, res){
                 res.end("Updated Password")
             }
             console.log(`xo_app::Post Data Email: ${postData.email}`);
-            XO_Auth.updateUserPassword(postData.old_password,postData.new_password, callback);
+            authDB.updateUserPassword(postData.old_password,postData.new_password, callback);
         });
 
     }

@@ -1,59 +1,124 @@
 
-// Import the functions you need from the SDKs you need
+const {Collection,MongoClient, Db} = require("mongodb");
 
-const getFirestore = require("firebase/firestore").getFirestore;
-const collection = require("firebase/firestore").collection;
-const addDoc = require("firebase/firestore").addDoc;
+//Look into Mongoose for Models
+const {config} = require("dotenv") ;
 
+const TAG = `xo_database`;
 
-
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
-// Initialize Firebase
-//const app = initializeApp(firebaseConfig);
-//const analytics = getAnalytics(app);
+// Ideally two different clusters for Authentication and another for Database
 
 
 class XO_Database {
     constructor(){
-        this.x = "hello"
-        //TODO: Might decide if I want a instance app or not
+        const uri = XO_Database.#uri();
+        this.connectToCluster(uri);
+        this.initDatabase();
+        //Decide if I want to init
 
     }
-    static #users;
-    static initDatabase(){
-        this.db = getFirestore();
-        this.#users = collection(this.db, "users");
+    
+    static #config_init = false;
+    #mongoClient;
+    #iamDb;
+    #contentDb;
+    #users;
+    #movies;
+    #shows;
+    #media;
+
+    static #uri = () => {
+        if(XO_Database.#config_init == false){
+            config();
+            XO_Database.#config_init = true;
+        }
+        return process.env.DB_URI;
+    }
+    
+
+    
+    async connectToCluster(uri ){
+        try{
+            console.log(`${TAG}::connectToCluster():: Cluster Uri ${uri}`);
+            this.#mongoClient = new MongoClient(uri);
+            console.log(`${TAG}::connectToCluster()::Connecting to JLMongoDB cluster...`);
+            await this.#mongoClient.connect();
+            console.log(`${TAG}::connectToCluster()::Successfully connected to JLMongoDB cluster...`);
+        
+        } catch (error) {
+            console.error(`Connection to MongoDB Atlas failed`, error);
+            process.exit();
+        }
+    }
+ 
+
+    async initDatabase(){
+
+        try{
+            this.#iamDb = this.#mongoClient.db('iam');
+            this.#users = this.#iamDb.collection('users');
+            this.populateDb(this.#users);
+    
+    
+            this.#contentDb = this.#mongoClient.db('content');
+            this.#movies = this.#contentDb.collection('movies');
+            this.populateDb(this.#movies);
+            this.#shows = this.#contentDb.collection('shows');
+            this.populateDb(this.#shows);
+            this.#media = this.#contentDb.collection('media');
+            this.populateDb(this.#media);
+
+        } catch(error){
+            console.log(`${TAG}::initDatabase:: Error occured `, error)
+            process.exit();
+        }
+
     }
 
+    async populateDb(collection ){
 
-    static createUser(id, userData, callback=null){
-        addDoc(collection(this.db, "users"),userData)
-        .then((docRef) =>{
+        try{
+            const docCount = await collection.countDocuments();
+            if(docCount == 0){
+                //TODO: Populate database Implement Later;
+            }else{
+                
+            }
 
-            console.log(`xo_database::createUser:: user created with ID: ${docRef.id}`);
+        }catch(error){
+            console.log(`${TAG}::populateDatabase:: Error occured `, error)
+            process.exit();
+        }
+
+    }
+
+    async createUser(id , userData, callback=null){
+        //userData[id]= id;
+        this.#users.insertOne(userData)
+        .then((document) =>{
+            console.log(`xo_database::createUser:: user created with ID: ${document}`);
             if(callback != null){
                 console.log("xo_database::createUser::excecuting callback")
                 callback();
-            }
-        })
+            }        })
         .catch((error) => {
             console.log(`xo_database::createUser::Error adding document: ${error}`);
+
         });
+
     }
+
+    
 
 
     
 }
 
+
 module.exports = {
     XO_Database: XO_Database,
 }
+
 
 
 

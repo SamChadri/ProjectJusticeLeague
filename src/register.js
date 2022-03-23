@@ -12,7 +12,7 @@ import { getAuth, isSignInWithEmailLink, signInWithEmailLink, applyActionCode } 
 
 
 
-
+//Question: Should I encrypt then hash, or hash then hash again, encrypt, decrpyt then hash, or just hash once here.
 
 let num_states = 5;
 //FOR THE LIFE OF ME, TELL THEM NIGGAS TO STOP FUCKING WIT THE INTERNET. RETROACTIVELY and PROACTIVELY.
@@ -74,7 +74,7 @@ class RegisterForms extends React.Component{
                     success: function(result){
                         console.log(result);
                         console.log("Updating Register Info.")
-                        instance.requestEmail();
+                        //instance.requestEmail();
                         $(`.register-info`).fadeOut(500, function(){
                             instance.setState(function(state, props) {
                                 return {
