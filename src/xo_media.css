@@ -374,6 +374,20 @@ hr.fade-in-ani{
 
 }
 
+a {
+    cursor: pointer; 
+}
+
+.stack-next{
+    color: white;
+    border-bottom: 1px solid transparent;
+}
+
+.stack-next:hover{
+    color: #ffb3de;
+    border-color: #ffb3de;
+}
+
 .tv-cell{
     width: 28%;
     height: 200px;

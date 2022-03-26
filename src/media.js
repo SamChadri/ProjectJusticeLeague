@@ -37,10 +37,10 @@ class VidContainer extends React.Component{
         this.state = {
             id: 1,
             items:[
-                {'id': 1, 'video_code': 'dAdjA2Y4y1U', 'local': false},
-                {'id': 2, 'video_code': 'V6p-0Vw5uXo', 'local': false},
-                {'id': 3, 'video_code': 'kbjIaPzODs0', 'local': false},
-                {'id': 4, 'video_code': 'x8lKPzFDHpU', 'local': false},
+                {'id': 1, 'video_code': 'yN0O8UaTnRA', 'local': false},
+                {'id': 2, 'video_code': 'claGvwo9gxY', 'local': false},
+                {'id': 3, 'video_code': '../media/video/XO_Faking_It.mp4', 'local': true},
+                {'id': 4, 'video_code': 'rEL3W9xNn9U', 'local': false},
             ],
             playerState: 'PAUSED',
             showVid: false
@@ -161,3 +161,215 @@ for(let i=1; i< vidItems + 1; i++){
         document.getElementById(`vdiv-${i}`)
     );
 }
+
+
+
+class StackDisplay extends React.Component{
+  constructor(props){
+    super(props);
+    
+    this.state = {
+      'id': '1',
+      'items': [
+        {
+          'name':'Amelia Clarke',
+          'occupation':'Actor',
+          'resume':[
+            {
+              'name':'Game of Thrones',
+              'image': 'https://m.media-amazon.com/images/M/MV5BYTRiNDQwYzAtMzVlZS00NTI5LWJjYjUtMzkwNTUzMWMxZTllXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_FMjpg_UX1000_.jpg',
+            },
+            {
+              'name':'Me Before You',
+              'image': 'https://m.media-amazon.com/images/M/MV5BMTQ2NjE4NDE2NV5BMl5BanBnXkFtZTgwOTcwNDE5NzE@._V1_.jpg',
+            },
+            {
+              'name':'Last Christmas',
+              'image': 'https://m.media-amazon.com/images/M/MV5BNTQ4ZmY0NjgtYzVhNy00NzhiLTk3YTYtNzM1MTdjM2VhZDA3XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg',
+            },
+          ],
+          'detail':'Emilia Isobel Euphemia Rose Clarke is an English actress. She studied at the Drama Centre London, appearing in a number of stage productions. Her television debut was a guest appearance in the BBC One medical soap opera Doctors in 2009.',
+        },
+        {
+          'name':'Kim Kardashian',
+          'occupation':'American Socialite',
+          'resume':[
+            {
+              'name':'Keeping Up With The Kardashians',
+              'image': 'https://m.media-amazon.com/images/M/MV5BMjJhMzUyYzQtMWZmYy00MGQ0LTlhMjMtMDkxOTFiZjRjNmFiXkEyXkFqcGdeQXVyMTI5NzE3NDQ2._V1_.jpg',
+            },
+            {
+              'name':'Paw Patrol: The Movie',
+              'image': 'https://m.media-amazon.com/images/M/MV5BNzY2OTYwNjItYzczMC00YjYzLThmY2MtZGFhNmVmMzUzN2QyXkEyXkFqcGdeQXVyNjY1MTg4Mzc@._V1_.jpg',
+            },
+            {
+              'name':'Temptation: Confessions of a Marriage Counselor',
+              'image': 'https://m.media-amazon.com/images/M/MV5BMWNhZTQwMDQtZWY5NC00MThjLWEzNGUtMDM5NzgzM2MzNDVhXkEyXkFqcGdeQXVyMTkzODUwNzk@._V1_.jpg',
+            },
+          ],
+          'detail':'Kimberly Noel Kardashian is an American media personality, socialite, model, and businesswoman. She first gained media attention as a friend and stylist of Paris Hilton, but received wider notice after the sex tape Kim Kardashian, Superstar, shot with her then-boyfriend Ray J, was released in 2007. ',
+        },
+        {
+          'name':'Oprah Winfrey',
+          'occupation':'American host',
+          'resume':[
+            {
+              'name': 'The Oprah Winfrey Show',
+              'image': 'https://m.media-amazon.com/images/M/MV5BMDA0ZDI5MDctMmMxNi00NmVhLTlmN2MtNzIyMzM1YTc3YjBiXkEyXkFqcGdeQXVyMTkzODUwNzk@._V1_FMjpg_UX1000_.jpg'
+            },
+            {
+              'name': 'A Wrinkle in Time',
+              'image': 'https://m.media-amazon.com/images/M/MV5BMjMxNjQ5MTI3MV5BMl5BanBnXkFtZTgwMjQ2MTAyNDM@._V1_FMjpg_UX1000_.jpg',
+            },
+            {
+              'name': 'The Butler',
+              'image': 'https://m.media-amazon.com/images/M/MV5BMjM2NDY3MjkyMF5BMl5BanBnXkFtZTcwMDM5Nzg5OQ@@._V1_FMjpg_UX1000_.jpg',
+            },
+          ],
+          'detail':'Oprah Gail Winfrey is an American talk show host, television producer, actress, author, and philanthropist.',
+        },
+
+      ],
+      'curr_item':
+      {
+        'name':'Amelia Clarke',
+        'occupation':'Actor',
+        'resume':[
+          {
+            'name':'Game of Thrones',
+            'image': 'https://m.media-amazon.com/images/M/MV5BYTRiNDQwYzAtMzVlZS00NTI5LWJjYjUtMzkwNTUzMWMxZTllXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_FMjpg_UX1000_.jpg',
+          },
+          {
+            'name':'Me Before You',
+            'image': 'https://m.media-amazon.com/images/M/MV5BMTQ2NjE4NDE2NV5BMl5BanBnXkFtZTgwOTcwNDE5NzE@._V1_.jpg',
+          },
+          {
+            'name':'Last Christmas',
+            'image': 'https://m.media-amazon.com/images/M/MV5BNTQ4ZmY0NjgtYzVhNy00NzhiLTk3YTYtNzM1MTdjM2VhZDA3XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg',
+          },
+        ],
+        'detail':'Emilia Isobel Euphemia Rose Clarke is an English actress. She studied at the Drama Centre London, appearing in a number of stage productions. Her television debut was a guest appearance in the BBC One medical soap opera Doctors in 2009.',
+      },
+
+      'curr_index': 0,
+      
+    }
+
+    this.handleClick = this.handleClick.bind(this);
+    this.updateInfo = this.updateInfo.bind(this);
+    this.transitionImage = this.transitionImage.bind(this);
+
+  }
+
+
+  handleClick(){
+    this.transitionImage();
+    this.updateInfo();
+
+
+  }
+
+
+  updateInfo(){
+    var next_index;
+    if(this.state.curr_index == this.state.items.length -1){
+      next_index = 0;
+    }else{
+      next_index = this.state.curr_index + 1;
+    }
+    const item = this.state.items[next_index];
+    this.setState(function(state,props){
+      return{
+        curr_index: next_index,
+        curr_item: item,
+      }
+    })
+    
+  }
+
+  transitionImage(){
+    $(`.top-image`).fadeOut(600, function(){
+        for(let i=1;i<4; i++){
+            var z_index = parseInt($(`#d-image-${i}`).css("z-index"));
+            if(z_index == 3){
+                $(`#d-image-${i}`).css("z-index",`1`);
+                $(`#d-image-${i}`).addClass("bottom-image");
+                $(`#d-image-${i}`).removeClass("top-image");
+
+            }else{
+                var new_z_index = z_index + 1;
+                $(`#d-image-${i}`).css("z-index",`${new_z_index}`);
+                if(new_z_index == 3){
+                    $(`#d-image-${i}`).addClass("top-image");
+                }else{
+                    $(`#d-image-${i}`).removeClass("bottom-image");
+                }
+            }
+        }
+        $(`.bottom-image`).fadeIn(600);
+
+    });
+    
+
+}
+
+
+
+
+  render(){
+    return(
+      <>
+        <Col md={7} className="text-center">
+          <div className="photo-display px-3  mx-auto">
+                <img id="d-image-1" className="d-image top-image  w-75" src="https://www.fashiongonerogue.com/wp-content/uploads/2015/12/Emilia-Clarke-Dior-Magazine-Winter-2015-Cover-Pictures07.jpg"/>
+                <img id="d-image-2" className="d-image w-100" src="https://www.hola.com/us/images/0266-117f85863148-55f688c6a17b-1000/horizontal-1200/kim-kardashian-for-skims.jpg"/>
+                <img id="d-image-3" className="d-image bottom-image w-100" src="https://assets.vogue.com/photos/598cc3c207a5d91d83ac40d1/4:3/w_2999,h_2249,c_limit/oprah-winfrey-vogue-september-2017.jpg"/>
+
+          </div>
+
+        </Col>
+        <Col md={5} className="text-center">
+          <div className="px-3  mx-auto">
+              <h4 className="fw-lighter display-5">{this.state.curr_item.name}</h4>
+              <h3 className="display-6">{this.state.curr_item.occupation}</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ffb3de" class="bi bi-x-diamond-fill zoom-in-ani" viewBox="0 0 16 16">
+                  <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L4.047 3.339 8 7.293l3.954-3.954L9.049.435zm3.61 3.611L8.708 8l3.954 3.954 2.904-2.905c.58-.58.58-1.519 0-2.098l-2.904-2.905zm-.706 8.614L8 8.708l-3.954 3.954 2.905 2.904c.58.58 1.519.58 2.098 0l2.905-2.904zm-8.614-.706L7.292 8 3.339 4.046.435 6.951c-.58.58-.58 1.519 0 2.098l2.904 2.905z"/>
+              </svg>
+              <Row className="my-3">
+                  <Col  className="ccard">
+                      <img className="cmovie rounded h-100 w-100 " src={this.state.curr_item.resume[0].image}/>
+                  </Col>
+                  <Col  className="ccard ">
+                      <img className="cmovie rounded h-100 w-100 " src={this.state.curr_item.resume[1].image}/>
+                  </Col>
+                  <Col className="ccard">
+                      <img className="cmovie rounded h-100 w-100 " src={this.state.curr_item.resume[2].image}/>
+
+                  </Col>
+
+              </Row>
+              <div className="my-5">
+                  <p className="lead fs-6">
+                  {this.state.curr_item.detail}
+                  </p>
+                  
+              </div>
+              <a className="stack-next" onClick={this.handleClick}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-arrow-right mb-3" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                </svg>
+              </a>
+
+          </div>
+
+        </Col>
+
+      </>
+    )
+  }
+}
+
+ReactDOM.render(
+  <StackDisplay/>,
+  document.getElementById("stack-display")
+);
