@@ -90,7 +90,8 @@ const requestListener = function (req, res){
             console.log(`xo_auth::sendVerification::Email Verification sent. Informing client`);
             res.end("Sent Email")
         }
-        authDB.sendVerification(callback);
+        
+        authDB.sendVerification(authDB.getCurrUserEmail(),callback);
     }
 
     else if(req.url == "/verify_email" && req.method == 'POST'){

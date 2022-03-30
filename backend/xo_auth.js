@@ -6,24 +6,28 @@ require("dotenv").config({ path: path.resolve(__dirname, '../.env') });
 const uuid = require("uuid");
 
 const bcrypt = require('bcrypt');
-
+const nodemailer = require("nodemailer");
 
 const TAG = `xo_auth`;
 
 
 
 class XO_Auth{
-    constructor(){
-        this.connectToCluster(XO_Auth.#uri);
-        this.initAuth();
 
-    }
     static #uri =  process.env.AUTH_URI;
-
     
-    #mongoClient ;
+    #serviceAccount;
+    #service_email = process.env.EMAIL_USER;
+    #service_type = '';
+    #service_code = '';
+    #service_password = process.env.EMAIL_PASSWORD;
 
+
+    #mongoClient;
+    #transporter;
     #auth;
+
+    #currUser;
     #users;
     #saltOrRounds = 10;
 
@@ -36,8 +40,43 @@ class XO_Auth{
 
     //Attach code to user later;
 
-    static #actionCode = "#1234";
-    static #resetCode = "#6969";
+    static #verificationCode = this.#generateRandomCode();
+    static #resetCode = this.#generateRandomCode();
+
+    constructor(){
+        this.connectToCluster(XO_Auth.#uri);
+        this.initAuth();
+        this.setupMailService();
+
+    }
+
+
+    async setupMailService(){
+        console.log(`${TAG}::setupMailService:: Setting up mail service...`)
+        try{
+            const serviceAccount = await nodemailer.createTestAccount();
+            this.#serviceAccount = serviceAccount;
+            this.#transporter = nodemailer.createTransport({
+                host: 'smtp-relay.sendinblue.com',
+                port: 587,
+                auth: {
+                  user:this.#service_email,
+                  pass:this.#service_password,
+                },
+                logger: true,
+                transactionLog: true
+            });
+            console.log(`${TAG}::setupMailSerice:: Mail Service setup successfully`)
+
+        }catch(error){
+            console.log(`${TAG}::setupMailService:: Error occurred`, error)
+            process.exit();
+
+        }
+
+
+
+    }
 
 
     async connectToCluster(uri){
@@ -100,6 +139,8 @@ class XO_Auth{
 
     }
 
+    
+
 
 
     async createUser(email, password , userDisplayName, callback=null){
@@ -113,10 +154,15 @@ class XO_Auth{
         this.#users.insertOne(userData)
         .then((document) => {
             console.log(`${TAG}::createUser::User created with id: ${document.insertedId}`);
+            //replace with mongoose model later
+            this.#currUser = {
+                id: document.insertedId,
+                email: email,
+                displayName: userDisplayName
+            };
             if(callback != null){
                 callback(document.insertedId);
                 console.log(`${TAG}::createUser::Executing callback`);
-
             }
 
         })
@@ -128,22 +174,57 @@ class XO_Auth{
       
     }
 
-    static getActionCode(){
-        return XO_Auth.#actionCode;
+    getCurrUserEmail(){
+        return this.#currUser.email;
     }
 
-    static sendVerification(callback=null){
-        //TODO: Implement Here
+    getCurrUser(){
+        return this.#currUser;
     }
-    static handleVerification(oobCode, callback=null){
-        //check with server later
-        if(oobCode == XO_Auth.#actionCode){
+
+    static #generateRandomCode(){
+        return Math.floor(Math.random() * (999-100+1)+100)
+    }
+
+    sendVerification(email, callback=null){
+        this.#service_type = 'verification';
+        this.#service_code = XO_Auth.#verificationCode;
+        var mailOptions =   {
+            from: 'iam@xo_service.org',
+            to: "beatfreak50@gmail.com",
+            subject: 'Email Verification',
+            text: `Hi There!\n 
+             This is a ${this.#service_type} email.\n
+             Please enter the follwing code into our website to finalize the process.\n
+             Code: ${this.#service_code}\n,
+             Let us know if the code does not work\n
+             The XO Team.`,
+        }
+        this.#transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error(`${TAG}::sendVerification:: Error Occured`, error);
+                process.exit(1);
+            }
+            console.log(info);
+            console.log(`${TAG}::sendVerification:: Email sent successfully to ${email}.`);
+            if(callback != null){
+                console.log(`${TAG}::sendVerification:: Executing Callback...`)
+                callback()
+            }
+    
+        });
+    }
+
+
+
+    handleVerification(oobCode, callback=null){
+        if(oobCode == XO_Auth.#verificationCode){
             if(callback != null){
                 console.log(`xo_auth::handleVerification:: Executing callback`);
                 callback();
             }
         }else{
-            console.log(`xo_auth::handleVerification:: Error: Code does not matchs`);
+            console.log(`xo_auth::handleVerification:: Error: Code does not match`);
 
         }
 

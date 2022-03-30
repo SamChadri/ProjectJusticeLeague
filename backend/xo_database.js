@@ -97,6 +97,7 @@ class XO_Database {
         this.#users.insertOne(userData)
         .then((document) =>{
             console.log(`xo_database::createUser:: user created with ID: ${document}`);
+            
             if(callback != null){
                 console.log("xo_database::createUser::excecuting callback")
                 callback();

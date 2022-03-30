@@ -11,3 +11,4 @@ npm install typescript
 npm install crypto
 npm install uuid
 npm install bcrypt
+npm install nodemailer

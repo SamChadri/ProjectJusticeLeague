@@ -27,6 +27,7 @@ class RegisterForms extends React.Component{
                 {'state': 2, 'type':'text', 'label': 'Display Name','placeholder':'John Doe'},
                 {'state': 3, 'type':'number', 'label': 'Age', 'placeholder':'21'},
                 {'state': 4, 'type':'password', 'label': 'Password', 'placeholder':''},
+                {'state': 5, 'type':'number', 'label': 'Verification Code', 'placeholder':''},
 
             ],
             'email':null,
@@ -37,127 +38,164 @@ class RegisterForms extends React.Component{
             'loading': false,
             'submit': false,
             'val': "",
-            'user_message':'Sent Email Verification'
+            'user_message':'Sent Email Verification',
+            'more_info':'',
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleUrl = this.handleUrl.bind(this);
         this.getParameterByName = this.getParameterByName.bind(this);
         this.sendVerification = this.sendVerification.bind(this);
         this.requestEmail = this.requestEmail.bind(this);
+        this.submitData = this.submitData.bind(this);
 
     }
     handleClick(){
         var instance = this;
         const register_state = this.state.register_state;
         console.log(`Register state: ${register_state}`);
-        if(register_state == 4){
-            var value = instance.state.val;
+
+        var new_state = this.state.register_state + 1;
+        this.setState(function(state,props){
+            return{
+                register_state: new_state
+            }
+        })
+        $(`.register-info`).fadeOut(300,function(){
+            var item = instance.state.register_items[instance.state.register_state -1];
             instance.setState(function(state, props) {
                 return {
-                  loading: true,
-                  password: value,
+                    loading: true,
+                    curr_state: item,
                 };
-            }, function(){
-                console.log(`Password ${value}`);
-                var userData = {
-                    age: instance.state.age,
-                    displayName : instance.state.displayName,
-                    email: instance.state.email,
-                    password: instance.state.password,
-                };
-                console.log(`Making Post Request with data... `);
-                console.log(userData);
-                $.ajax({
-                    url: 'http://127.0.0.1:3005/register',
-                    type:"POST",
-                    data: userData,
-                    success: function(result){
-                        console.log(result);
-                        console.log("Updating Register Info.")
-                        //instance.requestEmail();
-                        $(`.register-info`).fadeOut(500, function(){
+            });
+            $(`.register-info`).fadeIn(300, function(){});
+            var value = instance.state.val;
+            switch(register_state){
+                case 1:
+                    instance.setState(function(state,props){
+                        return {
+                            email:value,
+                            val:"",
+                        }
+                    });
+                    window.setTimeout(function(){
+                        $(`.register-info`).fadeOut(300, function(){
                             instance.setState(function(state, props) {
                                 return {
-                                  loading: false,
-                                  submit: true,
+                                    loading: false,
                                 };
                             });
-                            $(`.register-info`).fadeIn(500, function(){});
+                            $(`.register-info`).fadeIn(300, function(){});
+        
                         });
-                    },
-                    error: function(error){
-                        console.log(`Error ${error}`)
-    
-                    }
-                })
+                    }, 1000);
+                    break;
+                case 2:
+                    instance.setState(function(state,props){
+                        return {
+                            displayName:value,
+                            val:"",
+                        }
+                    });
+                    window.setTimeout(function(){
+                        $(`.register-info`).fadeOut(300, function(){
+                            instance.setState(function(state, props) {
+                                return {
+                                    loading: false,
+                                };
+                            });
+                            $(`.register-info`).fadeIn(300, function(){});
+        
+                        });
+                    }, 1000);
+                    break;
+                case 3:
+                    instance.setState(function(state,props){
+                        return {
+                            age:value,
+                            val:"",
+                        }
+                    });
+                    window.setTimeout(function(){
+                        $(`.register-info`).fadeOut(300, function(){
+                            instance.setState(function(state, props) {
+                                return {
+                                    loading: false,
+                                };
+                            });
+                            $(`.register-info`).fadeIn(300, function(){});
+        
+                        });
+                    }, 1000);
+                    break;
+                case 4:
+                    instance.submitData()
+                    break;
+                
+                case 5:
+                    instance.sendVerification(value);
+                    break;
 
-            });
+                default:
+                    console.log(`Error occurred`);
+            }
+            
+            
 
             
-        }else{
-            var new_state = this.state.register_state + 1;
-            this.setState(function(state,props){
-                return{
-                    register_state: new_state
-                }
-            })
-            $(`.register-info`).fadeOut(500,function(){
-                var item = instance.state.register_items[instance.state.register_state -1];
-                instance.setState(function(state, props) {
-                    return {
-                      loading: true,
-                      curr_state: item,
-                    };
-                });
-                $(`.register-info`).fadeIn(500, function(){});
-                var value = instance.state.val;
-                switch(register_state){
-                    case 1:
-                        instance.setState(function(state,props){
-                            return {
-                                email:value,
-                                val:"",
-                            }
-                        });
-                        break;
-                    case 2:
-                        instance.setState(function(state,props){
-                            return {
-                                displayName:value,
-                                val:"",
-                            }
-                        });
-                        break;
-                    case 3:
-                        instance.setState(function(state,props){
-                            return {
-                                age:value,
-                                val:"",
-                            }
-                        });
-                        break;
-                    default:
-                        console.log(`Error occurred`);
-                }
-                
-                
-                window.setTimeout(function(){
-                    $(`.register-info`).fadeOut(500, function(){
+        });
+
+
+
+
+    }
+
+
+    submitData(){
+        var instance = this;
+        var value = instance.state.val;
+        instance.setState(function(state, props) {
+            return {
+              password: value,
+            };
+        }, function(){
+            console.log(`Password ${value}`);
+            var userData = {
+                age: instance.state.age,
+                displayName : instance.state.displayName,
+                email: instance.state.email,
+                password: instance.state.password,
+            };
+            console.log(`Making Post Request with data... `);
+            console.log(userData);
+            $.ajax({
+                url: 'http://127.0.0.1:3005/register',
+                type:"POST",
+                data: userData,
+                success: function(result){
+                    console.log(result);
+                    console.log("Updating Register Info.");
+                    instance.requestEmail();
+                    var message = `Email Verification Sent to ${instance.state.email}`
+                    $(`.register-info`).fadeOut(300, function(){
                         instance.setState(function(state, props) {
                             return {
-                              loading: false,
+                              more_info: message,
+                              loading:false,
                             };
                         });
-                        $(`.register-info`).fadeIn(500, function(){});
-    
+
+                        $(`.register-info`).fadeIn(300);
                     });
-                }, 2000)
-                
-            });
 
-        }
+                },
+                error: function(error){
+                    console.log(`Error ${error}`)
 
+                }
+            })
 
+        });
 
     }
     handleUrl(){
@@ -211,24 +249,24 @@ class RegisterForms extends React.Component{
             actionCode:code,
         };
         console.log(userData);
-        instance.setState(function(state,props){
-            return{
-                loading:true
-            }
-        })
         $.ajax({
-            url: 'http://localhost:3005/verify_email',
+            url: 'http://127.0.0.1:3005/verify_email',
             type:"POST",
             data: userData,
             success: function(result){
                 console.log(result);
-                instance.setState(function(state,props){
-                    return{
-                        loading:false,
-                        submit:true,
-                        user_message: "Email Verified"
-                    }
-                });
+                $(`.register-info`).fadeOut(300,function(){
+                    instance.setState(function(state,props){
+                        return{
+                            loading:false,
+                            submit:true,
+                            user_message: "Email Verified"
+                        }
+                    });
+                    
+                    $(`.register-info`).fadeIn(300);
+                })
+
                 
             },
             error: function(error){
@@ -261,6 +299,7 @@ class RegisterForms extends React.Component{
                 <Button onClick={this.handleClick} variant="outline-light" >
                     Submit
                 </Button>
+                <p className="lead">{this.state.more_info}</p>
             </Form>
 
         }
