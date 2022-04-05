@@ -94,6 +94,14 @@ const requestListener = function (req, res){
         authDB.sendVerification(authDB.getCurrUserEmail(),callback);
     }
 
+    else if(req.url == "/request_key"){
+        console.log(`xo_app::GET of /request_key routes`);
+        res.setHeader("Content-Type", "text/html");
+        res.writeHead(200);
+        const key = XO_Auth.getKey();
+        res.end(key);
+    }
+
     else if(req.url == "/verify_email" && req.method == 'POST'){
         console.log(`xo_app::POST on /verify_email route`);
         var body = ""

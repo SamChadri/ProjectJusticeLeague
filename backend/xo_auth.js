@@ -7,6 +7,7 @@ const uuid = require("uuid");
 
 const bcrypt = require('bcrypt');
 const nodemailer = require("nodemailer");
+const { createNoSubstitutionTemplateLiteral } = require("typescript");
 
 const TAG = `xo_auth`;
 
@@ -22,6 +23,8 @@ class XO_Auth{
     #service_code = '';
     #service_password = process.env.EMAIL_PASSWORD;
 
+    static #encryptionKey = process.env.ENCRYPTION_KEY;
+
 
     #mongoClient;
     #transporter;
@@ -29,24 +32,30 @@ class XO_Auth{
 
     #currUser;
     #users;
-    #saltOrRounds = 10;
+    static #saltOrRounds = 10;
 
 
     static #configInit;
     
+    static #salt;
     static currUserEmail = '';
     static errorCode = -1;
     static errorMessage = "";
 
     //Attach code to user later;
 
-    static #verificationCode = this.#generateRandomCode();
-    static #resetCode = this.#generateRandomCode();
+    static #verificationCode = () =>{
+        return this.#generateRandomCode();
+    } 
+    static #resetCode = ()  =>{
+        return this.#generateRandomCode();
+    }
 
     constructor(){
         this.connectToCluster(XO_Auth.#uri);
         this.initAuth();
         this.setupMailService();
+        XO_Auth.#generateSalt();
 
     }
 
@@ -126,9 +135,23 @@ class XO_Auth{
 
     }
 
+    static async #generateSalt(){
+        try{
+            this.#salt = await bcrypt.genSalt(this.#saltOrRounds);
+            console.log(`${TAG}:: Auth Salt generated.`)
+
+        }catch(error){
+            console.log(`${TAG}::generatesalt:: Error occurred `, error);
+            //TODO: Instead of process exit return error to user and handle error page.
+        }
+        
+
+    }
+
     async #hashPassword(text){
         try{
-            const salt = await bcrypt.genSalt(this.#saltOrRounds);
+            //TODO: Generate unique salt for each password and store within database
+            const salt = XO_Auth.#salt;
             const hash = await bcrypt.hash(text, salt);
             return hash;
 
@@ -186,9 +209,13 @@ class XO_Auth{
         return Math.floor(Math.random() * (999-100+1)+100)
     }
 
+    static getKey(){
+        return XO_Auth.#encryptionKey;
+    }
+
     sendVerification(email, callback=null){
         this.#service_type = 'verification';
-        this.#service_code = XO_Auth.#verificationCode;
+        this.#service_code = XO_Auth.#verificationCode();
         var mailOptions =   {
             from: 'iam@xo_service.org',
             to: "beatfreak50@gmail.com",
@@ -218,7 +245,7 @@ class XO_Auth{
 
 
     handleVerification(oobCode, callback=null){
-        if(oobCode == XO_Auth.#verificationCode){
+        if(oobCode == this.#service_code){
             if(callback != null){
                 console.log(`xo_auth::handleVerification:: Executing callback`);
                 callback();

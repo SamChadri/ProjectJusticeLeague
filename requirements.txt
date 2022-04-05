@@ -12,3 +12,4 @@ npm install crypto
 npm install uuid
 npm install bcrypt
 npm install nodemailer
+npm install crypto-browserify
