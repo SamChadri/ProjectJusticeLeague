@@ -5,6 +5,7 @@ import ReactDOMServer from 'react-dom/server';
 import { Container } from 'react-bootstrap';
 import { Col, Row, Form, Spinner } from "react-bootstrap";
 
+const TAG = `password_reset`
 
 
 class PasswordResetForm extends React.Component{
@@ -14,13 +15,15 @@ class PasswordResetForm extends React.Component{
             'reset_state': 1,
             'reset_items':[
                 {'state': 1, 'type':'text','label':'Email Address', 'placeholder':'name@example.com','message':"We'll send a recovery email to this address."},
-                {'state': 2, 'type':'password', 'label': 'Old Password', 'placeholder':'', 'message':"Enter in your old password"},
-                {'state': 3, 'type':'password', 'label': 'New Password', 'placeholder':'', 'message': "Enter in your new password"},
+                {'state': 2, 'type':'number','label':'Password Reset Code', 'placeholder':'','message':"Enter in the verification sent to your recovery email."},
+                {'state': 3, 'type':'password', 'label': 'New Password', 'placeholder':'', 'message':"Enter in your old password."},
+                {'state': 4, 'type':'password', 'label': 'Confirm Password', 'placeholder':'', 'message': "Enter in your new password."},
 
             ],
             'curr_state': {'state': 1, 'type':'text','label':'Email Address', 'placeholder':'name@example.com','message':"We'll send a recovery email to this address."},
             'email': null,
-            'old_password': null,
+            'actionCode': null,
+            'confirm_password': null,
             'new_password':null,
             'val': "",
             'status':'PASSIVE',
@@ -33,88 +36,94 @@ class PasswordResetForm extends React.Component{
         this.getParameterByName = this.getParameterByName.bind(this);
         this.handleUrl = this.handleUrl.bind(this);
         this.sendEmail = this.sendEmail.bind(this);
+        this.verifyCode = this.verifyCode.bind(this);
     }
 
     handleClick(){
         var instance = this;
         const reset_state = this.state.reset_state;
         console.log(`Register state: ${reset_state}`);
-        if(reset_state == 3){
-            var value = instance.state.val;
+        var new_state = this.state.reset_state + 1;
+        this.setState(function(state,props){
+            return{
+                reset_state: new_state
+            }
+        })
+        $(`.reset-info`).fadeOut(500,function(){
+            var item = instance.state.reset_items[instance.state.reset_state -1];
             instance.setState(function(state, props) {
                 return {
                     status: 'LOADING',
-                    new_password: value,
+                    curr_state: item,
                 };
-            }, function(){
-                if(instance.state.password == instance.state.confirm_password){
-                    instance.updatePassword();
-
-                }else{
-                    console.log(`xo_password_reset::ERROR: Passwords do no match`)
-                }
-
             });
+            $(`.reset-info`).fadeIn(500, function(){});
+            var value = instance.state.val;
+            switch(reset_state){
+                case 1:
+                    instance.setState(function(state,props){
+                        return {
+                            email:value,
+                            val:"",
+                        }
+                    },function(){
+                        instance.sendEmail();
+                    });
+                    
+                    break;
+                case 2:
+                    instance.setState(function(state,props){
+                        return{
+                            actionCode: value,
+                        }
+                    }, function(){
+                        instance.verifyCode(instance.state.actionCode,item );
+                    });
 
-            
-        }else{
-            var new_state = this.state.reset_state + 1;
-            this.setState(function(state,props){
-                return{
-                    reset_state: new_state
-                }
-            })
-            $(`.reset-info`).fadeOut(500,function(){
-                var item = instance.state.reset_items[instance.state.reset_state -1];
-                instance.setState(function(state, props) {
-                    return {
-                      status: 'LOADING',
-                      curr_state: item,
-                    };
-                });
-                $(`.reset-info`).fadeIn(500, function(){});
-                var value = instance.state.val;
-                switch(reset_state){
-                    case 1:
-                        instance.setState(function(state,props){
-                            return {
-                                email:value,
-                                val:"",
-                            }
-                        },function(){
-                            instance.sendEmail();
-                        });
-                        
-                        break;
-                    case 2:
-                        window.setTimeout(function(){
-                            $(`.reset-info`).fadeOut(500, function(){
-                                instance.setState(function(state,props){
-                                    return {
-                                        old_password:value,
-                                        val:"",
-                                        status: 'PASSIVE',
-                                        curr_state: item,
-                                    }
-                                });
-                                $(`.reset-info`).fadeIn(500, function(){});
-    
+                    break;
+                case 3:
+                    window.setTimeout(function(){
+                        $(`.reset-info`).fadeOut(500, function(){
+                            instance.setState(function(state,props){
+                                return {
+                                    old_password:value,
+                                    val:"",
+                                    status: 'PASSIVE',
+                                    curr_state: item,
+                                }
                             });
+                            $(`.reset-info`).fadeIn(500, function(){});
+
+                        });
+
+        
+                    }, 2000);
+                    break;
+                case 4:
+                    var value = instance.state.val;
+                    instance.setState(function(state, props) {
+                        return {
+                            new_password: value,
+                        };
+                    }, function(){
+                        if(instance.state.password == instance.state.confirm_password){
+                            instance.updatePassword();
+        
+                        }else{
+                            console.log(`xo_password_reset::ERROR: Passwords do no match`)
+                        }
+        
+                    });
+
+                default:
+                    console.log(`Error occurred`);
+            }
+            
+            
 
             
-                        }, 2000);
-                        break;
+        });
 
-                    default:
-                        console.log(`Error occurred`);
-                }
-                
-                
-
-                
-            });
-
-        }
     }
 
     updatePassword(){
@@ -132,7 +141,6 @@ class PasswordResetForm extends React.Component{
             success: function(result){
                 console.log(result);
                 console.log("Updating Register Info.")
-                instance.requestEmail();
                 $(`.reset-info`).fadeOut(500, function(){
                     instance.setState(function(state, props) {
                         return {
@@ -148,6 +156,38 @@ class PasswordResetForm extends React.Component{
 
             }
         })
+    }
+
+    verifyCode(code, next_state){
+        var instance = this;
+        console.log(`${TAG}::verifyCode::Making POST request`);
+        var userData = {
+            actionCode: code,
+        }
+        $.ajax({
+            url: 'http://127.0.0.1:3005/verify_password',
+            type:"POST",
+            data: userData,
+            success: function(result){
+                console.log(result);
+                $(`.reset-info`).fadeOut(500, function(){
+                    instance.setState(function(state, props) {
+                        return {
+                          status: 'PASSIVE',
+                          val:"",
+                          curr_state: next_state,
+
+                        };
+                    });
+                    $(`.reset-info`).fadeIn(500, function(){});
+                });
+            },
+            error: function(error){
+                console.log(`Error ${error}`)
+
+            }
+        });
+
     }
 
     sendEmail(){
@@ -166,8 +206,7 @@ class PasswordResetForm extends React.Component{
                 $(`.reset-info`).fadeOut(500, function(){
                     instance.setState(function(state, props) {
                         return {
-                          status: 'RESET_SENT',
-                          user_message: 'Check your email, your password reset token has been sent'
+                          status: 'PASSIVE',
                         };
                     });
                     $(`.reset-info`).fadeIn(500, function(){});
@@ -177,7 +216,7 @@ class PasswordResetForm extends React.Component{
                 console.log(`Error ${error}`)
 
             }
-        })
+        });
     }
 
     handleUrl(){

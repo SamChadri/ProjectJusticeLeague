@@ -8,7 +8,7 @@ const uuid = require("uuid");
 const bcrypt = require('bcrypt');
 const nodemailer = require("nodemailer");
 const { createNoSubstitutionTemplateLiteral } = require("typescript");
-
+const {Auth} = require("../backend/xo_auth_models.js")
 const TAG = `xo_auth`;
 
 
@@ -47,7 +47,7 @@ class XO_Auth{
     static #verificationCode = () =>{
         return this.#generateRandomCode();
     } 
-    static #resetCode = ()  =>{
+    static  get #resetCode(){
         return this.#generateRandomCode();
     }
 
@@ -96,6 +96,9 @@ class XO_Auth{
             console.log(`${TAG}::connectToCluster()::Connecting to JLMongoDB cluster...`);
             await this.#mongoClient.connect();
             console.log(`${TAG}::connectToCluster()::Successfully connected to JLMongoDB cluster...`);
+
+            //AuthModel Connection
+            await Auth.setupMongooseModel();
         
         } catch (error) {
             console.error(`Connection to MongoDB Atlas failed`, error);
@@ -167,6 +170,7 @@ class XO_Auth{
 
 
     async createUser(email, password , userDisplayName, callback=null){
+
         const encrypted_password = await this.#hashPassword(password);
         const userData = {
             email: email,
@@ -191,12 +195,55 @@ class XO_Auth{
         })
         .catch((error) => {
 
-            console.log(`xo_auth::handleVerification::Error Occurred: ${XO_Auth.errorMessage}`);
+            console.error(`xo_auth::handleVerification::Error Occurred: `, error);
 
         })
       
     }
 
+    async findUser(param, email=true, callback=null){
+        var result;
+        if(email){
+            result = Auth.authModel.findByEmail(param)
+            .then((document) => {
+                console.log(`${TAG}::findUser:: Query successful, found user : `,document);
+                var user = Auth.parseDocument(document);
+                console.log(user);
+                this.#currUser = user;
+                //TODO: Impement parseDocument
+                if(callback != null){
+                    callback()
+                }
+                return user;
+
+            })
+            .catch((error) =>{
+                console.log(`${TAG}::findUser:: Error occured`, error)
+                return error;
+            });
+
+        }else{
+            result = Auth.authModel.findByDisplayName(param)
+            .then((document) => {
+                console.log(`${TAG}::findUser:: Query successful, found user : `,document);
+                //TODO: Impement parseDocument
+                var user = Auth.parseDocument(document);
+
+                if(callback != null){
+                    callback()
+                }
+                return user;
+
+            })
+            .catch((error) =>{
+                console.log(`${TAG}::findUser:: Error occured`, error)
+                return error;
+            });
+
+        }
+        return result;
+        
+    }
     getCurrUserEmail(){
         return this.#currUser.email;
     }
@@ -216,9 +263,9 @@ class XO_Auth{
     sendVerification(email, callback=null){
         this.#service_type = 'verification';
         this.#service_code = XO_Auth.#verificationCode();
-        var mailOptions =   {
+        var mailOptions =  {
             from: 'iam@xo_service.org',
-            to: "beatfreak50@gmail.com",
+            to: email,
             subject: 'Email Verification',
             text: `Hi There!\n 
              This is a ${this.#service_type} email.\n
@@ -257,13 +304,85 @@ class XO_Auth{
 
     }
 
-    static sendResetEmail(email, callback=null){
+
+    async sendResetEmail(email, callback=null){
+        try{
+            var user = await this.findUser(email,true);
+            if(user != null){
+                this.#service_type = 'password reset';
+                this.#service_code = XO_Auth.#resetCode;
+                var mailOptions =   {
+                    from: 'iam@xo_service.org',
+                    to: email,
+                    subject: 'Password Reset',
+                    text: `Hi There!\n 
+                     This is a ${this.#service_type} email.\n
+                     Please enter the follwing code into our website to continue the process.\n
+                     Code: ${this.#service_code}\n,
+                     Let us know if the code does not work\n
+                     The XO Team.`,
+                }
+                this.#transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.error(`${TAG}::sendVerification:: Error Occured`, error);
+                        process.exit(1);
+                    }
+                    console.log(info);
+                    console.log(`${TAG}::sendVerification:: Email sent successfully to ${email}.`);
+                    if(callback != null){
+                        console.log(`${TAG}::sendVerification:: Executing Callback...`)
+                        callback()
+                    }
+            
+                });
+            }else{
+                console.log(`${TAG}::sendResetEmail::User Result: `,user)
+                throw new Error('User Does Not Exist');
+            }
+
+        }catch(error){
+            console.error(`${TAG}::sendResetEmail:: Error occured`, error)
+            return (error)
+        }
+
         //TODO: Implement Later
     }
 
+    handlePasswordReset(oobCode, callback=null){
+        if(oobCode == this.#service_code){
+            if(callback != null){
+                console.log(`xo_auth::handlePasswordReset:: Executing callback`);
+                callback();
+            }
+        }else{
+            console.log(`xo_auth::handleVerification:: Error: Code does not match`);
 
-    static updateUserPassword(old_password, new_password, callback=null){
+        }
 
+    }
+
+
+
+    async updateUserPassword(new_password, callback=null){
+        var hash_password = await this.#hashPassword(new_password);
+
+        this.#currUser.model.password = hash_password;
+        //TODO: Decide if I want ot use save or not later
+        
+        Auth.authModel.findByIdAndUpdatePassword(this.#currUser._id, hash_password)
+        .then((document) =>{
+            console.log(`${TAG}::updateUserPassword:: Updated password successfully for user`, this.#currUser)
+            console.log(document);
+
+            if(callback != null){
+                console.log(`${TAG}::updateUserPassword:: Executing callback`);
+                callback();
+            }
+
+        })
+        .catch((error) =>{
+            console.error(`${TAG}::updateUserPassword:: `, error);
+        });
         //TODO: Implement Later.
 
     }

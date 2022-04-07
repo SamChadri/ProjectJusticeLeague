@@ -101,7 +101,8 @@ class XO_Database {
             if(callback != null){
                 console.log("xo_database::createUser::excecuting callback")
                 callback();
-            }        })
+            }        
+        })
         .catch((error) => {
             console.log(`xo_database::createUser::Error adding document: ${error}`);
 

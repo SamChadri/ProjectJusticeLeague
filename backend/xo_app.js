@@ -28,7 +28,7 @@ const xoDB = new XO_Database();
 
 const requestListener = function (req, res){
     if(req.url == "/"){
-        promises.readFile(__dirname + "/../dist/register_1.html")
+        promises.readFile(__dirname + "/../dist/password_reset.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
@@ -39,7 +39,7 @@ const requestListener = function (req, res){
     }
     else if(req.url == "/#"){
         console.log(req.url);
-        promises.readFile(__dirname + "/../dist/register_1.html")
+        promises.readFile(__dirname + "/../dist/password_reset.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             //res.setHeader("oobCode", XO_Auth.getActionCode());
@@ -121,6 +121,26 @@ const requestListener = function (req, res){
             authDB.handleVerification(postData.actionCode, callback);
         });
     }
+    else if(req.url == "/verify_password" && req.method == 'POST'){
+        console.log(`xo_app::POST on /verify_password route`);
+        var body = ""
+        req.on('data', function(data){
+            body += data;
+            console.log(`xo_app::Partial body: ${body}`);
+
+        });
+        req.on('end', function(){
+            var postData = qs.parse(body);
+            var callback = function() {
+                console.log(`xo_auth::handlePasswordReset:: Verification complete. Informing client`);
+                res.end("Password Reset Verified")
+            }
+            console.log(postData);
+            console.log(`Code: ${postData.actionCode}`);
+            authDB.handlePasswordReset(postData.actionCode, callback);
+        });
+    }
+
     else if(req.url == "/reset_email" && req.method == 'POST'){
         console.log(`xo_app::POST of /reset_email`);
         var body = ""
@@ -155,7 +175,7 @@ const requestListener = function (req, res){
                 res.end("Updated Password")
             }
             console.log(`xo_app::Post Data Email: ${postData.email}`);
-            authDB.updateUserPassword(postData.old_password,postData.new_password, callback);
+            authDB.updateUserPassword(postData.new_password, callback);
         });
 
     }
