@@ -14,3 +14,4 @@ npm install bcrypt
 npm install nodemailer
 npm install crypto-browserify
 npm install mongoose
+npm install react-router-dom

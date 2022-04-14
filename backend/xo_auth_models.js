@@ -28,32 +28,42 @@ class Auth{
     _id;
     email;
     #password;
+    #salt;
     displayName;
 
 
-    constructor(_id, email, password, displayName){
+    constructor(_id, email, password, salt, displayName, dateCreated){
         this._id = _id;
         this.email = email;
         this.#password = password;
-        //this.dateCreated = dateCreated;
+        this.dateCreated = dateCreated;
         this.displayName = displayName;
-        //this.salt = salt;
+        this.#salt = salt;
         var mongoId = new mongoose.Types.ObjectId(_id);
 
         this.model = new Auth.authModel({
             _id:mongoId,
             email: email,
             password: password,
-           // dateCreated: dateCreated,
+            dateCreated: dateCreated,
             displayName: displayName,
-           // salt: salt
+            salt: salt
         });
 
     }
 
+    get salt(){
+        return this.#salt;
+    }
+
+    get password(){
+        return this.#password;
+    }
+
+
 
     static parseDocument(document){
-        return new Auth(document._id, document.email, document.password, document.displayName);
+        return new Auth(document._id, document.email, document.password, document.salt, document.displayName, document.dateCreated);
     }
     
     
@@ -88,7 +98,9 @@ class Auth{
             _id: ObjectId,
             email: String,
             password: String,
+            salt: String,
             displayName: String,
+            dateCreated: Date
         });
 
         schema.statics.findByEmail = function(email) {

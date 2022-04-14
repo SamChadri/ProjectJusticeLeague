@@ -20,7 +20,7 @@ const qs = require('querystring');
 const hostname = '127.0.0.1';
 const port = 3005;
 
-
+const TAG = "xo_app"
 
 const authDB = new XO_Auth();
 const xoDB = new XO_Database();
@@ -28,7 +28,7 @@ const xoDB = new XO_Database();
 
 const requestListener = function (req, res){
     if(req.url == "/"){
-        promises.readFile(__dirname + "/../dist/password_reset.html")
+        promises.readFile(__dirname + "/../dist/login.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
@@ -37,17 +37,52 @@ const requestListener = function (req, res){
 
 
     }
-    else if(req.url == "/#"){
+    else if(req.url == "/home"){
         console.log(req.url);
-        promises.readFile(__dirname + "/../dist/password_reset.html")
+        promises.readFile(__dirname + "/../dist/home.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
-            //res.setHeader("oobCode", XO_Auth.getActionCode());
             res.writeHead(200);
             res.end(contents);
         
         });
 
+    }
+    
+    else if(req.url == "/login" && req.method == 'POST'){
+        console.log(`${TAG}::POST on /login route`);
+        var body = ""
+        req.on('data', function(data){
+            body += data;
+            console.log(`${TAG}::Partial body: `, body);
+
+        })
+        req.on('end', function(){
+            var postData = qs.parse(body);
+            const callback = function(match){
+                if(match){
+                    console.log(`${TAG}::loginUser:: Login successful, infomring user`)
+                    res.setHeader("Content-Type", "text/html");
+                    res.writeHead(200);
+                    res.end("Success");
+                }else{
+                    console.log(`${TAG}::loginUser:: Login Unsuccessful, infomring user.`)
+                    res.setHeader("Content-Type", "text/html");
+                    res.writeHead(200);
+                    res.end("Login and Password mismatch");
+                }
+            }
+            authDB.loginUser(postData.email,postData.password,callback);
+        });
+    }
+
+    else if(req.url == "/register" && req.method == 'GET'){
+        promises.readFile(__dirname + "/../dist/register_1.html")
+        .then(contents => {
+            res.setHeader("Content-Type", "text/html");
+            res.writeHead(200);
+            res.end(contents);
+        });
     }
 
     else if(req.url == "/register" && req.method == 'POST'){
@@ -73,6 +108,7 @@ const requestListener = function (req, res){
                 }
                 xoDB.createUser(id, userData, dbCallback);
                 console.log("xo_auth::createUser::Executed Auth callback")
+
             }
             authDB.createUser(postData.email, postData.password, postData.displayName, callback);
             console.log(postData.email);
@@ -80,6 +116,14 @@ const requestListener = function (req, res){
             res.writeHead(200, {'Content-Type': 'text/html'});
           })
 
+    }
+    else if(req.url == "/password_reset" && req.method == 'GET'){
+        promises.readFile(__dirname + "/../dist/password_reset.html")
+        .then(contents => {
+            res.setHeader("Content-Type", "text/html");
+            res.writeHead(200);
+            res.end(contents);
+        });
     }
 
     else if(req.url == "/send_verification_email"){
@@ -93,6 +137,7 @@ const requestListener = function (req, res){
         
         authDB.sendVerification(authDB.getCurrUserEmail(),callback);
     }
+
 
     else if(req.url == "/request_key"){
         console.log(`xo_app::GET of /request_key routes`);
@@ -114,11 +159,16 @@ const requestListener = function (req, res){
             var postData = qs.parse(body);
             var callback = function() {
                 console.log(`xo_auth::handleVerification:: Verification complete. Informing client`);
+                res.setHeader("Content-Type", "text/html");
+                res.writeHead(200);
                 res.end("Email Verified")
             }
             console.log(postData);
             console.log(`Code: ${postData.actionCode}`);
             authDB.handleVerification(postData.actionCode, callback);
+
+
+
         });
     }
     else if(req.url == "/verify_password" && req.method == 'POST'){
@@ -133,6 +183,8 @@ const requestListener = function (req, res){
             var postData = qs.parse(body);
             var callback = function() {
                 console.log(`xo_auth::handlePasswordReset:: Verification complete. Informing client`);
+                res.setHeader("Content-Type", "text/html");
+                res.writeHead(200);
                 res.end("Password Reset Verified")
             }
             console.log(postData);
@@ -153,6 +205,8 @@ const requestListener = function (req, res){
             var postData = qs.parse(body);
             var callback = function() {
                 console.log(`xo_auth::sendResetEmail::Reset Email sent. Informing client`);
+                res.setHeader("Content-Type", "text/html");
+                res.writeHead(200);
                 res.end("Sent Email")
             }
             console.log(`xo_app::Post Data Email: ${postData.email}`);
@@ -172,6 +226,8 @@ const requestListener = function (req, res){
             var postData = qs.parse(body);
             var callback = function() {
                 console.log(`xo_auth::updateUserPassword::Reset Email sent. Informing client`);
+                res.setHeader("Content-Type", "text/html");
+                res.writeHead(200);
                 res.end("Updated Password")
             }
             console.log(`xo_app::Post Data Email: ${postData.email}`);

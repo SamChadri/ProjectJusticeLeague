@@ -29,6 +29,7 @@ class XO_Auth{
     #mongoClient;
     #transporter;
     #auth;
+    #salt;
 
     #currUser;
     #users;
@@ -37,7 +38,6 @@ class XO_Auth{
 
     static #configInit;
     
-    static #salt;
     static currUserEmail = '';
     static errorCode = -1;
     static errorMessage = "";
@@ -55,7 +55,6 @@ class XO_Auth{
         this.connectToCluster(XO_Auth.#uri);
         this.initAuth();
         this.setupMailService();
-        XO_Auth.#generateSalt();
 
     }
 
@@ -121,7 +120,7 @@ class XO_Auth{
     }
 
 
-    async #populateDb(collection ){
+    async #populateDb(collection){
 
         try{
             const docCount = await collection.countDocuments();
@@ -138,10 +137,11 @@ class XO_Auth{
 
     }
 
-    static async #generateSalt(){
+    async #generateSalt(){
         try{
-            this.#salt = await bcrypt.genSalt(this.#saltOrRounds);
+            var salt = await bcrypt.genSalt(XO_Auth.#saltOrRounds);
             console.log(`${TAG}:: Auth Salt generated.`)
+            return salt
 
         }catch(error){
             console.log(`${TAG}::generatesalt:: Error occurred `, error);
@@ -151,18 +151,49 @@ class XO_Auth{
 
     }
 
-    async #hashPassword(text){
+    async #hashPassword(text, storedSalt=null){
         try{
             //TODO: Generate unique salt for each password and store within database
-            const salt = XO_Auth.#salt;
+            var salt;
+            if(storedSalt == null){
+                salt =  await this.#generateSalt();
+            }else{
+                salt = storedSalt;
+            }
+            
             const hash = await bcrypt.hash(text, salt);
-            return hash;
+            return {
+                hash: hash,
+                salt: salt,
+            }
 
         }catch(error){
             console.log(`${TAG}::hashPassword:: Error occured `, error);
             process.exit();
         }
+    }
 
+
+
+    async loginUser(email, password, callback=null){
+        var user = await this.findUser(email,true);
+        this.#hashPassword(password, user.salt)
+        .then((res) =>{
+            var compare = res.hash == user.password;
+            if(compare){
+                console.log(`${TAG}:: Password verfication a match. Loging in user...`)
+                this.#currUser = user
+            }else{
+                console.log(`${TAG}:: Password verfication not a match. Inform user...`)
+            }
+            if(callback != null){
+                callback(res)
+            }
+        })
+        .catch((error) =>{
+            console.error(`${TAG}::loginUser::Error occured `, error)
+        });
+        
     }
 
     
@@ -170,12 +201,16 @@ class XO_Auth{
 
 
     async createUser(email, password , userDisplayName, callback=null){
-
-        const encrypted_password = await this.#hashPassword(password);
+        const result = await this.#hashPassword(password);
+        const encrypted_password = result.hash
+        const storedSalt = result.salt
+        var dateCreation = new Date();
         const userData = {
             email: email,
             password: encrypted_password,
+            salt: storedSalt,
             displayName: userDisplayName,
+            dateCreated: dateCreation,
         };
 
         this.#users.insertOne(userData)
@@ -209,7 +244,6 @@ class XO_Auth{
                 console.log(`${TAG}::findUser:: Query successful, found user : `,document);
                 var user = Auth.parseDocument(document);
                 console.log(user);
-                this.#currUser = user;
                 //TODO: Impement parseDocument
                 if(callback != null){
                     callback()
@@ -309,6 +343,8 @@ class XO_Auth{
         try{
             var user = await this.findUser(email,true);
             if(user != null){
+                this.#currUser = user;
+                //Set Current User for the Password reset process.
                 this.#service_type = 'password reset';
                 this.#service_code = XO_Auth.#resetCode;
                 var mailOptions =   {

@@ -218,15 +218,49 @@ hr.fade-in-ani{
     background-size: 100% 100%;
 }
 
+.register-container{
+    position: relative;
+    height: 600px;
+    width: 100vw;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+}
+
 .register-visual{
+    position: absolute;
     height: 300px;
-    width : 100%;
+    width:75pc;
+    top: 30%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     background-image:
     radial-gradient( rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 1.0)),
     url('https://www.teahub.io/photos/full/220-2205714_get-the-latest-movies-data-src-kodi-tv.jpg');
     background-size: 100% 100%;
 
 }
+
+.register-detail{
+    position: absolute;
+    width: 1000px;
+    top: 60%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#form-info{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 
 .forgot-password{
     float: right;

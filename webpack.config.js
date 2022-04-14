@@ -8,6 +8,8 @@ module.exports = {
       mMedia: path.join(__dirname, "src", "media.js"),
       mRegister: path.join(__dirname, "src", "register.js"),
       mReset: path.join(__dirname, "src", "password_reset.js"),
+      mLogin: path.join(__dirname, "src", "login.js"),
+
 
     }, 
     output: {

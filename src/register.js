@@ -33,6 +33,8 @@ class RegisterForms extends React.Component{
         this.setInitializationVector = this.setInitializationVector.bind(this);
 
         const iv = CryptoJS.lib.WordArray.random(16).toString();
+        console.log(`IV: `);
+        console.log(iv)
 
 
         this.state = {
@@ -58,7 +60,7 @@ class RegisterForms extends React.Component{
             'more_info':'',
             'algorithm': 'aes-256-ctr',
             'secretKey': '',
-            'iv': iv,
+            'iv': '4855d45a4d3e04f9448def4b88e24cc3',
 
         }
         
@@ -194,7 +196,7 @@ class RegisterForms extends React.Component{
                 console.log(result);
                 instance.setState(function(state,props){
                     return{
-                        key: result,
+                        secretKey: result,
                     }
                 });
                 
