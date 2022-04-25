@@ -400,8 +400,9 @@ class XO_Auth{
 
 
     async updateUserPassword(new_password, callback=null){
-        var hash_password = await this.#hashPassword(new_password);
-
+        var result = await this.#hashPassword(new_password, this.#currUser.salt);
+        var hash_password = result.hash;
+        var salt = result.salt;
         this.#currUser.model.password = hash_password;
         //TODO: Decide if I want ot use save or not later
         

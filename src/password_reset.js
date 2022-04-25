@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import ReactDOMServer from 'react-dom/server';
 import { Container } from 'react-bootstrap';
 import { Col, Row, Form, Spinner } from "react-bootstrap";
+import * as CryptoJS from 'crypto-js'
+
 
 const TAG = `password_reset`
 
@@ -28,6 +30,8 @@ class PasswordResetForm extends React.Component{
             'val': "",
             'status':'PASSIVE',
             'user_message': null,
+            'secretKey': '',
+            'iv': '4855d45a4d3e04f9448def4b88e24cc3',
 
         }
 
@@ -37,6 +41,10 @@ class PasswordResetForm extends React.Component{
         this.handleUrl = this.handleUrl.bind(this);
         this.sendEmail = this.sendEmail.bind(this);
         this.verifyCode = this.verifyCode.bind(this);
+        this.encrypt = this.encrypt.bind(this);
+        this.decrypt = this.decrypt.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.showVal = this.showVal.bind(this);
     }
 
     handleClick(){
@@ -126,6 +134,88 @@ class PasswordResetForm extends React.Component{
 
     }
 
+    encrypt(text){
+        console.log(`Text: ${text}, SecretKey: ${this.state.secretKey}`);
+        const key = CryptoJS.enc.Hex.parse(this.state.secretKey);
+        const encryptedData= CryptoJS.AES.encrypt(text,key,{iv: this.state.iv, mode: CryptoJS.mode.ECB });
+        return encryptedData.toString();
+
+    }
+
+    decrypt(hash){
+        //I'll Keep this here so that the user can see what he is typing, however I would like to make some sort of
+        //black box for anyone using "this utility".
+        const key = CryptoJS.enc.Hex.parse(this.state.secretKey);
+        const bytes = CryptoJS.AES.decrypt(hash, key, {iv: this.state.iv, mode: CryptoJS.mode.ECB })
+        const decipheredData = bytes.toString(CryptoJS.enc.Utf8);
+
+
+        return decipheredData;
+
+    }
+    requestKey(){
+        var instance = this;
+        $.ajax({
+            url: 'http://127.0.0.1:3005/request_key',
+            type:"GET",
+            success: function(result){
+                console.log(result);
+                instance.setState(function(state,props){
+                    return{
+                        secretKey: result,
+                    }
+                });
+                
+            },
+            error: function(error){
+                console.log(`xo_register::requestKey::Error ${error}`)
+
+            }
+        })
+
+    }
+
+    handleChange(event){
+        var value;
+        var curr_state = this.state.reset_state
+
+        if((curr_state == 3 || curr_state == 4) && event.target.value != ''){
+            value = this.encrypt(event.target.value);
+            console.log(`${TAG}::handleChange:: Encrypted password ${value}`);
+            this.setState(function(state,props){
+                return{
+                    val: value,
+                }
+            });
+
+        }else{
+            value = event.target.value;
+            console.log(`${TAG}::handleChange:: Email : ${value}`);
+            this.setState(function(state,props){
+                return{
+                    val: value,
+                }
+            });
+        }
+
+        
+
+
+    }
+
+
+    showVal(){
+        console.log(`Value: ${this.state.val}`);
+        var state_4_check = this.state.reset_state == 4 && this.state.curr_state.state == 4
+        var state_3_check = this.state.reset_state == 3 && this.state.reset_state == 3
+        if((state_3_check || state_4_check) && this.state.val != ''){
+            return this.decrypt(this.state.val);
+            //return this.state.val;
+        }else{
+            return this.state.val;
+        }
+    }
+
     updatePassword(){
         var instance  = this;
         var userData = {
@@ -171,6 +261,7 @@ class PasswordResetForm extends React.Component{
             success: function(result){
                 console.log(result);
                 $(`.reset-info`).fadeOut(500, function(){
+                    instance.requestKey();
                     instance.setState(function(state, props) {
                         return {
                           status: 'PASSIVE',
@@ -263,7 +354,7 @@ class PasswordResetForm extends React.Component{
                <Form className="my-5 w-75 mx-auto ml-0">
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>{this.state.curr_state.label}</Form.Label>
-                        <Form.Control id="register_box" onChange={e => this.setState({val: e.target.value})} value={this.state.val} type={this.state.curr_state.type} placeholder={this.state.curr_state.placeholder} />
+                        <Form.Control id="register_box" onChange={this.handleChange} value={this.showVal()} type={this.state.curr_state.type} placeholder={this.state.curr_state.placeholder} />
                         <div id="emailHelp" class="form-text">{this.state.curr_state.message}</div>
 
                     </Form.Group>
@@ -274,13 +365,7 @@ class PasswordResetForm extends React.Component{
                     </Form.Group>
 
                 </Form>
-                <hr className=" w-75 mx-auto "/>
-                <div className="text-center" >
-                        <Button className="w-50" onClick={this.handleClick} variant="outline-light" >
-                            Back to Login
-                        </Button>
 
-                </div>
             </div>
         }else if(status == 'LOADING'){
             content = 
@@ -304,7 +389,18 @@ class PasswordResetForm extends React.Component{
         }
         return(
             <>
-                {content}
+                <div className='reset-info'>
+                    {content}
+                </div>
+                <div className='back-home'>
+                    <hr className=" w-75 mx-auto "/>
+                    <div className="text-center" >
+                            <Button href='http://127.0.0.1:3005/' className="w-50" variant="outline-light" >
+                                Back to Login
+                            </Button>
+
+                    </div>
+                </div>
             </>
         );
     }
